@@ -1,4 +1,6 @@
-# React + Vite
+# PerfectKrushiMarketYard - React + Vite
+
+This project is part of the Agridisha initiative.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
