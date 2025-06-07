@@ -1,0 +1,248 @@
+/* 📌 Main container */
+.signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+/* 📌 Single Box with Two Sections */
+.signin-box {
+    display: flex;
+    width: 100%;
+    height: 550px;
+    max-width: 1200px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex-direction: row;
+}
+
+/* 📌 Left Side */
+.signin-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ec8a44, #f3b64c);
+    padding: 40px;
+    color: white;
+    box-sizing: border-box;
+}
+
+.content-box {
+    text-align: center;
+    max-width: 300px;
+}
+
+.image-box img {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* 📌 Right Side */
+.signin-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+}
+
+/* 📌 Form */
+.form-group1 {
+    margin-bottom: 15px;
+}
+
+.form-control1 {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 📌 Password toggle */
+.password-group {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* 📌 Buttons */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff9f43;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-login:hover {
+    background-color: #df7716;
+}
+
+/* 📌 Social Icons Container */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* 📌 Individual Social Icon Box */
+.social-icon {
+    width: 90px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 📌 Hover effect for Social Icons */
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+.social-icon img {
+    width: 30px;
+    height: 27px;
+}
+
+/* 📌 Logo Container */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* 📌 Logo Image */
+.logo img {
+    width: 150px;
+    height: auto;
+}
+
+/* 📌 Signup text */
+.signup-text {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.bold-link {
+    font-weight: 700;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.bold-link:hover {
+    text-decoration: underline;
+}
+
+/* 📌 📱 Responsive Design for Tablets */
+@media (max-width: 1024px) {
+    .signin-box {
+        flex-direction: column;
+        width: 100%;
+        max-width: 900px;
+        height: auto;
+    }
+
+    .signin-left,
+    .signin-right {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .content-box {
+        max-width: 100%;
+    }
+
+    .social-icons {
+        gap: 10px;
+    }
+}
+
+/* 📌 📱 Responsive Design for Large Mobiles */
+@media (max-width: 768px) {
+    .signin-box {
+        flex-direction: column;
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+
+    .signin-left,
+    .signin-right {
+        padding: 15px;
+    }
+
+    .form-control1 {
+        padding: 10px;
+    }
+
+    .btn-login {
+        padding: 10px;
+    }
+
+    .social-icons {
+        gap: 10px;
+    }
+}
+
+/* 📌 📱 Mobile Design */
+@media (max-width: 480px) {
+    .signin-box {
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+    }
+
+    .signin-left,
+    .signin-right {
+        padding: 15px;
+    }
+
+    .form-control1 {
+        padding: 10px;
+    }
+
+    .btn-login {
+        padding: 10px;
+    }
+
+    .social-icons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .social-icon {
+        width: 80px;
+        height: 35px;
+    }
+}

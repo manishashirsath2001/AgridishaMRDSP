@@ -1,0 +1,126 @@
+-- Input Variables
+DECLARE @VPAID VARCHAR(24) = 'PK16C6BDE1BD6280462291';
+DECLARE @TRNDT VARCHAR(50) = '17 MAY 2025';
+
+-- Declare slab variables
+DECLARE @VSAID VARCHAR(24),     
+        @DUEDATE INT,
+        @VSDAID VARCHAR(24),
+        @STARTDATE INT,
+        @ENDDATE INT;
+
+-- Drop temp tables if exist
+IF OBJECT_ID('tempdb..#TempVapasiDetails') IS NOT NULL DROP TABLE #TempVapasiDetails;
+IF OBJECT_ID('tempdb..#TempSlabDetails') IS NOT NULL DROP TABLE #TempSlabDetails;
+IF OBJECT_ID('tempdb..#FinalResult') IS NOT NULL DROP TABLE #FinalResult;
+
+-- Create temp tables
+CREATE TABLE #TempVapasiDetails (
+    DUE_DAY INT,
+    TO_DAY INT,
+    VAPASI INT
+);
+
+CREATE TABLE #TempSlabDetails (
+    VSAID VARCHAR(24),
+    DUEDATE INT,
+    STARTDATE INT,
+    ENDDATE INT,
+    VSDAID VARCHAR(24)
+);
+
+CREATE TABLE #FinalResult (
+    FDUEDT DATE,
+    TAMT DECIMAL(18, 2),
+    BPAMT DECIMAL(18, 2),
+    VAPASAT INT,
+    VAPASIAMT DECIMAL(18, 2)
+);
+
+-- Step 1: Insert Slab Details
+INSERT INTO #TempSlabDetails (VSAID, DUEDATE, STARTDATE, ENDDATE, VSDAID)
+SELECT 
+    D.VSAID, 
+    D.DUEDATE, 
+    D.STARTDATE,
+    D.ENDDATE,
+    D.VSDAID
+FROM tblVyapariMaster V
+LEFT JOIN tblVpapariSlabMaster M ON M.ISDELETED = 0 AND M.VSAID = V.VPSCHEME
+LEFT JOIN tblVyapariSlabDetail D ON D.ISDELETED = 0 AND D.VSAID = M.VSAID
+WHERE V.ISDELETED = 0 AND V.VPAID = @VPAID;
+
+-- Step 2: Cursor over slabs
+DECLARE slab_cursor CURSOR FOR
+SELECT VSAID, DUEDATE, STARTDATE, ENDDATE, VSDAID FROM #TempSlabDetails;
+
+OPEN slab_cursor;
+FETCH NEXT FROM slab_cursor INTO @VSAID, @DUEDATE, @STARTDATE, @ENDDATE, @VSDAID;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    DELETE FROM #TempVapasiDetails;
+
+    INSERT INTO #TempVapasiDetails (DUE_DAY, TO_DAY, VAPASI)
+    SELECT DUE_DAY, TO_DAY, VAPASI 
+    FROM tblVyapariVapasiDetails 
+    WHERE VSAID = @VSAID AND VSDAID = @VSDAID;
+
+    DECLARE @DUE_DAY INT, @TO_DAY INT, @VAPASI INT;
+
+    DECLARE vapasi_cursor CURSOR FOR
+    SELECT DUE_DAY, TO_DAY, VAPASI FROM #TempVapasiDetails;
+
+    OPEN vapasi_cursor;
+    FETCH NEXT FROM vapasi_cursor INTO @DUE_DAY, @TO_DAY, @VAPASI;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DECLARE @TRNDT_DATE DATE = TRY_CAST(@TRNDT AS DATE);
+        DECLARE @FDUEDT_DATE DATE;
+        DECLARE @DIFF INT;
+        DECLARE @BPAMT DECIMAL(18, 2);
+        DECLARE @TAMT DECIMAL(18, 2);
+        DECLARE @CALC_VAPASI_AMOUNT DECIMAL(18, 2);
+		
+		INSERT INTO #FinalResult (FDUEDT, TAMT, BPAMT, VAPASIAMT)
+        SELECT TOP 1 
+            FDUEDT,
+            TAMT,
+             BPAMT,
+			 0
+        FROM tblVyapriDue
+        WHERE ISDELETED = 0
+            AND VPAID = @VPAID
+            AND TRNTID <> '30'
+            AND DAY(TRNDT) BETWEEN @STARTDATE AND @ENDDATE
+        ORDER BY SYSDT DESC;
+
+        IF @FDUEDT_DATE IS NOT NULL
+        BEGIN
+            SET @DIFF = DATEDIFF(DAY, @FDUEDT_DATE, @TRNDT_DATE);
+
+            IF @DIFF BETWEEN @DUE_DAY AND @TO_DAY
+            BEGIN
+                SET @CALC_VAPASI_AMOUNT = ISNULL(@BPAMT, 0) * ISNULL(@VAPASI, 0) / 100.0;
+
+                INSERT INTO #FinalResult (FDUEDT, TAMT, BPAMT, VAPASIAMT)
+                VALUES (@FDUEDT_DATE, @TAMT, @BPAMT,  @CALC_VAPASI_AMOUNT);
+
+
+            END
+        END
+
+        FETCH NEXT FROM vapasi_cursor INTO @DUE_DAY, @TO_DAY, @VAPASI;
+    END
+
+    CLOSE vapasi_cursor;
+    DEALLOCATE vapasi_cursor;
+
+    FETCH NEXT FROM slab_cursor INTO @VSAID, @DUEDATE, @STARTDATE, @ENDDATE, @VSDAID;
+END
+
+CLOSE slab_cursor;
+DEALLOCATE slab_cursor;
+
+SELECT * FROM #FinalResult;

@@ -1,0 +1,81 @@
+Liabilities /Equity (main group)(JAMA-NAVE )
+
+1. Share Capital (sub group)
+    - Equity Share Capital
+    - Preference Share Capital
+	
+2. Reserves & Surplus  (sub group)
+    - General Reserve
+    - Profit & Loss Account
+    - Retained Earnings
+    - Surplus in Profit & Loss Account	
+
+3. Current Liabilities  (sub group)
+    - Bank Overdraft
+    - Deposits (Liability)
+    - Loans & Advances (Liability)
+    - Provisions
+    - Sundry Creditors
+    - Tax Deducted at Source
+	
+4. Non-Current Liabilities  (sub group)
+    - Deferred Tax Liability
+    - Long-term Borrowings
+    - Long-term Provisions
+    - Reserves & Surplus
+	
+
+Assets (Main group)(JAMA-NAVE )
+
+1. Current Assets (sub group)
+    - Bank Accounts
+    - Cash-in-Hand
+    - Deposits (Asset)
+    - Inventory Assets
+    - Loans & Advances (Asset)
+    - Prepaid Expenses
+    - Stock-in-Trade
+    - Sundry Debtors
+    - Suspense Account
+	
+2. Non-Current Assets (sub group)
+
+    - Capital Work-in-Progress
+    - Fixed Assets
+    - Intangible Assets
+    - Investments
+    - Loans & Advances (Non-Current)	
+	
+	
+Revenue Trading (Main group)  (JAMA MODE) 
+
+1. Direct Income (sub group)
+    - Sales
+    - Sales Returns
+	
+Revenue (Main group)(JAMA MODE)
+	
+2. Indirect Income (sub group)
+    - Discount Received
+    - Interest Received
+    - Rent Received
+
+Expenses Trading (Main group)	(NAVE MODE)
+
+1. Direct Expenses (sub group)
+    - Cost of Goods Sold
+    - Purchases
+    - Purchases Returns
+
+Expenses (Main group)	(NAVE MODE)
+	
+2. Indirect Expenses (sub group)
+    - Advertising Expenses
+    - Bank Charges
+    - Depreciation
+    - Electricity Charges
+    - Insurance Expenses
+    - Interest Expenses
+    - Rent Expenses
+    - Salaries & Wages
+    - Taxes & Duties

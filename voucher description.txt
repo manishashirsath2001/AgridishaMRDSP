@@ -1,0 +1,30 @@
+ VoucherAID			= New genrate primarykey(PKID)
+,VoucherNumber      = ""
+,OrganizationID     = cpmpany id
+,DivisionID         = department id
+,VoucherTID         = (jama-nave == CR && Transfer == TR)  
+,SerialNumber       = ""
+,VoucherDate        = date
+,STATUS             = 1
+,DRACC              = debit farmer (PKACC00000000001)
+,CRACC              = 'PKACC00000000000'
+,VoucherAmount      = baki rakkam
+,ReferenceTID       = "" 
+,ReferenceKey       = farmerID (FAID)
+,Narration          = "farmer bill"
+,GRPKEY             = recipt PKID(BAID)
+,BATCHKEY           = recipt PKID(BAID)
+,OID                = "20"
+,JAMANAVE           = ""
+,VOUCHERTYPE        = ""
+,ASID               = New genrate primarykey(PKID)
+,IsDeleted          = 0
+
+
+
+*farmer account = 'PKACC00000000001'
+*apositeside	= 'PKACC00000000000'
+*vyapari account= 'PKACC00000000002'
+*OID			= -voucher(10)
+				= -farmerBill(20)
+* CASH OID 		= 50

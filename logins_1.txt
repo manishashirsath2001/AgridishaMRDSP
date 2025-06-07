@@ -1,0 +1,33 @@
+*******GateEntry**********
+
+username : gateentry@gmail.com
+password : 123456
+*********admin**********
+
+username : admin@gmail.com
+password : 123456
+******Auction**********
+
+username : auction@gmail.com
+password : 123456
+
+******bill**********
+username : bill@gmail.com
+password : 123456
+
+*****vyapari**********
+username : vyapari@gmail.com
+password : 123456
+******maneger********
+
+username : manager@gmail.com
+password : 123456
+
+**********vyapari**********
+1)
+username : tejas@gmail.com
+password : welcome
+
+2) 
+username : anuja@gmail.com
+password : welcome

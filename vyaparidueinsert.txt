@@ -1,0 +1,255 @@
+DECLARE @VDAID     VARCHAR(24)		= 'PK006',
+		@TRNDT     DATETIME			= '15 MAY 2025',
+		@TAMT      FLOAT			= 100,
+		@VPAID     VARCHAR(24)		= 'PK16C894A85B3D44882111',
+		@TRNSR	   VARCHAR(256)		= '',
+		@TRNTID	  VARCHAR(24)		= '',
+		@REFKEY		VARCHAR(24)		= 'PK001',
+		@UAID		VARCHAR(24)		= 'PK001',
+		@ISDELETED	bit				= 0,
+		@VREFF		VARCHAR(24)		= ''
+
+BEGIN
+	DECLARE  @VPSCHEME		 VARCHAR(24)	= ''
+			,@VTYPE			 VARCHAR(10)	= ''
+			,@STARTDATE		 VARCHAR(10)	= ''
+			,@ENDDATE		 VARCHAR(10)	= ''
+			,@DUEDATE		 VARCHAR(10)	= ''
+			,@KALAVADHI		 VARCHAR(10)	= ''
+			,@FDUEDT		 DATETIME		= '01 jan 1900'
+			,@SDUEDT		 DATETIME		= '01 jan 1900'
+			,@TID			 VARCHAR(24)	= ''
+			,@DaysInMonth	INT				= DAY(EOMONTH(@TRNDT))
+			,@Day			INT				= DAY(@TRNDT)
+			,@BPAMT			FLOAT			= 0
+			,@TAMT1			FLOAT			= 0
+			,@CNT			INT				= 0
+			,@REFF			VARCHAR(24)		= ''
+			,@STID			VARCHAR(24)		= ''
+	IF OBJECT_ID('tempdb..#TmpSlabData') IS NOT NULL
+	DROP TABLE #TmpSlabData;
+
+	CREATE TABLE #TmpSlabData (
+		STARTDATE	VARCHAR(10),
+		ENDDATE		VARCHAR(10),
+		DUEDATE		VARCHAR(10),
+		KALAVADHI	VARCHAR(10),
+	)
+
+
+	SELECT  @VPSCHEME	= VPSCHEME,
+			@VTYPE		= VTYPE
+	FROM	tblVyapariMaster
+	WHERE	ISDELETED	= 0
+		AND VPAID		= @VPAID
+
+	INSERT INTO #TmpSlabData (STARTDATE, ENDDATE, DUEDATE, KALAVADHI)
+	SELECT	D.STARTDATE,	
+			D.ENDDATE,	
+			D.DUEDATE,	
+			D.KALAVADHI
+	FROM	tblVpapariSlabMaster	M
+		LEFT JOIN tblVyapariSlabDetail D ON D.ISDELETED = 0 AND D.VSAID = M.VSAID
+	WHERE	M.ISDELETED	= 0
+		AND M.VSAID		= @VPSCHEME
+
+	SELECT	* FROM #TmpSlabData
+
+	IF @VTYPE  = 0
+	BEGIN 
+
+		DECLARE @C_STARTDATE	VARCHAR(10)
+				,@C_ENDDATE		VARCHAR(10)
+				,@C_DUEDATE		VARCHAR(10)
+				,@C_KALAVADHI	VARCHAR(10)
+
+		DECLARE slab_cursor CURSOR FOR
+		SELECT STARTDATE, ENDDATE, DUEDATE, KALAVADHI FROM #TmpSlabData
+
+		OPEN slab_cursor
+		FETCH NEXT FROM slab_cursor INTO @C_STARTDATE, @C_ENDDATE, @C_DUEDATE, @C_KALAVADHI
+
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+				SET @STARTDATE   =  @C_STARTDATE
+				SET @ENDDATE	 =  @C_ENDDATE	
+				SET @DUEDATE	 =  @C_DUEDATE	
+				SET @KALAVADHI	 =  @C_KALAVADHI
+			
+			IF @Day BETWEEN CAST(@C_STARTDATE AS INT) AND CAST(@C_ENDDATE AS INT)
+			BEGIN
+				SELECT  @Day AS DAY , CAST(@C_STARTDATE AS INT) AS SDAY,  CAST(@C_ENDDATE AS INT) AS EDAY
+
+				SELECT		@STID		= VSDAID
+				FROM		tblVyapariSlabDetail
+				WHERE		ISDELETED	= 0
+					AND		VSAID		= @VPSCHEME		
+					AND		STARTDATE	=  @C_STARTDATE
+					AND		ENDDATE		=  @C_ENDDATE	
+					AND		DUEDATE		=  @C_DUEDATE	
+					AND		KALAVADHI	=  @C_KALAVADHI
+
+				SELECT		TOP 1
+							@BPAMT		= BPAMT
+							,@REFF		= VDAID
+				FROM		TBLVYAPRIDUE
+				WHERE		ISDELETED	= 0
+				  AND		DAY(TRNDT) BETWEEN CAST(@C_STARTDATE AS INT) AND CAST(@C_ENDDATE AS INT)
+				  AND		VPAID		= @VPAID
+				ORDER BY	SYSDT DESC
+
+				SELECT @REFF  AS REFF,@BPAMT AS BPAMT
+
+				SET		@BPAMT		= @TAMT + @BPAMT
+
+				IF @KALAVADHI = 0
+				BEGIN
+						SELECT @KALAVADHI AS KALAVADHI, @DUEDATE AS DUEDATE
+						SET @FDUEDT = DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), @DUEDATE)
+				END
+				ELSE IF @KALAVADHI = 1
+				BEGIN
+						SELECT @KALAVADHI AS KALAVADHI_1, @DUEDATE AS DUEDATE_1
+						DECLARE @NextMonthDate DATE = DATEADD(MONTH, 1, GETDATE())
+						SET @FDUEDT = DATEFROMPARTS(YEAR(@NextMonthDate), MONTH(@NextMonthDate), @DUEDATE)
+				END
+				ELSE IF @KALAVADHI = 2
+				BEGIN
+						SET @FDUEDT = @TRNDT
+				END
+				SET @TID = @VPSCHEME
+				SELECT	@VDAID
+					   ,@TRNDT
+					   ,@TAMT
+					   ,@BPAMT
+					   ,@FDUEDT
+					   ,@SDUEDT
+					   ,@VPAID
+					   ,@TID
+					   ,@STID
+					   ,@TRNTID
+					   ,@TRNSR
+					   ,@REFKEY
+					   ,@VDAID
+					   ,@UAID
+					   ,@ISDELETED
+					   ,@REFF
+
+			
+				INSERT INTO [dbo].[tblVyapriDue]
+								   ([VDAID]
+								   ,[TRNDT]
+								   ,[TAMT]
+								   ,[BPAMT]
+								   ,[FDUEDT]
+								   ,[SDUEDT]
+								   ,[VPAID]
+								   ,[TID]
+								   ,[STID]
+								   ,[TRNTID]
+								   ,[TRNSR]
+								   ,[REFKEY]
+								   ,[ASID]
+								   ,[UAID]
+								   ,[ISDELETED]
+								   ,[VREFF]
+								   ,[REFF])
+						 VALUES
+							   (@VDAID
+							   ,@TRNDT
+							   ,@TAMT
+							   ,@BPAMT
+							   ,@FDUEDT
+							   ,@SDUEDT
+							   ,@VPAID
+							   ,@TID
+							   ,@STID
+							   ,@TRNTID
+							   ,@TRNSR
+							   ,@REFKEY
+							   ,@VDAID
+							   ,@UAID
+							   ,@ISDELETED
+							   ,@VREFF
+							   ,@REFF)
+			END
+				
+			
+			FETCH NEXT FROM slab_cursor INTO @C_STARTDATE, @C_ENDDATE, @C_DUEDATE, @C_KALAVADHI
+		END
+		CLOSE slab_cursor
+		DEALLOCATE slab_cursor
+
+		DROP TABLE #TmpSlabData
+	END
+
+	
+	IF @VTYPE  = 1
+	BEGIN 
+		SET		@BPAMT		= @TAMT
+		SET		@FDUEDT		= @TRNDT
+
+		SELECT		@STID		= VSDAID
+		FROM		tblVyapariSlabDetail
+		WHERE		ISDELETED	= 0
+			AND		VSAID		= @VPSCHEME			
+			AND		KALAVADHI	= '2'
+
+		SELECT	@VDAID
+			   ,@TRNDT
+			   ,@TAMT
+			   ,@BPAMT
+			   ,@FDUEDT
+			   ,@SDUEDT
+			   ,@VPAID
+			   ,@TID
+			   ,@STID
+			   ,@TRNTID
+			   ,@TRNSR
+			   ,@REFKEY
+			   ,@VDAID
+			   ,@UAID
+			   ,@ISDELETED
+			   ,@REFF
+
+			SET @TID = @VPSCHEME
+
+			INSERT INTO [dbo].[tblVyapriDue]
+					   ([VDAID]
+					   ,[TRNDT]
+					   ,[TAMT]
+					   ,[BPAMT]
+					   ,[FDUEDT]
+					   ,[SDUEDT]
+					   ,[VPAID]
+					   ,[TID]
+					   ,[STID]
+					   ,[TRNTID]
+					   ,[TRNSR]
+					   ,[REFKEY]
+					   ,[ASID]
+					   ,[UAID]
+					   ,[ISDELETED]
+					   ,[VREFF]
+					   ,[REFF])
+			 VALUES
+				   (@VDAID
+				   ,@TRNDT
+				   ,@TAMT
+				   ,@BPAMT
+				   ,@FDUEDT
+				   ,@SDUEDT
+				   ,@VPAID
+				   ,@TID
+				   ,@STID
+				   ,@TRNTID
+				   ,@TRNSR
+				   ,@REFKEY
+				   ,@VDAID
+				   ,@UAID
+				   ,@ISDELETED
+				   ,@VREFF
+				   ,@REFF)
+	END
+
+END

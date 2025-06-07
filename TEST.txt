@@ -1,0 +1,105 @@
+-- Input Variables
+DECLARE @VPAID VARCHAR(24) = 'PK16C6BDE1BD6280462291';
+DECLARE @TRNDT DATE = CONVERT(DATE, '17 MAY 2025', 113);
+
+-- Declare slab variables
+DECLARE @VSAID VARCHAR(24),
+        @DUEDATE INT,
+        @VSDAID VARCHAR(24),
+        @STARTDATE INT,
+        @ENDDATE INT;
+
+-- Drop temp tables if they exist
+IF OBJECT_ID('tempdb..#TempVapasiDetails') IS NOT NULL DROP TABLE #TempVapasiDetails;
+IF OBJECT_ID('tempdb..#TempSlabDetails') IS NOT NULL DROP TABLE #TempSlabDetails;
+IF OBJECT_ID('tempdb..#TempVyapriDueResult') IS NOT NULL DROP TABLE #TempVyapriDueResult;
+
+-- Create temp tables
+CREATE TABLE #TempVapasiDetails (
+    DUE_DAY INT,
+    TO_DAY INT,
+    VAPASI INT,
+    VSDAID VARCHAR(24),
+);
+
+CREATE TABLE #TempSlabDetails (
+    VSAID VARCHAR(24),
+    DUEDATE INT,
+    VSDAID VARCHAR(24),
+    STARTDATE INT,
+    ENDDATE INT
+);
+
+CREATE TABLE #TempVyapriDueResult (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    FDUEDT DATE,
+    TRNDT DATE,
+    TAMT DECIMAL(18, 2),
+    BPAMT DECIMAL(18, 2),
+    VAPASAT INT DEFAULT 0,
+    DUEDATE INT,
+    VSDAID VARCHAR(24),
+    STARTDATE INT,
+    ENDDATE INT
+);
+
+-- Step 1: Populate slab details
+INSERT INTO #TempSlabDetails (VSAID, DUEDATE, VSDAID, STARTDATE, ENDDATE)
+SELECT 
+    D.VSAID, 
+    D.DUEDATE, 
+    D.VSDAID,
+    D.STARTDATE,
+    D.ENDDATE
+FROM tblVyapariMaster V
+LEFT JOIN tblVpapariSlabMaster M ON M.ISDELETED = 0 AND M.VSAID = V.VPSCHEME
+LEFT JOIN tblVyapariSlabDetail D ON D.ISDELETED = 0 AND D.VSAID = M.VSAID
+WHERE V.ISDELETED = 0 AND V.VPAID = @VPAID;
+
+-- Step 2: Cursor loop to populate due result
+DECLARE slab_cursor CURSOR FOR
+SELECT VSAID, DUEDATE, VSDAID, STARTDATE, ENDDATE FROM #TempSlabDetails;
+
+OPEN slab_cursor;
+FETCH NEXT FROM slab_cursor INTO @VSAID, @DUEDATE, @VSDAID, @STARTDATE, @ENDDATE;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    INSERT INTO #TempVyapriDueResult (FDUEDT, TRNDT, TAMT, BPAMT, VAPASAT, DUEDATE, VSDAID, STARTDATE, ENDDATE)
+    SELECT TOP 1 
+        FDUEDT,
+        TRNDT,
+        TAMT,
+        BPAMT,
+        0,
+        @DUEDATE,
+        @VSDAID,
+        @STARTDATE,
+        @ENDDATE
+    FROM tblVyapriDue
+    WHERE ISDELETED = 0
+      AND VPAID = @VPAID
+      AND TRNTID <> '30'
+      AND DAY(TRNDT) BETWEEN @STARTDATE AND @ENDDATE
+    ORDER BY SYSDT DESC;
+
+    FETCH NEXT FROM slab_cursor INTO @VSAID, @DUEDATE, @VSDAID, @STARTDATE, @ENDDATE;
+END
+
+CLOSE slab_cursor;
+DEALLOCATE slab_cursor;
+
+-- Step 3: Insert Vapasi Details for ALL VSDAID in slab
+INSERT INTO #TempVapasiDetails (DUE_DAY, TO_DAY, VAPASI, VSDAID)
+SELECT 
+    DUE_DAY, 
+    TO_DAY, 
+    VAPASI,
+    VSDAID
+FROM tblVyapariVapasiDetails
+WHERE VSDAID IN (SELECT DISTINCT VSDAID FROM #TempSlabDetails);
+
+
+
+-- Final Output
+SELECT * FROM #TempVyapriDueResult ORDER BY TRNDT;

@@ -1,0 +1,29 @@
+ALTER TRIGGER [dbo].[trg_Generate_TOKNNO]
+ON [dbo].[tblGateEntryDetail]
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Handle only rows where DATE has changed or newly inserted
+    ;WITH ChangedRows AS (
+        SELECT i.DPKID, CAST(i.[DATE] AS DATE) AS EntryDate
+        FROM inserted i
+        LEFT JOIN deleted d ON i.DPKID = d.DPKID
+        WHERE d.DPKID IS NULL -- Newly inserted
+           OR CAST(i.[DATE] AS DATE) <> CAST(d.[DATE] AS DATE) -- Date actually changed
+    ),
+    Recalculated AS (
+        SELECT 
+            g.DPKID,
+            g.DATE,
+            ROW_NUMBER() OVER (PARTITION BY CAST(g.DATE AS DATE) ORDER BY g.DPKID) AS NewTokenNo
+        FROM tblGateEntryDetail g
+        INNER JOIN ChangedRows c ON CAST(g.DATE AS DATE) = c.EntryDate
+        WHERE g.ISDELETED = 0
+    )
+    UPDATE g
+    SET g.TOKNNO = r.NewTokenNo
+    FROM tblGateEntryDetail g
+    INNER JOIN Recalculated r ON g.DPKID = r.DPKID;
+END;

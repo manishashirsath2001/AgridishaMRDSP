@@ -1,0 +1,150 @@
+.dash-widget {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.dash-widgetcontent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+
+}
+
+/* Card colors */
+.card-blue {
+    background: #5e72e4;
+    color: white;
+}
+
+.card-green {
+    background: linear-gradient(135deg, #e6ece7, #738a0d);
+    color: white;
+}
+
+.card-orange {
+    background: linear-gradient(135deg, #b69d0f, #d3c270);
+
+    color: white;
+}
+
+.dash-widget:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+
+@media (max-width: 767px) {
+    .dash-widget {
+        padding: 15px;
+    }
+
+    .dash-widgetcontent h5 {
+        font-size: 20px;
+    }
+
+    .dash-widgetcontent h6 {
+        font-size: 14px;
+    }
+}
+
+
+
+.custom-rectangle {
+    background-color: #f4f7fb;
+    padding: 20px;
+    border-radius: 10px;
+    height: 180px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-box {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.pie-container {
+    width: 220px;
+    height: 220px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.crop-info {
+    margin-top: 10px;
+}
+
+.crop-selector {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.crop-btn {
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.crop-btn.active {
+    background-color: #36A2EB;
+    color: white;
+    border-color: #36A2EB;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f8fafc;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+
+.card-header {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.card-text {
+    font-size: 20px;
+    font-weight: bold;
+}
