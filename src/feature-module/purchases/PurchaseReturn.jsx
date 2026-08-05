@@ -125,14 +125,14 @@ function PurchaseReturn() {
 
     const columns = [
         {
-            title: "विक्रेता नाव",
+            title: "Vendor",
             dataIndex: "Vendor",
 
             sorter: (a, b) => a.warehouse.length - b.warehouse.length,
             //   width: "5%",
         },
         {
-            title: "उत्पादन",
+            title: "Product",
             dataIndex: "Product",
             sorter: (a, b) => a.store.length - b.store.length,
         },
@@ -150,28 +150,28 @@ function PurchaseReturn() {
         //   sorter: (a, b) => a.product.length - b.product.length,
         // },
         {
-            title: "मोजमाप एकक",
+            title: "UOM",
             dataIndex: "UOM",
 
         },
         {
-            title: "प्रमाण",
+            title: "Quantity",
             dataIndex: "Quantity",
 
         },
         {
-            title: "बिल/चलान क्रमांक ",
+            title: "Bill/Challan Number ",
             dataIndex: "Bill/Challan Number",
             sorter: (a, b) => a.qty.length - b.qty.length,
         },
         {
-            title: "परत केलेली प्रमाण",
+            title: "Return Quantity",
             dataIndex: "ReturnQuantity",
             sorter: (a, b) => a.qtyalert.length - b.qtyalert.length,
         },
 
         {
-            title: "क्रिया",
+            title: "Actions",
             dataIndex: "actions",
             key: "actions",
             render: () => (
@@ -234,8 +234,8 @@ function PurchaseReturn() {
                 <div className="content">
                     <div className="page-header">
                         <div className="page-title me-auto">
-                            <h4>खरेदी परतफेड</h4>
-                            <h6>खरेदी परतफेड व्यवस्थापित करा</h6>
+                            <h4>Purchase Return</h4>
+                            <h6>Manage Purchase Return</h6>
                         </div>
                         <ul className="table-top-head">
                             <li>
@@ -303,7 +303,7 @@ function PurchaseReturn() {
                             <div className="page-btn">
                                 <Link to={route.PurchaseIndex} className="btn btn-secondary">
                                     <ArrowLeft className="me-2" />
-                                    अनुक्रमणिकेकडे परत जा
+                                    Back to Index
                                 </Link>
                             </div>
                         </div>
@@ -321,7 +321,7 @@ function PurchaseReturn() {
                                     aria-controls="pills-home"
                                     aria-selected="true"
                                 >
-                                    चलान परतफेड
+                                    Challan Return
                                 </button>
                             </li>
                             <li className="nav-item" role="presentation">
@@ -335,7 +335,7 @@ function PurchaseReturn() {
                                     aria-controls="pills-profile"
                                     aria-selected="false"
                                 >
-                                    इनव्हॉइस खरेदी परतफेड
+                                    Invoice Purchase Return
                                 </button>
                             </li>
                         </ul>
@@ -527,13 +527,13 @@ function PurchaseReturn() {
                                                         data-bs-target="#AddPurchaseReturn"
                                                     >
                                                         <PlusCircle className="me-2" />
-                                                        नवीन खरेदी जोडा
+                                                        Add New Purchase
                                                     </Link>
                                                 </div>
                                                 <div className="page-btn">
                                                     <Link to={route.test} className="btn btn-secondary">
                                                         <ArrowLeft className="me-2" />
-                                                        अनुक्रमणिकेकडे परत जा
+                                                        Back to Index
                                                     </Link>
                                                 </div>
                                             </div>
@@ -593,7 +593,7 @@ function PurchaseReturn() {
                                                                     data-feather="search"
                                                                     className="feather-search"
                                                                 />{" "}
-                                                                शोधा{" "}
+                                                                Search{" "}
                                                             </Link>
                                                         </div>
                                                     </div>

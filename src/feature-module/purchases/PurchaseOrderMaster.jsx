@@ -133,16 +133,16 @@ function PurchaseOrderMaster() {
     const columns = [
         {
             title: (
-                <OverlayTrigger placement="top" overlay={<Tooltip id="Order_Number-tooltip">खरेदी आदेश क्रमांक</Tooltip>}>
-                    <span>खरेदी आदेश क्रमांक</span>
+                <OverlayTrigger placement="top" overlay={<Tooltip id="Order_Number-tooltip">Purchase Order No.</Tooltip>}>
+                    <span>Purchase Order No</span>
                 </OverlayTrigger>
             ),
             dataIndex: "potranno",
         },
         {
             title: (
-                <OverlayTrigger placement="top" overlay={<Tooltip id="Order_Date-tooltip">खरेदी आदेश दिनांक</Tooltip>}>
-                    <span>खरेदी आदेश दिनांक</span>
+                <OverlayTrigger placement="top" overlay={<Tooltip id="Order_Date-tooltip">Purchase Order Date</Tooltip>}>
+                    <span>Purchase Order Date</span>
                 </OverlayTrigger>
             ),
             dataIndex: "podate",
@@ -150,8 +150,8 @@ function PurchaseOrderMaster() {
         },
         {
             title: (
-                <OverlayTrigger placement="top" overlay={<Tooltip id="Delivery_Date-tooltip">वितरण दिनांक</Tooltip>}>
-                    <span>वितरण दिनांक</span>
+                <OverlayTrigger placement="top" overlay={<Tooltip id="Delivery_Date-tooltip">Delivery Date</Tooltip>}>
+                    <span>Delivery Date</span>
                 </OverlayTrigger>
             ),
             dataIndex: "poddate",
@@ -159,8 +159,8 @@ function PurchaseOrderMaster() {
         },
         {
             title: (
-                <OverlayTrigger placement="top" overlay={<Tooltip id="Delivery_Place-tooltip">वितरणाचे ठिकाण</Tooltip>}>
-                    <span>वितरणाचे ठिकाण</span>
+                <OverlayTrigger placement="top" overlay={<Tooltip id="Delivery_Place-tooltip">Delivery Place</Tooltip>}>
+                    <span>Delivery Place</span>
                 </OverlayTrigger>
             ),
             dataIndex: "statename",
@@ -168,8 +168,8 @@ function PurchaseOrderMaster() {
 
         {
             title: (
-                <OverlayTrigger placement="top" overlay={<Tooltip id="Due_Date-tooltip">देय दिनांक</Tooltip>}>
-                    <span>देय दिनांक</span>
+                <OverlayTrigger placement="top" overlay={<Tooltip id="Due_Date-tooltip">Due Date</Tooltip>}>
+                    <span>Due Date</span>
                 </OverlayTrigger>
             ),
             dataIndex: "poduedate",
@@ -177,8 +177,8 @@ function PurchaseOrderMaster() {
 
         {
             title: (
-                <OverlayTrigger placement="top" overlay={<Tooltip id="Quotation_No-tooltip">कोटेशन क्रमांक</Tooltip>}>
-                    <span>कोटेशन क्रमांक</span>
+                <OverlayTrigger placement="top" overlay={<Tooltip id="Quotation_No-tooltip">Quotation No.</Tooltip>}>
+                    <span>Quotation No.</span>
                 </OverlayTrigger>
             ),
             dataIndex: "qno",
@@ -187,8 +187,8 @@ function PurchaseOrderMaster() {
         {
             title: (
                 <div className="d-flex justify-content-center">
-                    <OverlayTrigger placement="top" overlay={<Tooltip id="action-tooltip">क्रिया</Tooltip>}>
-                        <span>क्रिया</span>
+                    <OverlayTrigger placement="top" overlay={<Tooltip id="action-tooltip">Action</Tooltip>}>
+                        <span>Action</span>
                     </OverlayTrigger>
                 </div>
             ),
@@ -264,13 +264,13 @@ function PurchaseOrderMaster() {
 
     const showConfirmationAlert = (poaid) => {
         MySwal.fire({
-            title: "तुम्ही खात्रीने सांगता का?",
-            text: "तुम्ही हे उलट करू शकणार नाही!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय, हे हटवा!",
+            confirmButtonText: "Yes, delete it!",
             cancelButtonColor: "#ff0000",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
                 OndeletePurchaseOrder(poaid)
@@ -478,7 +478,7 @@ function PurchaseOrderMaster() {
                 <div className="page-header">
                     <div className="add-item d-flex">
                         <div className="page-title">
-                            <h3>खरेदी आदेश</h3>
+                            <h3>Purchase Order</h3>
 
                         </div>
                     </div>
@@ -537,14 +537,14 @@ function PurchaseOrderMaster() {
                                 data-bs-target="#AddPurchaseorder"
                             >
 
-                                खरेदी आदेश जोडा
+                                Add Purchase Order
                             </Link>
                         </div>
                     </div>
                     <div className="page-btn">
                         <Link to={route.PurchaseIndex} className="btn btn-secondary">
                             <ArrowLeft className="me-2" />
-                            अनुक्रमणिकेकडे परत जा
+                            Back to Index
                         </Link>
                     </div>
                 </div>

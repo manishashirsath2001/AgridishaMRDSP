@@ -13,17 +13,13 @@ import { setToogleHeader } from "../../core/redux/action";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { baseUrl } from "../../core/json/custom";
-
 import {
     ArrowLeft,
     ChevronUp,
     Edit,
     Eye,
-
     PlusCircle,
     RotateCcw,
-
-
     Trash2,
 } from "feather-icons-react/build/IconComponents";
 const VideoMaster = () => {
@@ -33,29 +29,23 @@ const VideoMaster = () => {
     const navigate = useNavigate();
     const [selectedVideoName, setSelectedVideoName] = useState("");
     const [PlotDetails, setPlotDetails] = useState([]);
-    // const [videoPreview, setVideoPreview] = useState(null); 
-    // const [selectedFile, setSelectedFile] = useState(null);
     const onEditClick = (vid) => {
-
         navigate(route.AddVideo, { state: { vid: vid } });
     };
     const columns = [
         {
-            title: "व्हिडिओ", // "Video" in Hindi
-            dataIndex: "video", // This should be the path to the video
+            title: "व्हिडिओ",
+            dataIndex: "video",
             render: (selectedVideoName) => {
-                // Ensure the video path is correct
-                // Combine baseUrl with the video path
-
                 return (
                     <div>
                         <video
-                            width="160" // Adjust the size as per your need
+                            width="160"
                             height="90"
                             controls
-                            style={{ objectFit: 'cover' }} // Optional styling to fit within bounds
+                            style={{ objectFit: 'cover' }}
                         >
-                            <source src={`${baseUrl.Url}/Images/${selectedVideoName}`} type="video/mp4" />
+                            <source src={`${baseUrl.Url}/Assets/${selectedVideoName}`} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -73,11 +63,10 @@ const VideoMaster = () => {
             dataIndex: "isactive",
             width: "5px",
             render: (status) => {
-                const isactive = status == 1; // फक्त 1 म्हणजेच Complete
+                const isactive = status == 1;
                 const badgeClass = isactive
                     ? "bg-danger text-white"
                     : "bg-success text-white";
-
                 const label = isactive ? "inactive" : "active";
                 return (
                     <OverlayTrigger
@@ -114,14 +103,6 @@ const VideoMaster = () => {
                                 <Trash2 className="feather-trash-2" />
                             </Link>
                         </OverlayTrigger>
-                        {/* <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip id="approve-tooltip">Proceed </Tooltip>}
-                  >
-                      <Link className="me-2 p-2" to="#" data-bs-toggle="modal" data-bs-target="#AddSaleQuotation" style={{ color: 'green' }}>
-                          <i data-feather="arrow-right-circle" className="feather-arrow-right-circle"></i>
-                      </Link>
-                  </OverlayTrigger> */}
                     </div>
                 </div>
             ),
@@ -129,7 +110,6 @@ const VideoMaster = () => {
         },
     ];
     const MySwal = withReactContent(Swal);
-
     const showConfirmationAlert = (vid) => {
         MySwal.fire({
             title: "तुम्हाला खात्री आहे का?",
@@ -173,7 +153,6 @@ const VideoMaster = () => {
             Collapse
         </Tooltip>
     );
-    //shorkey
     useEffect(() => {
         const handleShortcut = (e) => {
             if (e.ctrlKey && e.key.toLowerCase() === "a") {
@@ -184,33 +163,27 @@ const VideoMaster = () => {
                 e.preventDefault();
                 navigate(route.test);
             }
-
         };
-
         window.addEventListener("keydown", handleShortcut);
-
         return () => {
             window.removeEventListener("keydown", handleShortcut);
         };
     }, [navigate]);
-    //get data
     useEffect(() => {
         try {
             const payload = {
                 "vid": "%",
                 "keyword": "%",
-                "companyid": "",
+                "companyid": "COMP123",
                 "deptid": ""
             }
-
             const headers = {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
             axios({
                 method: "POST",
-                url: baseUrl.Url + "/backend/api/GET_AdminVideo",
+                url: baseUrl.Url + "/api/GET_AdminVideo",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
@@ -219,59 +192,49 @@ const VideoMaster = () => {
                     const DATA = response.data;
                     setPlotDetails(DATA);
                 })
-
         } catch (error) {
             console.error("Error fetching Access Right Data:", error);
         }
     }, []);
-    //delete
     const OndeletePlotDetails = async (vid) => {
         try {
             const payload = {
                 "vid": vid,
-                "companyid": "",
+                "companyid": "COMP123",
                 "deptid": "",
-
             }
             const headers = {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
             axios({
                 method: "POST",
-                url: baseUrl.Url + "/backend/api/SP_DeleteAdminVideo",
+                url: baseUrl.Url + "/api/SP_DeleteAdminVideo",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
                 .then((response) => {
-                    if (response.status != 200) throw new Error("Failed to Fetching Data");
-                    MySwal.fire({
-                        title: response.data[0].responseCode === "FAILURE" ? "Deletion Not Allowed" : "Deleted!",
-                        text: response.data[0].responseCode === "FAILURE"
-                            ? response.data[0].responseMessage
-                            : response.data[0].responseMessage,
-                        icon: response.data[0].responseCode === "FAILURE" ? "error" : "success",
+                   if (response.status !== 200) throw new Error("Failed to Delete Data");
+                      MySwal.fire({
+                        title: "Deleted!",
+                        text: "Advertisement deleted successfully.",
+                        icon: "success",
                         confirmButtonText: "OK",
-                        customClass: {
-                            confirmButton: response.data[0].responseCode === "FAILURE" ? "btn btn-danger" : "btn btn-success",
-                        },
                     });
+                     setPlotDetails((prevState) => prevState.filter((Advertisement) => Advertisement.vid !== vid));
                     try {
                         const payload = {
                             "vid": "%",
-                            "companyid": "",
+                            "companyid": "COMP123",
                             "deptid": "",
-
                         }
                         const headers = {
                             "Content-Type": "application/json",
                             Accept: "*/*",
                         };
-
                         axios({
                             method: "POST",
-                            url: baseUrl.Url + "/backend/api/GET_AdminVideo",
+                            url: baseUrl.Url + "/api/GET_AdminVideo",
                             data: JSON.stringify(payload),
                             headers: headers,
                         })
@@ -280,12 +243,10 @@ const VideoMaster = () => {
                                 const DATA = response.data;
                                 setPlotDetails(DATA);
                             })
-
                     } catch (error) {
                         console.error("Error fetching Access Right Data:", error);
                     }
                 })
-
         } catch (error) {
             console.error("Error fetching Access Right Data:", error);
         }
@@ -299,9 +260,7 @@ const VideoMaster = () => {
                             <h3>Video Master</h3>
                             <h6>Manage your Data</h6>
                         </div>
-
                     </div>
-
                     <ul className="table-top-head">
                         <li>
                             <OverlayTrigger placement="top" overlay={renderTooltip}>
@@ -363,7 +322,6 @@ const VideoMaster = () => {
                         </Link>
                     </div>
                 </div>
-                {/* Add this alert message here */}
                 <div className="alert alert-warning" role="alert">
                     ⚠️ तुम्ही एकाच वेळी एकच व्हिडिओ सक्रिय ठेवू शकता. जर तुम्हाला नवीन व्हिडिओ जोडायचा असेल, तर तुम्हाला आधीच्या व्हिडिओला निष्क्रिय करणे आवश्यक आहे.
                 </div>
@@ -374,13 +332,9 @@ const VideoMaster = () => {
                         </div>
                     </div>
                 </div>
-
                 <Brand />
             </div>
         </div>
     );
 };
-
-
-
 export default VideoMaster;

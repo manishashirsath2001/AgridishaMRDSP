@@ -7,7 +7,6 @@ import AddCategory from "../../core/modals/inventory/addcategory";
 import AddBrand from "../../core/modals/addbrand";
 import axios from "axios";
 import { ACSPLGUID, baseUrl, convertToISODate } from "../../core/json/custom";
-
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from "sweetalert2-react-content";
@@ -21,9 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToogleHeader } from "../../core/redux/action";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { getUserData } from "../../Context/UserData";
-
 const AddCompanyInfo = () => {
-
     const location = useLocation();
     const { CINFOID } = location.state || {};
     console.log('CINFOID', CINFOID);
@@ -32,7 +29,6 @@ const AddCompanyInfo = () => {
         console.log("user", userdetail);
         console.log("getUserData", getUserData);
     }
-
     const companyidRef = useRef();
     const cnameRef = useRef();
     const TelephoneRef = useRef();
@@ -55,7 +51,6 @@ const AddCompanyInfo = () => {
     const SaveRef = useRef();
     const Districtref = useRef();
     const Stateref = useRef();
-
     const navigate = useNavigate();
     const GUID = ACSPLGUID.getNew()
     const route = all_routes;
@@ -66,7 +61,6 @@ const AddCompanyInfo = () => {
             Collapse
         </Tooltip>
     );
-
     const handleKeyDown = (e, nextRef, isLastField = false) => {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -75,13 +69,10 @@ const AddCompanyInfo = () => {
             } else {
                 nextRef?.current?.focus();
             }
-
         }
     };
-
     const [sellingtype, setsellingtype] = useState([]);
     const [statetype, setstatetype] = useState([]);
-
     const [formData, setFormData] = useState({
         companyid: '',
         cname: '',
@@ -114,17 +105,13 @@ const AddCompanyInfo = () => {
                     "Content-Type": "application/json",
                     Accept: "*/*",
                 };
-
                 const payload = { spincode: "%" };
-
-
                 const response = await axios({
                     method: "POST",
                     url: baseUrl.Url + "/backend/api/StatePincode",
                     data: JSON.stringify(payload),
                     headers: headers,
                 });
-
                 if (response.status === 200) {
                     const data = response.data;
                     const districtdata = data
@@ -154,18 +141,13 @@ const AddCompanyInfo = () => {
             const fetchData = async () => {
                 try {
                     const payload = {
-
-
                         "cinfoid": CINFOID,
                         "keyword": "%"
-
-
                     }
                     const headers = {
                         "Content-Type": "application/json",
                         Accept: "*/*",
                     };
-
                     axios({
                         method: "POST",
                         url: baseUrl.Url + "/backend/api/GET_CompanyInfo",
@@ -193,24 +175,16 @@ const AddCompanyInfo = () => {
                                 Facebook: DATA.facebookid || '',
                                 Instagram: DATA.instagramid || '',
                                 Twitter: DATA.twitterid || '',
-
                             });
-
                             console.log("DATA", DATA)
-
-
                         })
-
                 } catch (error) {
                     console.error("Error fetching Access Right Data:", error);
                 }
-
             };
             fetchData();
         }
     }, [CINFOID]);
-
-
     useEffect(() => {
         const handleShortcut = (e) => {
             if (e.ctrlKey && e.key === 'e') {
@@ -218,33 +192,20 @@ const AddCompanyInfo = () => {
                 showExitAlert();
             }
             if (e.ctrlKey && e.key == 's' || e.ctrlKey && e.key == 'S') {
-
                 e.preventDefault();
                 validateinput();
-
             }
-
-
         };
-
         window.addEventListener('keydown', handleShortcut);
-
         return () => {
             window.removeEventListener('keydown', handleShortcut);
         };
     }, [formData, navigate]);
-
-
     useEffect(() => {
-
         if (companyidRef.current) {
             companyidRef.current.focus();
         }
-
     }, []);
-
-
-
     const handleSelectChange = (selectedOption, field) => {
         console.log('selectedcity', selectedOption.value)
         setFormData(prevData => ({
@@ -252,31 +213,15 @@ const AddCompanyInfo = () => {
             [field]: selectedOption ? selectedOption.value : '',
         }));
     };
-
-
-
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   showConfirmationAlert(event);
-    //   validateinput(e);
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (validateinput()) {
-            // Validation successful
             showConfirmationAlert(e);
-            // You can also send data to server here if needed
         }
     };
-
     const handleFormSubmission = async () => {
-
         try {
-
             const payload = {
-
                 "cinfoid": CINFOID ? CINFOID : GUID,
                 "companyid": formData.companyid,
                 "cname": formData.cname,
@@ -289,31 +234,24 @@ const AddCompanyInfo = () => {
                 "instagramid": formData.Instagram,
                 "twitterid": formData.Twitter,
                 "facebookid": formData.Facebook,
-
             };
-
             console.log('payload', payload)
             const headers = {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
             axios({
                 method: "POST",
                 url: baseUrl.Url + "/backend/api/SP_AddUpdCompanyInfo",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
-            // console.log("API Response:", response.data);
-
             Swal.fire({
                 icon: "success",
                 title: "Saved!",
                 text: "Data saved successfully.",
                 confirmButtonText: "OK",
             });
-
-
             navigate(route.CompanyInfo)
         } catch (error) {
             console.error("Submission Error:", error);
@@ -323,11 +261,8 @@ const AddCompanyInfo = () => {
                 text: "Failed to save data. Please try again.",
             });
         }
-
     };
-
     const MySwal = withReactContent(Swal);
-
     const showConfirmationAlert = (event) => {
         MySwal.fire({
             title: "Are you sure?",
@@ -358,9 +293,6 @@ const AddCompanyInfo = () => {
             }
         });
     };
-
-
-
     const validateinput = () => {
         const {
             companyid,
@@ -373,91 +305,72 @@ const AddCompanyInfo = () => {
             Instagram,
             Twitter
         } = formData;
-
         if (!companyid || companyid.trim() === '') {
             Swal.fire("Error", "Company ID is required.", "error");
             companyidRef.current.focus();
             return false;
         }
-
         if (!cname || !/^[A-Za-z\s]{2,100}$/.test(cname)) {
             Swal.fire("Error", "Company Name must be 2-100 characters and contain only letters and spaces.", "error");
             cnameRef.current.focus();
             return false;
         }
-
         if (!ccontact || !/^[789]\d{9}$/.test(ccontact)) {
             Swal.fire("Error", "Contact number must be 10 digits starting with 7, 8, or 9.", "error");
             ccontactRef.current.focus();
             return false;
         }
-
         if (cpincode && !/^\d{6}$/.test(cpincode)) {
             Swal.fire("Error", "Pincode must be a 6-digit number.", "error");
             cpincodeRef.current.focus();
             return false;
         }
-
         if (cemail && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(cemail)) {
             Swal.fire("Error", "Invalid email format.", "error");
             cemailRef.current.focus();
             return false;
         }
-
         if (cgstno && !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(cgstno)) {
             Swal.fire("Error", "Invalid GST Number format.", "error");
             cgstnoRef.current.focus();
             return false;
         }
-
         if (Instagram && !/^[a-zA-Z0-9._]{3,30}$/.test(Instagram)) {
             Swal.fire("Error", "Instagram ID must be 3-30 characters (letters, numbers, underscore, dot).", "error");
             InstagramRef.current.focus();
             return false;
         }
-
         if (Facebook && !/^@?(\w){3,15}$/.test(Facebook)) {
             Swal.fire("Error", "Facebook ID handle must be 3-15 characters and can include letters, numbers, or underscore.", "error");
             FacebookRef.current.focus();
             return false;
         }
-
         if (Twitter && !/^@?(\w){3,15}$/.test(Twitter)) {
             Swal.fire("Error", "Twitter handle must be 3-15 characters and can include letters, numbers, or underscore.", "error");
             TwitterRef.current.focus();
             return false;
         }
-
-
-        // If all validations pass
         return true;
     };
-
-
     const handleChange = async (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
-
         if (name === "cpincode" && value.length === 6) {
             try {
                 const headers = {
                     "Content-Type": "application/json",
                     Accept: "*/*",
                 };
-
                 const payload = { spincode: value };
-
-
                 const response = await axios({
                     method: "POST",
                     url: baseUrl.Url + "/backend/api/StatePincode",
                     data: JSON.stringify(payload),
                     headers: headers,
                 });
-
                 if (response.status === 200) {
                     const data = response.data;
                     const districtdata = data
@@ -489,12 +402,6 @@ const AddCompanyInfo = () => {
             }
         }
     };
-
-
-
-
-
-
     return (
         <div className="page-wrapper">
             <div className="content">
@@ -529,11 +436,9 @@ const AddCompanyInfo = () => {
                         </Link>
                     </div>
                 </div>
-                {/* /add */}
                 <form onSubmit={handleSubmit}>
                     <div className="card mbgcolor">
-                        <div className="card-body add-product pb-0">
-
+                        <div className="card-body add-product pb-0 mbgcolor">
                             <div
                                 className="accordion-card-one accordion"
                                 id="accordionExample"
@@ -556,7 +461,6 @@ const AddCompanyInfo = () => {
                                                     <ChevronDown className="chevron-down-add" />
                                                 </Link>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div
@@ -566,7 +470,6 @@ const AddCompanyInfo = () => {
                                         data-bs-parent="#accordionExample"
                                     >
                                         <div className="accordion-body">
-
                                             <div className="row">
                                                 <div className="col-lg-3 col-sm-6 col-12">
                                                     <div className="mb-3 add-product">
@@ -578,7 +481,6 @@ const AddCompanyInfo = () => {
                                                             onChange={handleChange}
                                                             onKeyDown={(e) => handleKeyDown(e, cnameRef, true)}
                                                         />
-
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-6 col-sm-6 col-12">
@@ -606,12 +508,8 @@ const AddCompanyInfo = () => {
                                                             ref={TelephoneRef}
                                                             onKeyDown={(e) => handleKeyDown(e, cemailRef, true)}
                                                             required />
-
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
                                             <div className="row">
                                                 <div className="col-lg-3 col-sm-6 col-12">
@@ -627,7 +525,6 @@ const AddCompanyInfo = () => {
                                                         />
                                                     </div>
                                                 </div>
-
                                                 <div className="col-lg-3 col-sm-6 col-12">
                                                     <div className="form-label add-product">
                                                         <label className="form-label required">Phone  </label>
@@ -665,12 +562,10 @@ const AddCompanyInfo = () => {
                                                         />
                                                     </div>
                                                 </div>
+
                                                 <div />
                                             </div>
-
                                             <div className="row">
-
-
                                                 <div className="col-lg-12 col-sm-6 col-12">
                                                     <div className="mb-3 add-product">
                                                         <label className="form-label">Address</label>
@@ -683,19 +578,14 @@ const AddCompanyInfo = () => {
                                                             ref={Addressref}
                                                             onKeyDown={(e) => handleKeyDown(e, Arearef, true)}
                                                             required
-
                                                         />
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div
                                 className="accordion-card-one accordion"
                                 id="accordionExample">
@@ -717,7 +607,6 @@ const AddCompanyInfo = () => {
                                                     <ChevronDown className="chevron-down-add" />
                                                 </Link>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div
@@ -727,7 +616,6 @@ const AddCompanyInfo = () => {
                                         data-bs-parent="#accordionExample"
                                     >
                                         <div className="accordion-body">
-
                                             <div className="row">
                                                 <div className="col-lg-4 col-sm-6 col-12">
                                                     <div className="mb-3 add-product">
@@ -739,7 +627,6 @@ const AddCompanyInfo = () => {
                                                             name="Instagram"
                                                             value={formData.Instagram}
                                                             onChange={handleChange}
-
                                                             onKeyDown={(e) => handleKeyDown(e, TwitterRef, true)}
                                                             required
                                                         />
@@ -762,10 +649,6 @@ const AddCompanyInfo = () => {
                                                         />
                                                     </div>
                                                 </div>
-
-
-
-
                                                 <div className="col-lg-4 col-sm-6 col-12">
                                                     <div className="mb-3 add-product">
                                                         <label className="form-label">Facebook</label>
@@ -776,7 +659,6 @@ const AddCompanyInfo = () => {
                                                             name="Facebook"
                                                             value={formData.Facebook}
                                                             onChange={handleChange}
-
                                                             onKeyDown={(e) => handleKeyDown(e, SaveRef, true)}
                                                             required
                                                         />
@@ -787,8 +669,6 @@ const AddCompanyInfo = () => {
                                     </div>
                                 </div>
                             </div>
-
-
                             <div className="col-lg-12">
                                 <div className="btn-addproduct mb-4">
                                     <button
@@ -803,21 +683,15 @@ const AddCompanyInfo = () => {
                                     </button>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                 </form>
-
             </div>
             <Addunits />
             <AddCategory />
             <AddBrand />
         </div>
-
     );
 };
-
 export default AddCompanyInfo;
 

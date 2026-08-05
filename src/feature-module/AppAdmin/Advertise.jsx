@@ -17,21 +17,15 @@ import marathiFontBase64 from "../../style/fonts/NotoSansDevanagari"
 import { saveAs } from 'file-saver';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-
 import {
     ArrowLeft,
     ChevronUp,
     Edit,
     Eye,
-
     PlusCircle,
     RotateCcw,
-
-
     Trash2,
 } from "feather-icons-react/build/IconComponents";
-
-
 const Advertise = () => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.toggle_header);
@@ -41,44 +35,54 @@ const Advertise = () => {
     const onEditClick = (aDid) => {
         navigate(route.AddAdvertise, { state: { aDid: aDid } });
     };
-
     const columns = [
         {
-            title: "फोटो", // Column Title
-            dataIndex: "aDimage", // Data index
+            title: "फोटो",
+            dataIndex: "aDimage",
             render: (imageName) => {
-                const fileUrl = `${baseUrl.Url}/Images/${imageName}`; // Construct the image URL
+                const fileUrl = `${baseUrl.Url}/Assets/${imageName}`;
                 return (
                     <img
                         src={fileUrl}
                         alt={imageName}
-                        style={{ width: 70, height: 70, objectFit: 'cover' }} // Style to make it look nice (resize as needed)
+                        style={{ width: 70, height: 70, objectFit: 'cover' }}
                     />
                 );
             },
         },
-
         {
             title: "शीर्षक",
             dataIndex: "aDtitle",
-            // sorter: (a, b) => a.sku.length - b.sku.length,
         },
         {
-            title: " स्थिती",
+            title: "स्थिती",
             dataIndex: "isactive",
-            // sorter: (a, b) => a.category.length - b.category.length,
+            width: "5px",
+            render: (status) => {
+                const isactive = status == 1;
+                const badgeClass = isactive
+                    ? "bg-danger text-white"
+                    : "bg-success text-white";
+                const label = isactive ? "inactive" : "active";
+                return (
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip id={`tooltip-${label}`}>{label}</Tooltip>}
+                    >
+                        <span
+                            className={`badge ${badgeClass} d-flex justify-content-center`}
+                            style={{ padding: "7px 12px", fontSize: "0.875rem" }}
+                        >
+                            {label}
+                        </span>
+                    </OverlayTrigger>
+                );
+            }
         },
-
-        // {
-        //     title: "जनरल लेजर",
-        //     dataIndex: "glrpid",
-        //     // sorter: (a, b) => a.price.length - b.price.length,
-        // },
-
-
         {
             title: "Action",
             dataIndex: "action",
+            align: "center",
             render: (_, record) => (
                 <div className="action-table-data">
                     <div className="edit-delete-action">
@@ -96,40 +100,27 @@ const Advertise = () => {
                                 <Trash2 className="feather-trash-2" />
                             </Link>
                         </OverlayTrigger>
-                        {/* <OverlayTrigger
-                     placement="top"
-                     overlay={<Tooltip id="approve-tooltip">Proceed </Tooltip>}
-                 >
-                     <Link className="me-2 p-2" to="#" data-bs-toggle="modal" data-bs-target="#AddSaleQuotation" style={{ color: 'green' }}>
-                         <i data-feather="arrow-right-circle" className="feather-arrow-right-circle"></i>
-                     </Link>
-                 </OverlayTrigger> */}
                     </div>
                 </div>
             ),
-
-
-
         },
     ];
-
     const [Advertisement, setAdvertisement] = useState([]);
     useEffect(() => {
         try {
             const payload = {
                 aDid: "%",
                 keyword: '%',
-                companyid: "",
+                companyid: "COMP123",
                 deptid: "",
             }
             const headers = {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
             axios({
                 method: "POST",
-                url: baseUrl.Url + "/backend/api/GET_Advertisement",
+                url: baseUrl.Url + "/api/GET_Advertisement",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
@@ -138,15 +129,10 @@ const Advertise = () => {
                     const DATA = response.data;
                     setAdvertisement(DATA);
                 })
-
         } catch (error) {
             console.error("Error fetching Access Right Data:", error);
         }
     }, []);
-
-
-
-
     const OndeleteAccounts = async (aDid) => {
         try {
             const payload = {
@@ -158,31 +144,20 @@ const Advertise = () => {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
-            // Perform the delete API call
             axios({
                 method: "POST",
-                url: baseUrl.Url + "/backend/api/SP_DeleteAdvertisement",
+                url: baseUrl.Url + "/api/SP_DeleteAdvertisement",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
                 .then((response) => {
                     if (response.status !== 200) throw new Error("Failed to Delete Data");
-
-                    // Display success or failure message
                     MySwal.fire({
-                        title: response.data[0].responseCode === "FAILURE" ? "Deletion Not Allowed" : "Deleted!",
-                        text: response.data[0].responseCode === "FAILURE"
-                            ? response.data[0].responseMessage
-                            : response.data[0].responseMessage,
-                        icon: response.data[0].responseCode === "FAILURE" ? "error" : "success",
+                        title: "Deleted!",
+                        text: "Advertisement deleted successfully.",
+                        icon: "success",
                         confirmButtonText: "OK",
-                        customClass: {
-                            confirmButton: response.data[0].responseCode === "FAILURE" ? "btn btn-danger" : "btn btn-success",
-                        },
                     });
-
-                    // After deletion, filter out the deleted account from the current state
                     setAdvertisement((prevState) => prevState.filter((Advertisement) => Advertisement.aDid !== aDid));
                 })
                 .catch((error) => {
@@ -192,8 +167,6 @@ const Advertise = () => {
             console.error("Error deleting account:", error);
         }
     };
-
-
 
     const showConfirmationAlert = (aDid) => {
         MySwal.fire({
@@ -212,8 +185,6 @@ const Advertise = () => {
             }
         });
     }
-
-
     useEffect(() => {
         const handleShortcut = (e) => {
             if (e.ctrlKey && e.key === 'a') {
@@ -222,18 +193,15 @@ const Advertise = () => {
             }
             if (e.ctrlKey && e.key === 'e') {
                 e.preventDefault();
-                navigate(route.test);
+                navigate(route.AppAdminIndex);
             }
         };
-
         window.addEventListener('keydown', handleShortcut);
-
         return () => {
             window.removeEventListener('keydown', handleShortcut);
         };
     }, [navigate]);
 
-    // Empty data source
     const dataSource = [];
     const renderTooltip = (props) => (
         <Tooltip id="pdf-tooltip" {...props}>
@@ -260,29 +228,22 @@ const Advertise = () => {
             Collapse
         </Tooltip>
     );
-
     const generatePDF = (Notification) => {
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.getWidth();
-
         const cleanBase64 = marathiFontBase64.replace(/^data:font\/ttf;base64,/, "");
-
         doc.addFileToVFS("NotoSansDevanagari.ttf", cleanBase64);
         doc.addFont("NotoSansDevanagari.ttf", "NotoSansDevanagari", "normal");
         doc.setFont("NotoSansDevanagari", "normal");
         doc.setFontSize(16);
-
         console.log(doc.getFontList());
-
         const title = " सुचना अहवाल";
         doc.text(title, (pageWidth - doc.getTextWidth(title)) / 2, 20);
-
         const tableColumn = ["शीर्षक", "तारीख", "समाप्ती तारीख"];
         const tableRows = Notification.map((item) => [
             item.notiTitle,
             item.notiSDate,
             item.notiNDate,
-
         ]);
         autoTable(doc, {
             startY: 30,
@@ -292,56 +253,40 @@ const Advertise = () => {
             headStyles: { fontStyle: "normal", fillColor: [0, 102, 204], textColor: 255, fontSize: 14 },
             alternateRowStyles: { fillColor: [240, 240, 240] },
         });
-
         window.open(doc.output("bloburl"), "_blank");
     };
-
-
-
     const exportToExcel = async () => {
         try {
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet("Acoounts Report");
-
-
             const headingRow = worksheet.addRow(["Acoounts Report"]);
             headingRow.getCell(1).font = { bold: true, size: 16 };
             headingRow.getCell(1).alignment = { horizontal: "center", vertical: "middle" };
-
-
             worksheet.mergeCells("A1:E1");
-
-
             const headers = ["शीर्षक", "तारीख", "समाप्ती तारीख"];
             const headerRow = worksheet.addRow(headers);
-
             headerRow.eachCell((cell) => {
                 cell.font = { bold: true, color: { argb: "FFFFFF" } };
                 cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "808080" } };
                 cell.alignment = { horizontal: "center", vertical: "middle" };
             });
-
             const columnWidths = [40, 40, 40, 40];
             columnWidths.forEach((width, index) => {
                 worksheet.getColumn(index + 1).width = width;
             });
-
             Notification.forEach(({ notiTitle, notiSDate, notiNDate }) => {
                 const row = worksheet.addRow([notiTitle, notiSDate, notiNDate]);
                 row.eachCell((cell) => {
                     cell.alignment = { horizontal: "center", vertical: "middle" };
                 });
             });
-
             const buffer = await workbook.xlsx.writeBuffer();
             const data = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
             saveAs(data, "Acoounts.xlsx");
-
         } catch (error) {
             console.error("Error generating the Excel file:", error);
         }
     };
-
     return (
         <div className="page-wrapper">
             <div className="content">
@@ -410,7 +355,6 @@ const Advertise = () => {
                         </Link>
                     </div>
                 </div>
-
                 <div className="card table-list-card">
                     <div className="card-body">
                         <div className="table-responsive">
@@ -418,11 +362,9 @@ const Advertise = () => {
                         </div>
                     </div>
                 </div>
-
                 <Brand />
             </div>
         </div>
     );
 };
-
 export default Advertise;

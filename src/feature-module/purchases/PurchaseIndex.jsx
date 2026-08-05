@@ -122,10 +122,10 @@ function PurchaseIndex() {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
-                                        रद्द करा
+                                        Cancel
                                     </button>
                                     <button type="button" className="btn btn-primary" onClick={() => setShowModal(false)}>
-                                        ठीक आहे
+                                        OK
                                     </button>
                                 </div>
                             </div>

@@ -369,13 +369,13 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
 
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला हे डेटा जतन करायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to save this data?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "जतन करा",
+            confirmButtonText: "SAVE",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "CANCEL",
         }).then((result) => {
             if (result.isConfirmed) {
                 handleFormSubmission();
@@ -646,13 +646,13 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
     };
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला बाहेर जायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("EditPurchasechallan");
@@ -703,14 +703,14 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                 aria-labelledby="exampleModalFullscreenLabel"
                 aria-hidden="true"
             >
-                <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
-                        <div className="modal-content">
-                            <div className="page-wrapper-new p-0">
-                                <div className="content">
+                <div className="modal-dialog modal-fullscreen mbgcolor">
+                    <div className="modal-content mbgcolor">
+                        <div className="modal-content mbgcolor">
+                            <div className="page-wrapper-new p-0 mbgcolor">
+                                <div className="content mbgcolor">
                                     <div className="modal-header border-0 custom-modal-header">
                                         <div className="page-title">
-                                            <h4>खरेदी चलान पिकअप संपादित करा</h4>
+                                            <h4>Edit Purchase Challan Pickup</h4>
                                         </div>
                                         <div className="page-btn">
                                             <Link className="btn btn-secondary"
@@ -719,7 +719,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                 onClick={showExitAlert}
                                             >
                                                 <ArrowLeft className="me-2" />
-                                                सूचिके कडे परत जा
+                                                Back to index
                                             </Link>
                                         </div>
                                     </div>
@@ -744,7 +744,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                         className="btn btn-primary ms-3 mt-1 mt-sm-0"
                                                         onClick={() => handleSearch(REQNNO)}
                                                     >
-                                                        शोधा
+                                                        Search
                                                     </button>
                                                 </div>
                                             </div>
@@ -757,7 +757,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                 <div className="row">
                                                     <div className="col-lg-3 col-md-3 col-sm-12">
                                                         <div className="mb-3 add-product form-label">
-                                                            <label className="form-label text-dark">चलान क्रमांक</label>
+                                                            <label className="form-label text-dark">Challan No</label>
                                                             <input
                                                                 ref={PCTRNNORef}
                                                                 type="text"
@@ -771,7 +771,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                     </div>
                                                     <div className="col-lg-3 col-sm-3 col-12">
                                                         <div className="input-blocks">
-                                                            <label>चलान तारीख</label>
+                                                            <label>Challan Date</label>
                                                             <div className="input-groupicon calender-input">
                                                                 <div className="info-img" />
                                                                 <input
@@ -793,7 +793,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                     </div>
                                                     <div className="col-lg-3 col-sm-3 col-12">
                                                         <div className="input-blocks">
-                                                            <label>भरणा पद्धत</label>
+                                                            <label>Payment Mode</label>
                                                             <div className="input-groupicon calender-input">
                                                                 <div className="info-img" />
                                                                 <Select
@@ -810,7 +810,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                 <div className="row">
                                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                                         <div className="input-blocks add-product">
-                                                            <label>विक्रेत्याचे नाव</label>
+                                                            <label>vendor name</label>
                                                             <input
                                                                 ref={PCVENDORRef}
                                                                 type="text"
@@ -825,7 +825,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                     </div>
                                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                                         <div className="input-blocks add-product">
-                                                            <label>विक्रेत्याचा ईमेल</label>
+                                                            <label>vendor Email</label>
                                                             <input
                                                                 ref={PCVENDORRef}
                                                                 type="text"
@@ -840,7 +840,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                     </div>
                                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                                         <div className="input-blocks add-product">
-                                                            <label>विक्रेत्याचा संपर्क</label>
+                                                            <label>vendor contact</label>
                                                             <input
                                                                 ref={PCVENDORRef}
                                                                 type="text"
@@ -855,7 +855,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                     </div>
                                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                                         <div className="input-blocks add-product">
-                                                            <label className="form-label text-dark">प्रेषक</label>
+                                                            <label className="form-label text-dark">Consigner</label>
                                                             <input
                                                                 ref={PCCONSIGNERRef}
                                                                 type="text"
@@ -869,7 +869,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                     </div>
                                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                                         <div className="mb-3 add-product form-label">
-                                                            <label className="form-label text-dark">वाहन क्रमांक</label>
+                                                            <label className="form-label text-dark">Vehicle No</label>
                                                             <input
                                                                 ref={PCVNORef}
                                                                 type="text"
@@ -885,7 +885,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
 
                                                     <div className="col-lg-4 col-md-4 col-sm-12">
                                                         <div className="mb-3 add-product form-label">
-                                                            <label className="form-label text-dark">पुरवठ्याचे ठिकाण</label>
+                                                            <label className="form-label text-dark">Place of supply</label>
                                                             {/* <input
                                                             ref={PCPOSUPPLYRef}
                                                             type="text"
@@ -910,7 +910,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                 <div className="row">
                                                     <div className="col-12">
                                                         <div className="form-label add-product form-label">
-                                                            <label className="form-label text-dark">वर्णन</label>
+                                                            <label className="form-label text-dark">Narration</label>
                                                             <textarea
                                                                 ref={PCNARRATIONRef}
                                                                 rows={2}
@@ -934,18 +934,18 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                                         <table className="table table-bordered">
                                                                             <thead className="thead-dark">
                                                                                 <tr>
-                                                                                    <th className="col-3">उत्पादन</th>
-                                                                                    <th className="col-1">माप युनिट</th>
-                                                                                    <th className="col-1">HSN कोड</th>
-                                                                                    <th className="col-2">बॅच क्रमांक</th>
-                                                                                    <th className="col-1">वैधता समाप्ती तारीख</th>
-                                                                                    <th className="col-1">प्रमाण</th>
-                                                                                    <th className="col-1">दर</th>
-                                                                                    <th className="col-1">करयोग्य मूल्य</th>
+                                                                                    <th className="col-3">Product</th>
+                                                                                    <th className="col-1">UOM</th>
+                                                                                    <th className="col-1">HSN Code</th>
+                                                                                    <th className="col-2">BATCH NO</th>
+                                                                                    <th className="col-1">EXPIRY DATE</th>
+                                                                                    <th className="col-1">Quantity</th>
+                                                                                    <th className="col-1">Rate</th>
+                                                                                    <th className="col-1">Taxable Value</th>
                                                                                     <th className="col-1">CGST</th>
                                                                                     <th className="col-1">SGST</th>
                                                                                     <th className="col-1">IGST</th>
-                                                                                    <th className="col-1">एकूण</th>
+                                                                                    <th className="col-1">Total</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -993,7 +993,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                                             <tfoot>
                                                                                 <tr>
                                                                                     <td colSpan="6"></td> {/* Empty cells for alignment */}
-                                                                                    <td><strong>एकूण करयोग्य:</strong></td>
+                                                                                    <td><strong>Total Taxable:</strong></td>
                                                                                     <td>
                                                                                         <input
                                                                                             type="text"
@@ -1004,7 +1004,7 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                                                         />
                                                                                     </td>
                                                                                     <td colSpan="3"></td>
-                                                                                    <td><strong>एकूण:</strong></td>
+                                                                                    <td><strong>Total:</strong></td>
                                                                                     <td>
                                                                                         <input
                                                                                             type="text"
@@ -1033,13 +1033,13 @@ function EditChallanPickUp({ PCAID, poaid, vendorid }) {
                                                             // data-bs-dismiss="modal"
                                                             onClick={showExitAlert}
                                                         >
-                                                            बाहेर जा
+                                                            Exit
                                                         </button>
                                                         <button
                                                             type="submit"
                                                             className="btn btn-submit"
                                                         >
-                                                            जतन करा
+                                                            Save
                                                         </button>
                                                     </div>
                                                 </div>

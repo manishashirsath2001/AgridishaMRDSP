@@ -72,13 +72,13 @@ function Analize({ praid }) {
 
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला हे डेटा जतन करायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to save this data?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "जतन करा",
+            confirmButtonText: "SAVE",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "CANCLE",
         }).then((result) => {
             if (result.isConfirmed) {
                 handleSave();
@@ -88,13 +88,13 @@ function Analize({ praid }) {
 
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला बाहेर जायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("analize");
@@ -202,12 +202,12 @@ function Analize({ praid }) {
     return (
         <div className="modal fade" id="analize">
             <div className="modal-dialog modal-dialog-centered modal-fullscreen">
-                <div className="modal-content">
-                    <div className="page-wrapper-new p-0">
-                        <div className="content">
+                <div className="modal-content mbgcolor">
+                    <div className="page-wrapper-new p-0 mbgcolor">
+                        <div className="content mbgcolor">
                             <div className="modal-header border-0 custom-modal-header">
                                 <div className="page-title">
-                                    <h4>साठा जोडा</h4>
+                                    <h4>Add Stock</h4>
                                 </div>
                                 <button
                                     type="button"
@@ -270,7 +270,7 @@ function Analize({ praid }) {
                                                             htmlFor={`approve_${checkbox.id}`}
                                                             style={{ marginBottom: "0" }}
                                                         >
-                                                            मंजुरी द्या
+                                                            Approve
                                                         </label>
                                                     </div>
                                                 ))}
@@ -287,14 +287,14 @@ function Analize({ praid }) {
                                             // data-bs-dismiss="modal"
                                             onClick={showExitAlert}
                                         >
-                                            बाहेर जा
+                                            Exit
                                         </button>
                                         <button
                                             type="button"
                                             className="btn btn-submit me-3"
                                             onClick={showConfirmationAlert}
                                         >
-                                            जतन करा
+                                            Save
                                         </button>
                                     </div>
                                 </div>

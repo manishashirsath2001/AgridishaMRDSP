@@ -153,34 +153,34 @@ function RequisitionMaster() {
 
     const columns = [
         {
-            title: "रेक्विसिशन क्रमांक",
+            title: "Requisition Number",
             dataIndex: "prno",
             sorter: (a, b) => a.prno.length - b.prno.length,
         },
         {
-            title: "रेक्विसिशन तारीख",
+            title: "Requisition Date",
             dataIndex: "prqdate",
             sorter: (a, b) => a.prqdate.length - b.prqdate.length,
         },
         {
-            title: "चौकशी क्रमांक",
+            title: "Enquiry Number",
             dataIndex: "preqno",
             sorter: (a, b) => a.preqno.length - b.preqno.length,
         },
         {
-            title: "अपेक्षित तारीख",
+            title: "Expected Date",
             dataIndex: "prexpcdate",
             sorter: (a, b) => a.prexpcdate.length - b.prexpcdate.length,
         },
         {
-            title: "बैठकीची तारीख",
+            title: "Meeting Date",
             dataIndex: "prmdate",
             sorter: (a, b) => a.prmdate.length - b.prmdate.length,
         },
         {
             title: (
                 <div className="d-flex justify-content-center">
-                    कृती
+                    Action
                 </div>
             ),
             dataIndex: "action",
@@ -502,13 +502,13 @@ function RequisitionMaster() {
                     </ul>
                     <div className="page-btn">
                         <Link to={route.AddRequisition} className="btn btn-added">
-                            <PlusCircle className="me-2 iconsize" /> नवीन
+                            <PlusCircle className="me-2 iconsize" /> Add Requisition
                         </Link>
                     </div>
                     <div className="page-btn">
                         <Link to={route.PurchaseIndex} className="btn btn-secondary">
                             <ArrowLeft className="me-2" />
-                            मागे
+                            Back to Index
                         </Link>
                     </div>
                 </div>

@@ -182,13 +182,13 @@ function AddPurchaseReturn({ PRAID }) {
 
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला हे डेटा जतन करायचा आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to save this data?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "जतन करा",
+            confirmButtonText: "SAVE",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "CANCEL",
         }).then((result) => {
             if (result.isConfirmed) {
                 // handleModalConfirm(event);
@@ -417,13 +417,13 @@ function AddPurchaseReturn({ PRAID }) {
     // const MySwal = withReactContent(Swal);
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला बाहेर जायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("AddPurchaseReturn");
@@ -474,17 +474,17 @@ function AddPurchaseReturn({ PRAID }) {
                 aria-hidden="true"
                 style={{ display: "none" }}
             >
-                <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="modal-content">
+                <div className="modal-dialog modal-fullscreen mbgcolor">
+                    <div className="modal-content mbgcolor">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
                                 <div className="page-wrapper-new p-0">
                                     <div className="content ">
                                         <form onSubmit={handleSubmit}>
                                             <div className="modal-header border-0 custom-modal-header  ">
                                                 <div className="page-title d-flex justify-content-between align-items-center w-75 ">
                                                     <div className="page-title ">
-                                                        <h4>खरेदी बिल परतावा :</h4>
+                                                        <h4>Purchase Bill Return :</h4>
                                                     </div>
 
                                                 </div>
@@ -496,7 +496,7 @@ function AddPurchaseReturn({ PRAID }) {
                                                         onClick={showExitAlert}
                                                     >
                                                         <ArrowLeft className="me-2" />
-                                                        सूचिका कडे परत
+                                                        Back to index
                                                     </Link>
                                                 </div>
                                             </div>
@@ -517,7 +517,7 @@ function AddPurchaseReturn({ PRAID }) {
                                                                 onClick={() => handleSearch(PBBILLNO)}
                                                                 className="btn btn-primary ms-3 mt-1 mt-sm-0"
                                                             >
-                                                                शोधा
+                                                                Search
                                                             </button>
                                                         </div>
                                                     </div>
@@ -532,7 +532,7 @@ function AddPurchaseReturn({ PRAID }) {
                                                         <div className="row">
                                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                                 <div className="form-label">
-                                                                    <label className="form-label required">व्यवहार क्रमांक</label>
+                                                                    <label className="form-label required">Transaction No</label>
                                                                     <input
                                                                         type="text"
                                                                         className="form-control"
@@ -545,7 +545,7 @@ function AddPurchaseReturn({ PRAID }) {
 
                                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                                 <div className="input-blocks">
-                                                                    <label className="form-label required">व्यवहार तारीख"</label>
+                                                                    <label className="form-label required">Transaction Date</label>
                                                                     <div className="input-groupicon calender-input">
                                                                         {/* <Calendar className="info-img" />
                                                                         <DatePicker
@@ -570,7 +570,7 @@ function AddPurchaseReturn({ PRAID }) {
 
                                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                                 <div className="form-label">
-                                                                    <label className="form-label required">बिल क्रमांक</label>
+                                                                    <label className="form-label required">Bill No</label>
                                                                     <input
                                                                         type="text"
                                                                         className="form-control"
@@ -584,7 +584,7 @@ function AddPurchaseReturn({ PRAID }) {
 
                                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                                 <div className="input-blocks">
-                                                                    <label className="form-label required">बिल तारीख</label>
+                                                                    <label className="form-label required">Bill Date</label>
                                                                     <div className="input-groupicon calender-input">
                                                                         {/* <Calendar className="info-img" /> */}
                                                                         <input
@@ -614,7 +614,7 @@ function AddPurchaseReturn({ PRAID }) {
 
                                                             <div className="col-lg-5 col-md-6 col-sm-12">
                                                                 <div className="add-product">
-                                                                    <label className="form-label required">विक्रेता</label>
+                                                                    <label className="form-label required">Vendor</label>
                                                                     <input
                                                                         type="text"
                                                                         className="form-control"
@@ -629,7 +629,7 @@ function AddPurchaseReturn({ PRAID }) {
 
                                                             <div className="col-lg-4 col-md-6 col-sm-12">
                                                                 <div className="form-label">
-                                                                    <label className="form-label required">प्रेषक</label>
+                                                                    <label className="form-label required">Consigner</label>
                                                                     <input
                                                                         type="text"
                                                                         className="form-control"
@@ -643,7 +643,7 @@ function AddPurchaseReturn({ PRAID }) {
                                                             </div>
                                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                                 <div className="form-label">
-                                                                    <label className="form-label required">भरणा पद्धत</label>
+                                                                    <label className="form-label required">Payment Mode</label>
                                                                     <input
                                                                         type="text"
                                                                         className="form-control"
@@ -657,7 +657,7 @@ function AddPurchaseReturn({ PRAID }) {
 
                                                             <div className="col-lg-12 col-sm-6 col-12">
                                                                 <div className="mb-5">
-                                                                    <label className="form-label">वर्णन</label>
+                                                                    <label className="form-label">Narration</label>
                                                                     <textarea
                                                                         className="form-control mb-1"
                                                                         value={formData.Narration || ""}
@@ -670,7 +670,7 @@ function AddPurchaseReturn({ PRAID }) {
                                                         </div>
 
                                                         <div className="row border border-1 p-3">
-                                                            <h5>खरेदी बिल परतावा तपशील:</h5>
+                                                            <h5>Purchase Bill Return Detail:</h5>
                                                             <div className="col-lg-12">
                                                                 <div className="table-responsive" style={{ maxHeight: "200px", overflowY: "auto" }}>
                                                                     <table className="table table-bordered" style={{ borderCollapse: "collapse" }}>
@@ -684,13 +684,13 @@ function AddPurchaseReturn({ PRAID }) {
                                                                             }}
                                                                         >
                                                                             <tr>
-                                                                                <th>उत्पादन</th>
-                                                                                <th>बॅच क्रमांक</th>
-                                                                                <th>समाप्ती तारीख</th>
-                                                                                <th>मापाची एकक</th>
-                                                                                <th>प्रमाण</th>
-                                                                                <th>एकूण</th>
-                                                                                <th>परत करण्याची मात्रा</th>
+                                                                                <th>Product</th>
+                                                                                <th>Batch NO.</th>
+                                                                                <th>Expiry Date</th>
+                                                                                <th>UOM</th>
+                                                                                <th>Quantity</th>
+                                                                                <th>Total</th>
+                                                                                <th>Return Quantity</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -719,7 +719,7 @@ function AddPurchaseReturn({ PRAID }) {
                                                                             ) : (
                                                                                 <tr>
                                                                                     <td colSpan="7" className="text-center">
-                                                                                        कोणतेही उत्पादने उपलब्ध नाहीत
+                                                                                        No Products Available
                                                                                     </td>
                                                                                 </tr>
                                                                             )}
@@ -737,11 +737,10 @@ function AddPurchaseReturn({ PRAID }) {
                                                                     // data-bs-dismiss="modal"
                                                                     onClick={showExitAlert}
                                                                 >
-                                                                    रद्द करा
-
+                                                                    Cancel
                                                                 </button>
                                                                 <button className="btn btn-submit">
-                                                                    खरेदी जतन करा
+                                                                    Save Purchase
                                                                 </button>
                                                             </div>
                                                         </div>

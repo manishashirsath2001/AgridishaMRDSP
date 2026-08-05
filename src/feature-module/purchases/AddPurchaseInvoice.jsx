@@ -468,13 +468,13 @@ function AddPurchaseInvoice({ PBAID }) {
     const MySwal = withReactContent(Swal);
     const showConfirmationAlert = (event) => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला हा डेटा सेव्ह करायचा आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to save this data?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "जतन करा",
+            confirmButtonText: "SAVE",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "CANCLE",
         }).then((result) => {
             if (result.isConfirmed) {
                 handleFormSubmission(event);
@@ -484,13 +484,13 @@ function AddPurchaseInvoice({ PBAID }) {
 
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला बाहेर पडायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("AddPurchaseInvoice");
@@ -545,7 +545,7 @@ function AddPurchaseInvoice({ PBAID }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया एक वैध तारीख प्रविष्ट करा.",
+                text: "Please enter a valid date.",
             }).then(() => {
                 PBDUEDATERef.current?.focus();
             });
@@ -557,7 +557,7 @@ function AddPurchaseInvoice({ PBAID }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया अटी आणि शर्ती प्रविष्ट करा.",
+                text: "Please Enter Terms And Condition.",
             }).then(() => {
                 PBTERMANDCONDITIONRef.current?.focus();
             });
@@ -568,7 +568,7 @@ function AddPurchaseInvoice({ PBAID }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया वर्णन प्रविष्ट करा.",
+                text: "Please Enter Narration.",
             }).then(() => {
                 PBNARRATIONRef.current?.focus();
             });
@@ -593,16 +593,16 @@ function AddPurchaseInvoice({ PBAID }) {
                 aria-labelledby="exampleModalFullscreenLabel"
                 aria-hidden="true"
             >
-                <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
+                <div className="modal-dialog modal-fullscreen mbgcolor">
+                    <div className="modal-content mbgcolor">
 
-                        <div className="modal-body">
-                            <div className="modal-content">
-                                <div className="page-wrapper-new p-0">
-                                    <div className="content">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
+                                <div className="page-wrapper-new p-0 mbgcolor">
+                                    <div className="content mbgcolor">
                                         <div className="modal-header border-0 custom-modal-header">
                                             <div className="page-title">
-                                                <h4>खरेदी बिल</h4>
+                                                <h4>Purchase Bill</h4>
                                             </div>
 
                                             <div className="page-btn">
@@ -612,7 +612,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                     onClick={showExitAlert}
                                                 >
                                                     <ArrowLeft className="me-2" />
-                                                    अनुक्रमणिकेकडे परत
+                                                    Back to Index
                                                 </Link>
                                             </div>
                                         </div>
@@ -635,7 +635,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                             className="btn btn-primary ms-3 mt-1 mt-sm-0"
                                                             onClick={handleSearch}
                                                         >
-                                                            शोधणे
+                                                            Search
                                                         </button>
                                                     </div>
                                                 </div>
@@ -648,7 +648,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                     <div className="row">
                                                         <div className="col-lg-3 col-md-3 col-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label">बिल क्रमांक</label>
+                                                                <label className="form-label">Bill No</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -663,7 +663,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-md-3 col-sm-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label ">बिल दिनांक:</label>
+                                                                <label className="form-label ">Bill Date</label>
                                                                 <div className="input-groupicon calender-input">
                                                                     <input
                                                                         type="date"
@@ -675,7 +675,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-md-3 col-sm-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label  required">देय तारीख</label>
+                                                                <label className="form-label  required">Due Date</label>
                                                                 <div className="input-groupicon calender-input">
                                                                     <input
                                                                         type="date"
@@ -698,7 +698,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-md-3 col-sm-6 col-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label  ">चालान क्रमांक</label>
+                                                                <label className="form-label  ">Challan No</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -714,7 +714,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                     <div className="accordion-header" id="headingOne">
                                                         <div data-bs-target="#collapseOne" aria-controls="collapseOne">
                                                             <div className="addproduct-icon">
-                                                                <h5><span>विक्रेत्याचा तपशील :</span></h5>
+                                                                <h5><span>Vender Details :</span></h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -734,7 +734,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                     <div className="row mb-3">
                                                         <div className="col-lg-2 col-md-3 col-12">
                                                             <div className="mb-3 add-product ">
-                                                                <label className="form-label required">विक्रेता बिल क्रमांक</label>
+                                                                <label className="form-label required">Vendor Bill No</label>
                                                                 <input
                                                                     type="text"
                                                                     name="PBVENDORBID"
@@ -747,7 +747,7 @@ function AddPurchaseInvoice({ PBAID }) {
 
                                                         <div className="col-lg-3 col-md-3 col-12">
                                                             <div className="form-label ">
-                                                                <label >विक्रेत्याचे नाव</label>
+                                                                <label >Vendor Name</label>
                                                                 <input
                                                                     type="text"
                                                                     name="PBVENDORNAME"
@@ -761,7 +761,7 @@ function AddPurchaseInvoice({ PBAID }) {
 
                                                         <div className="col-lg-2 col-md-3 col-12">
                                                             <div className="form-label">
-                                                                <label>विक्रेत्याशी संपर्क</label>
+                                                                <label>Vendor Contact</label>
                                                                 <input
                                                                     type="number"
                                                                     name="PBVENDORCONTACT"
@@ -775,7 +775,7 @@ function AddPurchaseInvoice({ PBAID }) {
 
                                                         <div className="col-lg-3 col-md-3 col-12">
                                                             <div className="form-label">
-                                                                <label>विक्रेता ईमेल</label>
+                                                                <label>Vendor Email</label>
                                                                 <input
                                                                     type="email"
                                                                     name="PBVENDOREMAIL"
@@ -804,7 +804,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                     <div className="row">
                                                         <div className="col-lg-3 col-md-3 col-12">
                                                             <div className="form-label">
-                                                                <label>प्रेषक</label>
+                                                                <label>Consigner</label>
                                                                 <input
                                                                     type="text"
                                                                     name="PBCONSIGNER"
@@ -817,7 +817,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-md-3 col-sm-6 col-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label ">वाहन क्रमांक</label>
+                                                                <label className="form-label ">Vehicle Number</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -833,7 +833,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-md-3 col-12">
                                                             <div className="form-label">
-                                                                <label>पुरवठ्याचे ठिकाण</label>
+                                                                <label>Place Of Supply</label>
                                                                 <Select
                                                                     readOnly
                                                                     classNamePrefix="react-select"
@@ -853,7 +853,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-sm-3 col-12">
                                                             <div className="input-blocks">
-                                                                <label>पेमेंट मोड</label>
+                                                                <label>Payment Mode</label>
                                                                 <div className="input-groupicon calender-input">
                                                                     <div className="info-img" />
                                                                     <Select
@@ -875,15 +875,15 @@ function AddPurchaseInvoice({ PBAID }) {
                                                                     <table className="table table-bordered">
                                                                         <thead className="thead-dark">
                                                                             <tr>
-                                                                                <th className="col-4">उत्पादन</th>
-                                                                                <th className="col-1">परिमाण</th>
-                                                                                <th className="col-1">माप युनिट</th>
-                                                                                <th className="col-1">दर</th>
-                                                                                <th className="col-1">करयोग्य मूल्य</th>
+                                                                                <th className="col-4">Product</th>
+                                                                                <th className="col-1">Quantity</th>
+                                                                                <th className="col-1">UOM</th>
+                                                                                <th className="col-1">Rate</th>
+                                                                                <th className="col-1">Taxable Value</th>
                                                                                 <th className="col-1">CGST</th>
                                                                                 <th className="col-1">SGST</th>
                                                                                 <th className="col-1">IGST</th>
-                                                                                <th className="col-1">एकूण</th>
+                                                                                <th className="col-1">Total</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -905,7 +905,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                                         </tbody>
                                                                         <tfoot>
                                                                             <tr>
-                                                                                <td colSpan="8" className="text-end">ग्रँड टोटल :</td>
+                                                                                <td colSpan="8" className="text-end">Grand Total:</td>
                                                                                 <td className="col-1">
                                                                                     <span>
                                                                                         {data?.reduce((total, product) => total + product.total, 0).toFixed(2)}
@@ -922,7 +922,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         <div className="col-lg-3 col-sm-6 col-12"></div>
                                                         <div className="col-lg-3 col-sm-6 col-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label">वाहक</label>
+                                                                <label className="form-label">Transport</label>
                                                                 <input
                                                                     type="number"
                                                                     className="form-control"
@@ -937,7 +937,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-sm-6 col-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label">सवलत</label>
+                                                                <label className="form-label">discount</label>
                                                                 <input
                                                                     type="number"
                                                                     className="form-control"
@@ -952,7 +952,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-sm-6 col-12">
                                                             <div className="mb-3 add-product">
-                                                                <label className="form-label">निव्वळ रक्कम</label>
+                                                                <label className="form-label">Net Amount</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -970,7 +970,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                     <div className="row">
                                                         <div className="col-lg-12 col-md-6 col-sm-12 mb-2">
                                                             <div>
-                                                                <label className="form-label required">नियम आणि अटी</label>
+                                                                <label className="form-label required">Terms And Conditions</label>
                                                                 <textarea
                                                                     type="text"
                                                                     className="form-control "
@@ -985,7 +985,7 @@ function AddPurchaseInvoice({ PBAID }) {
                                                     <div className="row">
                                                         <div className="col-lg-12 col-md-6 col-sm-12 ">
                                                             <div>
-                                                                <label className="form-label required">वर्णन</label>
+                                                                <label className="form-label required">Narration</label>
                                                                 <textarea
                                                                     ref={PBNARRATIONRef}
                                                                     type="text"
@@ -1006,12 +1006,12 @@ function AddPurchaseInvoice({ PBAID }) {
                                                                 // data-bs-dismiss="modal"
                                                                 onClick={showExitAlert}
                                                             >
-                                                                बाहेर जाणे
+                                                                Exit
                                                             </button>
                                                             <button
                                                                 type="submit"
                                                                 className="btn btn-submit">
-                                                                जतन करा
+                                                                Save
                                                             </button>
                                                         </div>
                                                     </div>

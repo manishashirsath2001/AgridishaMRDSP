@@ -9,7 +9,13 @@ import { getUserData } from "../../Context/UserData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FiLogOut } from 'react-icons/fi';
+import { useGoogleTranslate } from './useGoogleTranslate';
+
+
+
 const Header = () => {
+  const isTranslateLoaded = useGoogleTranslate();
+
   const { userdetail } = getUserData();
   const route = all_routes;
   const [toggle, SetToggle] = useState(false);
@@ -17,14 +23,127 @@ const Header = () => {
   const isElementVisible = (element) => {
     return element.offsetWidth > 0 || element.offsetHeight > 0;
   };
-
+  const isRestricted = userdetail.LANGUAGE === "en";
   const navigate = useNavigate();
+  const [selectedLanguage, setSelectedLanguage] = useState(isRestricted ? 'en' : 'mr');
+  const waitForGoogleTranslateCombo = () => {
+    return new Promise((resolve) => {
+      const checkExist = setInterval(() => {
+        const selectField = document.querySelector('.goog-te-combo');
+        if (selectField) {
+          clearInterval(checkExist);
+          resolve(selectField);
+        }
+      }, 100);
+    });
+  };
 
+
+
+  const waitForComboAndChangeLanguage = async (lang) => {
+    setSelectedLanguage(lang);
+    if (!isTranslateLoaded) {
+      console.warn("Google Translate not yet ready");
+      return;
+    }
+
+    const maxWait = 5000; // max wait 5 seconds
+    const interval = 100;
+    let waited = 0;
+
+    const intervalId = setInterval(() => {
+      const selectField = document.querySelector('.goog-te-combo');
+      if (selectField) {
+        clearInterval(intervalId);
+        selectField.value = lang;
+        selectField.dispatchEvent(new Event('change'));
+      }
+
+      waited += interval;
+      if (waited >= maxWait) {
+        clearInterval(intervalId);
+        console.error("❌ Failed to find Google Translate dropdown.");
+      }
+    }, interval);
+  };
+
+  function waitForIframe(callback, timeout = 5000) {
+    const interval = 100;
+    let waited = 0;
+
+    const check = setInterval(() => {
+      const frame = document.querySelector("iframe.goog-te-menu-frame");
+      if (frame) {
+        clearInterval(check);
+        callback(frame);
+      } else {
+        waited += interval;
+        if (waited >= timeout) {
+          clearInterval(check);
+          console.error("❌ Google Translate iframe not found.");
+        }
+      }
+    }, interval);
+  }
+
+
+
+  const handleLanguageChange = (lang) => {
+    setSelectedLanguage(lang);
+
+    waitForIframe((frame) => {
+      const innerDoc = frame.contentDocument || frame.contentWindow.document;
+      const langLinks = innerDoc.querySelectorAll("a.goog-te-menu2-item");
+
+      langLinks.forEach(link => {
+        if (lang === 'en' && link.innerText.includes('English')) {
+          link.click();
+        }
+        if (lang === 'mr' && link.innerText.includes('Marathi')) {
+          link.click();
+        }
+      });
+    });
+  };
+
+
+
+  const getLanguageText = () => {
+    switch (selectedLanguage) {
+      case 'mr': return 'मराठी';
+      case 'en':
+      default: return 'English';
+    }
+  };
+
+
+
+  useEffect(() => {
+    const handleMouseover = (e) => {
+      e.stopPropagation();
+
+      const body = document.body;
+      const toggleBtn = document.getElementById("toggle_btn");
+
+      if (
+        body.classList.contains("mini-sidebar") &&
+        isElementVisible(toggleBtn)
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("mouseover", handleMouseover);
+
+    return () => {
+      document.removeEventListener("mouseover", handleMouseover);
+    };
+  }, []);
   const handleLogout = async () => {
     try {
 
       if (userdetail?.uaid) {
-        await axios.post(`${baseUrl.Url}/backend/api/SP_UpadateUserLogin`, {
+        await axios.post(`${baseUrl.Url}/api/SP_UpadateUserLogin`, {
           uaid: userdetail.uaid,
           islogin: false,
         }, {
@@ -206,10 +325,38 @@ const Header = () => {
       }
     }
   };
+  function waitForTranslateCombo(callback) {
+    const interval = setInterval(() => {
+      const selectField = document.querySelector('.goog-te-combo');
+      if (selectField) {
+        clearInterval(interval);
+        callback(selectField);
+      }
+    }, 100); // check every 100ms
+  }
+
+  const doTranslation = (langText) => {
+    const frame = document.querySelector("iframe.goog-te-menu-frame");
+    if (!frame) {
+      console.error("Google Translate iframe not loaded yet.");
+      return;
+    }
+    const innerDoc = frame.contentDocument || frame.contentWindow.document;
+    const langLinks = innerDoc.querySelectorAll("a.goog-te-menu2-item");
+    for (let i = 0; i < langLinks.length; i++) {
+      if (langLinks[i].innerText.includes(langText)) {
+        langLinks[i].click();
+        break;
+      }
+    }
+  };
 
   return (
     <>
       <div className="header">
+        {/* <div id="google_translate_element"></div> */}
+
+
         {/* Logo */}
         <div
           className={`header-left ${toggle ? "" : "active"}`}
@@ -217,7 +364,7 @@ const Header = () => {
           onMouseOver={expandMenuOpen}
         >
           <Link className="logo logo-normal" onClick={handleLogout}>
-            <ImageWithBasePath src="assets/img/arthadishalogo.png" alt="img" />
+            <ImageWithBasePath src="assets/img/avatar/mrdbs1.png" alt="img" />
           </Link>
           <Link className="logo logo-white" onClick={handleLogout} >
             <ImageWithBasePath src="assets/img/logo-white.png" alt="img" />
@@ -261,20 +408,6 @@ const Header = () => {
             <div
               className="top-nav-search"
               style={{
-                backgroundColor: '#e3eef2', // lighter shade matchingrgb(88, 129, 143)2
-                padding: '6px 12px',
-                borderRadius: '8px',
-                color: '#2c3e50', // dark text for contrast
-                fontWeight: '500',
-                fontSize: '1rem',
-              }}
-            >
-              <b style={{ color: '#3e5f68' }}>दिनांक : <span style={{ color: 'rgb(150, 70, 187) ' }}> {userdetail?.APPDT}</span> </b>
-            </div>
-          </li>
-          <li className="nav-item" style={{ marginLeft: '10px' }}>
-            <div
-              style={{
                 backgroundColor: '#e3eef2',
                 padding: '6px 12px',
                 borderRadius: '8px',
@@ -283,62 +416,76 @@ const Header = () => {
                 fontSize: '1rem',
               }}
             >
-              <b style={{ color: '#3e5f68' }}><span style={{ color: 'rgb(150, 70, 187)' }}> {userdetail?.departmentname}</span></b>
+              <b style={{ color: '#3e5f68' }}>{isRestricted ? 'Date' : 'दिनांक'} : <span style={{ color: 'rgb(150, 70, 187) ' }}> {userdetail?.APPDT}</span> </b>
             </div>
           </li>
+          <li
+            className="nav-item"
+            style={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-60%)',
+              fontSize: '1.7rem',
+              fontWeight: '500',
+              fontFamily: "'Segoe Script', cursive",
+              letterSpacing: '1px',
+              userSelect: 'none',
+              cursor: 'default',
+              color: '#6D4C7B',
+              textShadow: `
+                  0.5px 0.5px 0 #fff,      
+                  -0.5px -0.5px 0 #5A4A6B  
+       `,
+              whiteSpace: 'nowrap',
+              padding: '4px 45px',
+              borderRadius: '8px',
+            }}
 
+          >
+            {userdetail?.departmentname}
+          </li>
           {/* /Select Store */}
 
           {/* Flag */}
-          {/* <li className="nav-item dropdown has-arrow flag-nav nav-item-box">
+          <li className="nav-item dropdown has-arrow flag-nav">
             <Link
-              className="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
               to="#"
               role="button"
+              className="nav-link dropdown-toggle"
             >
-            
-              <ImageWithBasePath
-                src="assets/img/flags/in.png"
-                alt="img"
-                height={16}
-              />
+              <span style={{ fontWeight: 'bold', marginRight: '5px' }}>
+                {getLanguageText()}
+              </span>
+              <ImageWithBasePath src="assets/img/flags/in.png" alt="Language" height={16} />
             </Link>
-            <div className="dropdown-menu dropdown-menu-right">
-              <Link to="#" className="dropdown-item active">
-                <ImageWithBasePath
-                  src="assets/img/flags/in.png"
-                  alt="img"
-                  height={16}
-                />
+
+            <div className="dropdown-menu dropdown-menu-right p-2 shadow" style={{ minWidth: '160px', borderRadius: '10px' }}>
+              <button
+                onClick={() => {
+                  handleLanguageChange('en');
+                }}
+                className={`btn btn-sm w-100 mb-2 ${selectedLanguage === 'en' ? 'btn-success' : 'btn-outline-success'}`}
+              >
                 English
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/flags/fr.png"
-                  alt="img"
-                  height={16}
-                />{" "}
-                Marathi
-              </Link>
-              {/* <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/flags/es.png"
-                  alt="img"
-                  height={16}
-                />{" "}
-                Spanish
-              </Link>
-              <Link to="#" className="dropdown-item">
-                <ImageWithBasePath
-                  src="assets/img/flags/de.png"
-                  alt="img"
-                  height={16}
-                />{" "}
-                German
-              </Link> 
+              </button>
+              <button
+                onClick={() => {
+                  handleLanguageChange('mr');
+                }}
+                className={`btn btn-sm w-100 ${selectedLanguage === 'mr' ? 'btn-primary' : 'btn-outline-primary'}`}
+              >
+                मराठी
+              </button>
+
+
             </div>
-          </li> */}
+          </li>
+
+
+
+
+          {/* /Flag */}
           {/* /Flag */}
           {/* <li className="nav-item nav-item-box">
             <Link

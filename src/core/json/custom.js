@@ -75,28 +75,56 @@ export const convertToCustomDate = (dateString, daysToSubtract = 0) => {
     return "";
 };
 
-
 export const formatDate = (dateString) => {
     if (!dateString) return "";
 
-    const inputDate = new Date(dateString);
+    const datePart = new Date(dateString);
     const now = new Date();
 
-    inputDate.setHours(now.getHours(), now.getMinutes());
+    // Set the hours/minutes/seconds/milliseconds from current time
+    datePart.setHours(now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 
-    const day = inputDate.getDate().toString().padStart(2, '0');
-    const monthShort = inputDate.toLocaleString('en-GB', { month: 'short' });
-    const year = inputDate.getFullYear();
-    const hours = inputDate.getHours().toString().padStart(2, '0');
-    const minutes = inputDate.getMinutes().toString().padStart(2, '0');
+    const day = datePart.getDate().toString().padStart(2, '0');
+    const monthShort = datePart.toLocaleString('en-GB', { month: 'short' });
+    const year = datePart.getFullYear();
+    const hours = datePart.getHours().toString().padStart(2, '0');
+    const minutes = datePart.getMinutes().toString().padStart(2, '0');
+    const seconds = datePart.getSeconds().toString().padStart(2, '0');
+    const milliseconds = datePart.getMilliseconds().toString().padStart(3, '0');
 
-    return `${day} ${monthShort} ${year} ${hours}:${minutes}`;
+    return `${day} ${monthShort} ${year} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+};
+
+export const formatDate1 = (dateString) => {
+    if (!dateString) return "";
+
+    // Parse date from "16 Jun 2025" (dd MMM yyyy)
+    const [day, monthShort, year] = dateString.split(" ");
+    const monthMap = {
+        Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+        Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+    };
+
+    const datePart = new Date(year, monthMap[monthShort], day); // Time is 00:00:00.000
+    const now = new Date();
+
+    // Set current time on parsed date
+    datePart.setHours(now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+
+    const hours = datePart.getHours().toString().padStart(2, '0');
+    const minutes = datePart.getMinutes().toString().padStart(2, '0');
+    const seconds = datePart.getSeconds().toString().padStart(2, '0');
+    const milliseconds = datePart.getMilliseconds().toString().padStart(3, '0');
+
+    return `${day} ${monthShort} ${year} ${hours}:${minutes}:${seconds}.${milliseconds}`;
 };
 
 export const baseUrl = {
     // Url: "https://arthadisha.in",
-    Url: "http://adsvr:140",
-    // Url: "http://192.168.1.121:140",
+    // Url: "http://adsvr:140",
+    // Url: "http://192.168.1.121:71",
+    Url: "http://adsvr:71",
+    // http://adsvr:71/api/SP_GET_UserLogin
     // Url: "https://perfectkrushimarketyard.com"
 
 };
@@ -107,6 +135,7 @@ export const Accounts = {
     VYAPARIACC: 'PK0040',
     CHECKACC: 'PK16C8CADC439495422033',
     COLDACC: 'PK16C8CB83820F44682187',
+    VAPASIACC: 'PK001',
 };
 
 

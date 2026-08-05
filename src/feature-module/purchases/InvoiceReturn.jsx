@@ -186,7 +186,7 @@ const InvoiceReturn = () => {
 
     const columns = [
         {
-            title: "चलन क्रमांक",
+            title: "Challan Number ",
             dataIndex: "pbno",
             render: (text) => (
                 <OverlayTrigger
@@ -203,7 +203,7 @@ const InvoiceReturn = () => {
         {
             title: () => (
                 <OverlayTrigger placement="top" overlay={renderUOMTooltip}>
-                    <span>व्यवहार क्रमांक</span>
+                    <span>Transaction Number</span>
                 </OverlayTrigger>
             ),
             dataIndex: "potrnno",
@@ -220,7 +220,7 @@ const InvoiceReturn = () => {
         {
             title: () => (
                 <OverlayTrigger placement="top" overlay={renderQuantityTooltip}>
-                    <span>व्यवहार तारीख</span>
+                    <span>Transaction Date</span>
                 </OverlayTrigger>
             ),
             dataIndex: "prdate",
@@ -235,7 +235,7 @@ const InvoiceReturn = () => {
 
         },
         {
-            title: "विक्रेता नाव",
+            title: "Vendor",
             dataIndex: "vendorname",
             render: (text) => (
                 <OverlayTrigger
@@ -250,7 +250,7 @@ const InvoiceReturn = () => {
             width: "25%",
         },
         {
-            title: "क्रिया",
+            title: "Actions",
             dataIndex: "actions",
             key: "actions",
             render: (_, record) => (
@@ -287,18 +287,18 @@ const InvoiceReturn = () => {
 
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "आपल्याला खात्री आहे का?",
-            text: "तुम्ही हे परत करू शकणार नाही!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "हो, ते हटवा!",
+            confirmButtonText: "Yes, delete it!",
             cancelButtonColor: "#ff0000",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
                 MySwal.fire({
-                    title: "हटवले!",
-                    text: "तुमची फाईल हटवली गेली आहे",
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
                     className: "btn btn-success",
                     confirmButtonText: "OK",
                     customClass: {
@@ -412,8 +412,8 @@ const InvoiceReturn = () => {
                 <div className="content">
                     <div className="page-header">
                         <div className="page-title me-auto">
-                            <h4>खरेदी परतावा</h4>
-                            <h6>खरेदी परताव्याचे व्यवस्थापन करा</h6>
+                            <h4>Purchase Return</h4>
+                            <h6>Manage Purchase Return</h6>
                         </div>
                         <ul className="table-top-head">
                             <li>
@@ -474,13 +474,13 @@ const InvoiceReturn = () => {
                                 data-bs-target="#AddPurchaseReturn"
                             >
                                 <PlusCircle className="me-2" />
-                                नवीन खरेदी परतावा जोडा
+                                Add New Purchase Return
                             </Link>
                         </div>
                         <div className="page-btn">
                             <Link to={route.ReturnIndex} className="btn btn-secondary">
                                 <ArrowLeft className="me-2" />
-                                सूचीवर परत जा
+                                Back to Index
                             </Link>
                         </div>
                     </div>

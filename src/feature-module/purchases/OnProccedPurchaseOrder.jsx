@@ -405,13 +405,13 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
   const showConfirmationAlert = (event) => {
     MySwal.fire({
-      title: "तुला खात्री आहे का?",
-      text: "तुम्हाला हा डेटा सेव्ह करायचा आहे का?",
+      title: "Are you sure?",
+      text: "Do you want to save this data?",
       showCancelButton: true,
       confirmButtonColor: "#00ff00",
-      confirmButtonText: "बचत करणे",
+      confirmButtonText: "SAVE",
       cancelButtonColor: "#092C4C",
-      cancelButtonText: "रद्द करा",
+      cancelButtonText: "CANCLE",
     }).then((result) => {
       if (result.isConfirmed) {
         handleFormSubmission(event);
@@ -420,13 +420,13 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
   };
   const showExitAlert = () => {
     MySwal.fire({
-      title: "तुला खात्री आहे का?",
-      text: "तुम्हाला बाहेर पडायचे आहे का?",
+      title: "Are you sure?",
+      text: "Do you want to Exit?",
       showCancelButton: true,
       confirmButtonColor: "#00ff00",
-      confirmButtonText: "हो",
+      confirmButtonText: "YES",
       cancelButtonColor: "#092C4C",
-      cancelButtonText: "नाही",
+      cancelButtonText: "NO",
     }).then((result) => {
       if (result.isConfirmed) {
         const modal = document.getElementById("onproceedorder");
@@ -676,15 +676,15 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
           aria-hidden="true"
         >
           <div className="modal-dialog modal-fullscreen">
-            <div className="modal-content">
+            <div className="modal-content mbgcolor">
 
-              <div className="modal-body">
-                <div className="modal-content">
+              <div className="modal-body mbgcolor">
+                <div className="modal-content mbgcolor">
                   <div className="page-wrapper-new p-0">
-                    <div className="content">
+                    <div className="content mbgcolor">
                       <div className="modal-header border-0 custom-modal-header">
                         <div className="page-title">
-                          <h4>खरेदी ऑर्डर जोडा</h4>
+                          <h4>Add Purchase Order</h4>
                         </div>
                         <div className="d-flex justify-content-between align-items-center">
                           <ul className="table-top-head">
@@ -700,7 +700,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                 >
                                   <ArrowLeft className="me-2" />
-                                  संपादन खरेदीकडे परत जा
+                                  Back to Editpurchase
                                 </button>
                               </div>
                             </li>
@@ -713,7 +713,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                           <div className="row">
                             <div className="col-md-3 col-sm-6 col-12">
                               <div className="mb-3 add-product">
-                                <label className="form-label">कोटेशन संख्या</label>
+                                <label className="form-label">Quotation Number</label>
                                 <input
                                   type="text"
                                   className="form-control"
@@ -728,7 +728,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-md-3 col-sm-12">
                               <div className="mb-3 add-product">
-                                <label className="form-label">कोटेशन तारीख</label>
+                                <label className="form-label">Quotation Date</label>
                                 <div className="input-groupicon calender-input">
                                   <input
                                     type="date"
@@ -744,7 +744,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-md-3 col-sm-6 col-12">
                               <div className="mb-3 add-product">
-                                <label className="form-label ">ऑर्डर नंबर खरेदी करा</label>
+                                <label className="form-label ">Purchase Order Number</label>
                                 <input
                                   type="text"
                                   className="form-control"
@@ -758,7 +758,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-md-3 col-sm-6 col-12">
                               <div className="mb-3 add-product">
-                                <label className="form-label ">खरेदी ऑर्डर दिनांक</label>
+                                <label className="form-label ">Purchase Order Date</label>
                                 <div className="input-groupicon calender-input">
                                   <input
 
@@ -807,14 +807,14 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                           <div className="accordion-header" id="headingOne">
                             <div data-bs-target="#collapseOne" aria-controls="collapseOne">
                               <div className="addproduct-icon">
-                                <h5><span>विक्रेत्याचा तपशील</span></h5>
+                                <h5><span>Vender Details</span></h5>
                               </div>
                             </div>
                           </div>
                           <div className="row mb-3">
                             <div className="col-lg-3 col-md-3 col-12">
                               <div className="form-label">
-                                <label>विक्रेत्याचे नाव</label>
+                                <label>Vendor Name</label>
                                 <input
                                   type="text"
                                   name="POVENDORNAME"
@@ -828,7 +828,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-lg-3 col-md-3 col-12">
                               <div className="form-label">
-                                <label>विक्रेत्याशी संपर्क साधा</label>
+                                <label>Vendor Contact</label>
                                 <input
                                   type="number"
                                   name="VENDORCONTACT"
@@ -842,7 +842,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-lg-3 col-md-3 col-12">
                               <div className="form-label">
-                                <label>विक्रेता ईमेल</label>
+                                <label>Vendor Email</label>
                                 <input
                                   type="email"
                                   name="VENDOREMAIL"
@@ -856,7 +856,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-lg-3 col-md-3 col-12">
                               <div className="form-label">
-                                <label>विक्रेता राज्य</label>
+                                <label>Vendor State</label>
                                 <Select
                                   readOnly
                                   classNamePrefix="react-select"
@@ -948,7 +948,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                           <div className="col-12">
                             <div className="mb-3">
-                              <label className="form-label ">वर्णन</label>
+                              <label className="form-label ">Narration</label>
                               <textarea
                                 rows="5"
                                 className="form-control"
@@ -967,15 +967,15 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                                   <table className="table table-bordered">
                                     <thead className="thead-dark">
                                       <tr>
-                                        <th className="col-3">उत्पादन</th>
-                                        <th className="col-1">माप एकक</th>
-                                        <th className="col-1">प्रमाण</th>
-                                        <th className="col-1">दर</th>
-                                        <th className="col-1">करयोग्य मूल्य</th>
+                                        <th className="col-3">Product Name</th>
+                                        <th className="col-1">UOM</th>
+                                        <th className="col-1">Quantity</th>
+                                        <th className="col-1">Rate</th>
+                                        <th className="col-1">Taxable Value</th>
                                         <th className="col-1">CGST</th>
                                         <th className="col-1">SGST</th>
                                         <th className="col-1">IGST</th>
-                                        <th className="col-1">एकूण</th>
+                                        <th className="col-1">Total</th>
                                       </tr>
                                     </thead>
                                     {/* <tbody>
@@ -1159,7 +1159,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                                       <tr>
                                         <td colSpan="3"></td>
                                         <td className="text-end">
-                                          <strong>एकूण करयोग्य:</strong>
+                                          <strong>Total Taxable:</strong>
                                         </td>
                                         <td>
                                           <input
@@ -1173,7 +1173,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                         <td colSpan="2"></td>
                                         <td className="text-end">
-                                          <strong>एकूण:</strong>
+                                          <strong>Total:</strong>
                                         </td>
                                         <div className="d-flex justify-content-end">
                                           <input
@@ -1195,11 +1195,11 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                           </div>
 
                           <div className="border p-3 rounded shadow-sm mb-4">
-                            <h4 className="mb-3">वितरण तपशील</h4>
+                            <h4 className="mb-3">Delivery Details</h4>
                             <div className="row">
                               <div className="col-md-3 col-sm-6 col-12">
                                 <div className="mb-3 form-label">
-                                  <label className="form-label required">वितरण तारीख</label>
+                                  <label className="form-label required">Delivery Date</label>
                                   <input
                                     type="date"
                                     className="form-control"
@@ -1214,7 +1214,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                               <div className="col-md-3 col-sm-6 col-12">
                                 <div className="mb-3">
-                                  <label className="form-label ">वितरण स्थळ</label>
+                                  <label className="form-label ">Delivery Place</label>
                                   {/* <select className="form-control"
                                   name="POPLACE"
                                   value={formData.POPLACE}
@@ -1239,7 +1239,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                               <div className="col-md-3 col-sm-6 col-12">
                                 <div className="mb-3 form-label">
-                                  <label className="form-label required">नियत तारीख</label>
+                                  <label className="form-label required">Due Date</label>
                                   <input
                                     type="date"
                                     className="form-control"
@@ -1260,7 +1260,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-12">
                               <div className="mb-3">
-                                <label className="form-label">वर्णन</label>
+                                <label className="form-label">Description</label>
                                 <textarea
                                   rows="5"
                                   className="form-control"
@@ -1278,7 +1278,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                           <div className="border p-3 rounded shadow-sm mb-4">
                             <div className="col-12">
                               <div className="mb-3 form-label">
-                                <label className="form-label required">शर्ती आणि अटी</label>
+                                <label className="form-label required">Terms And Conditions</label>
                                 <textarea
                                   rows="5"
                                   className="form-control"
@@ -1295,7 +1295,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                             <div className="row align-items-center">
                               <div className="col-lg-6 col-md-6 col-12">
                                 <div className="form-label">
-                                  <label className="form-label required">भरणा नियत तारीख:</label>
+                                  <label className="form-label required">Payment Due Date:</label>
                                   <Select
                                     ref={POPDUEDAYSRef}
                                     name="POPDUEDAYS"
@@ -1320,7 +1320,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                                 <div className="col-lg-6 col-md-6 col-12">
                                   <div className="form-label">
                                     <div className="d-flex align-items-center mt-2">
-                                      <label className="mr-2">दिवसांची संख्या प्रविष्ट करा:</label>
+                                      <label className="mr-2">Enter Number of Days:</label>
                                       <input
                                         type="number"
                                         className="form-control"
@@ -1414,7 +1414,7 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                             <div className="col-12">
                               <div className="mb-3 form-label ">
-                                <label className="form-label required">भरणा शर्ती</label>
+                                <label className="form-label required">Payment Terms</label>
                                 <textarea
                                   rows="5"
                                   className="form-control"
@@ -1437,10 +1437,10 @@ function OnProccedPurchaseOrder({ POAID, qamaid, vandorid }) {
                                 // data-bs-dismiss="modal"
                                 onClick={showExitAlert}
                               >
-                                बाहेर पडणे
+                                Exit
                               </button>
                               <button type="submit" className="btn btn-submit">
-                                जतन करा
+                                Save
                               </button>
                             </div>
                           </div>

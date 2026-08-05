@@ -4,29 +4,30 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { all_routes } from "../../Router/all_routes";
 import { ArrowLeft } from "feather-icons-react/build/IconComponents";
-
 function AppAdminIndex() {
     const route = all_routes;
     const navigate = useNavigate();
     const [isDesktop, setIsDesktop] = useState(false);
-
     useEffect(() => {
         const handleResize = () => {
             setIsDesktop(window.innerWidth >= 992);
         };
-
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
     const cardsData = [
         { title: 'सूचना', image: 'assets/img/avatar/AD.png', path: '/AppNotification' },
         { title: 'विडियो अपलोड', image: 'assets/img/avatar/video.png', path: '/VideoMaster' },
         { title: 'जाहिरात', image: 'assets/img/avatar/ADS.png', path: '/Advertise' },
-        { title: 'कंपनी माहिती', image: 'assets/img/avatar/company.png', path: '/CompanyInfo' },
+        { title: 'द्राक्षांच्या व्हरायटी', image: 'assets/img/avatar/grapes.jpg', path: '/GrapesVariety' },
+        { title: 'रेट लिस्ट', image: 'assets/img/avatar/Ireturn.png', path: '/RateList' },
+        { title: 'ॲनेक्स्चर फाइल', image: 'assets/img/avatar/voucher.png', path: '/Annexure' },
+        { title: 'द्राक्ष वूत्त', image: 'assets/img/avatar/GrapesRutt.jpg', path: '/GrapeList' },
+        { title: 'नोटिस', image: 'assets/img/avatar/Notice.png', path: '/Notice' },
+        // { title: 'संचालक', image: 'assets/img/avatar/company.png', path: '/Report' },
     ];
     return (
         <div className="page-wrapper pagehead">
@@ -36,14 +37,6 @@ function AppAdminIndex() {
                         <h3>ॲप अडमिन सूची </h3>
                     </div>
                     <ul className="table-top-head">
-                        {/* <li>
-                            <div className="page-btn">
-                                <Link to={route.PurchaseIndex} className="btn btn-secondary">
-                                    <ArrowLeft className="me-2" />
-                                    मागे
-                                </Link>
-                            </div>
-                        </li> */}
                     </ul>
                 </div>
                 <div className="row">
@@ -75,5 +68,4 @@ function AppAdminIndex() {
         </div>
     )
 }
-
 export default AppAdminIndex

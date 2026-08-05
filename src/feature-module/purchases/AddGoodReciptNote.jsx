@@ -516,7 +516,7 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                 Swal.fire({
                     icon: "error",
                     title: "Validation Error",
-                    text: "कृपया होय किंवा नाही यापैकी एकच निवडा, दोन्ही नाही.",
+                    text: "Please select either Yes or No, but not both.",
                 }).then(() => {
                     setTimeout(() => document.getElementById(yes ? idNo : idYes).focus(), 100);
                 });
@@ -563,13 +563,13 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
     const showConfirmationAlert = (event) => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला हि डेटा जतन करायचा आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to save this data?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "जतन करा",
+            confirmButtonText: "SAVE",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "CANCLE",
         }).then((result) => {
             if (result.isConfirmed) {
                 handleFormSubmission(event);
@@ -579,13 +579,13 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला बाहेर पडायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("AddGRN");
@@ -723,15 +723,15 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                 aria-labelledby="exampleModalFullscreenLabel"
                 aria-hidden="true"
             >
-                <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="modal-content">
-                                <div className="page-wrapper-new p-0">
-                                    <div className="content">
+                <div className="modal-dialog modal-fullscreen mbgcolor">
+                    <div className="modal-content mbgcolor">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
+                                <div className="page-wrapper-new p-0 mbgcolor " >
+                                    <div className="content mbgcolor">
                                         <div className="modal-header border-0 custom-modal-header">
                                             <div className="page-title">
-                                                <h3>माहिती प्राप्ती नोंद</h3>
+                                                <h3>Good Recepite Note</h3>
                                             </div>
                                             {!showForm && (
                                                 <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
@@ -752,7 +752,7 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                             className="btn btn-primary ms-3 mt-1 mt-sm-0"
                                                             onClick={() => handleSearch(PBCHALLANNO)}
                                                         >
-                                                            शोध
+                                                            Search
                                                         </button>
                                                     </div>
                                                 </div>
@@ -768,7 +768,7 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                                 //   data-bs-dismiss="modal"
                                                                 onClick={showExitAlert}>
                                                                 <ArrowLeft className="me-2" />
-                                                                अनुक्रमणिकेकडे परत
+                                                                Back to index
                                                             </Link>
                                                         </div>
                                                     </li>
@@ -780,8 +780,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                 <form onSubmit={handleSubmit}>
                                                     <div className="row">
                                                         <div className="col-lg-2 col-md-6 col-sm-12">
-                                                            <div className="input-blocks">
-                                                                <label>GRN क्रमांक</label>
+                                                            <div >
+                                                                <label className="form-label">GRN No</label>
                                                                 <input
                                                                     type="number"
                                                                     className="form-control"
@@ -795,8 +795,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
 
                                                         <div className="col-lg-2 col-md-6 col-sm-12">
-                                                            <div className="input-blocks">
-                                                                <label>GRN दिनांक</label>
+                                                            <div >
+                                                                <label className="form-label">GRN Date</label>
                                                                 <input
                                                                     type="date"
                                                                     className="form-control"
@@ -807,9 +807,10 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-2 col-md-6 col-sm-12">
-                                                            <div className="input-blocks">
-                                                                <label>चलन क्रमांक</label>
-                                                                <input type="text" className="form-control"
+                                                            <div >
+                                                                <label className="form-label">Challan No</label>
+                                                                <input type="text"
+                                                                    className="form-control"
                                                                     name="ChallanNo"
                                                                     onChange={handleInputChange}
                                                                     value={formData.ChallanNo || ''}
@@ -820,8 +821,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
 
                                                         <div className="col-lg-2 col-md-6 col-sm-12">
-                                                            <div className="input-blocks">
-                                                                <label>चलन दिनांक</label>
+                                                            <div >
+                                                                <label className="form-label">Challan Date</label>
                                                                 <input type="text" className="form-control"
                                                                     name="Challandate"
                                                                     onChange={handleInputChange}
@@ -831,8 +832,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-2 col-md-6 col-sm-12">
-                                                            <div className="input-blocks">
-                                                                <label>वाहन क्रमांक</label>
+                                                            <div >
+                                                                <label className="form-label">Vechile No</label>
                                                                 <input type="text" className="form-control"
                                                                     name="VechileNo"
                                                                     onChange={handleInputChange}
@@ -845,8 +846,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
                                                     <div className="row">
                                                         <div className="col-lg-4 col-md-4 col-sm-12">
-                                                            <div className="input-blocks add-product">
-                                                                <label>पुरवठादाराचे नाव</label>
+                                                            <div className="">
+                                                                <label className="form-label">vendor name</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control border"
@@ -859,8 +860,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-3 col-md-4 col-sm-12">
-                                                            <div className="input-blocks add-product">
-                                                                <label>पुरवठादाराचा ईमेल</label>
+                                                            <div className="">
+                                                                <label className="form-label">vendor Email</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control border"
@@ -873,8 +874,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-2 col-md-4 col-sm-12">
-                                                            <div className="input-blocks add-product">
-                                                                <label>पुरवठादाराचा संपर्क</label>
+                                                            <div className="">
+                                                                <label className="form-label">vendor contact</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control border"
@@ -887,8 +888,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-3 col-md-4 col-sm-12">
-                                                            <div className="input-blocks add-product">
-                                                                <label className="form-label text-dark">प्रेषक</label>
+                                                            <div className="">
+                                                                <label className="form-label text-dark">Consigner</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control border"
@@ -905,12 +906,13 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                     <div className="row">
 
                                                         <div className="col-lg-12 col-md-6 col-sm-12">
-                                                            <div className="input-blocks">
-                                                                <label>तपासलेले द्वारा </label>
+                                                            <div >
+                                                                <label className="form-label">Inspected By </label>
                                                                 <input
                                                                     type="text"
                                                                     placeholder="Please enter Inspected Person Name"
                                                                     name="InspectedBy"
+                                                                    className="form-control"
                                                                     onChange={handleInputChange}
                                                                     value={formData.InspectedBy || ''}
                                                                 />
@@ -919,11 +921,12 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                     </div>
 
                                                     <div className="col-lg-12">
-                                                        <div className="input-blocks">
-                                                            <label>वर्णन</label>
+                                                        <div >
+                                                            <label className="form-label">Naration </label>
                                                             <textarea
                                                                 placeholder="Please enter Naration"
                                                                 name="Naration"
+                                                                className="form-control"
                                                                 onChange={handleInputChange}
                                                                 value={formData.Naration || ''}
                                                             />
@@ -939,16 +942,16 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
                                                                         <thead className="thead-dark">
                                                                             <tr>
-                                                                                <th className="col-4 " style={{ textAlign: "center" }}>उत्पादन</th>
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>HSN कोड</th>
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>बैच क्रमांक</th>
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>अखेरची तारीख</th>
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>माप युनिट</th>
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>चलन प्रमाण</th>
+                                                                                <th className="col-4 " style={{ textAlign: "center" }}>Product</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>HSN Code</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>Batch No</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>Expiry Date</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>UOM</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>Challan Qty</th>
 
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>अतिरिक्त प्रमाण</th>
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>नाकारलेले प्रमाण</th>
-                                                                                <th className="col-1 " style={{ textAlign: "center" }}>स्वीकृत प्रमाण</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>Excess Qty</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>Rejected Qty</th>
+                                                                                <th className="col-1 " style={{ textAlign: "center" }}>Accepted Qty</th>
 
 
                                                                             </tr>
@@ -1000,7 +1003,7 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                         </div>
                                                     </div>
                                                     <div className="col-lg-12">
-                                                        <h4>गुणवत्ता आणि प्रमाण आश्वासन</h4>
+                                                        <h4>Quality & Quantity Assurance</h4>
                                                         <div className="border p-3 rounded shadow-sm mb-4">
 
                                                             <div className="modal-body-table">
@@ -1012,9 +1015,9 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
                                                                         <thead className="thead-dark">
                                                                             <tr>
-                                                                                <th className="col-4 "> गुणवत्ता आणि प्रमाण तपासा</th>
-                                                                                <th className="col-1 ">होय</th>
-                                                                                <th className="col-1 ">नाही</th>
+                                                                                <th className="col-4 "> Check Quality & Quantity</th>
+                                                                                <th className="col-1 ">Yes</th>
+                                                                                <th className="col-1 ">No</th>
                                                                                 <th className="col-4 " style={{ textAlign: "center" }}>Description</th>
 
                                                                             </tr>
@@ -1022,8 +1025,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <label className="form-check- required" htmlFor="condition1">
-                                                                                        उत्पादन कोणत्याही नुकसानीशिवाय चांगल्या स्थितीत आहे का?
+                                                                                    <label className="form-check-label  form-label required" htmlFor="condition1">
+                                                                                        Is the product in good condition without any damage?
                                                                                     </label>
                                                                                 </td>
                                                                                 <td>
@@ -1092,8 +1095,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <label className="form-check-label required" htmlFor="condition2">
-                                                                                        आपण ऑर्डर केलेल्या वस्तू योग्य प्रमाणात प्राप्त झाल्या का?
+                                                                                    <label className="form-check-label form-label required" htmlFor="condition2">
+                                                                                        Did you receive the correct amount of items you ordered?
                                                                                     </label>
                                                                                 </td>
                                                                                 <td>
@@ -1153,8 +1156,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <label className="form-check-label required" htmlFor="condition3">
-                                                                                        सर्व काही अपेक्षेप्रमाणे दिसते आणि कार्य करते का?
+                                                                                    <label className="form-check-label form-label required" htmlFor="condition3">
+                                                                                        Does everything look and work as expected?
                                                                                     </label>
                                                                                 </td>
                                                                                 <td>
@@ -1214,8 +1217,8 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <label className="form-check-label required" htmlFor="condition4">
-                                                                                        सर्व वस्तूंकरिता पॅकेजिंग सुरक्षित आणि संरक्षक आहे का?
+                                                                                    <label className="form-check-label form-label required" htmlFor="condition4">
+                                                                                        Is the packaging secure and protective for all the items?
                                                                                     </label>
                                                                                 </td>
                                                                                 <td>
@@ -1313,10 +1316,10 @@ function AddGoodReciptNote({ GRNAID, pcaid, vendorid, statusID }) {
 
                                                                 onClick={showExitAlert}
                                                             >
-                                                                बाहेर पडा
+                                                                Exist
                                                             </button>
                                                             <button type="submit" className="btn btn-submit" >
-                                                                जतन करा
+                                                                Save
                                                             </button>
                                                         </div>
                                                     </div>

@@ -130,7 +130,7 @@ const ThemeSettings = () => {
             : "sidebar-settings nav-toggle"
         }
         id="layoutDiv"
-        // onclick="toggleClassDetail()"
+      // onclick="toggleClassDetail()"
       >
         <div className="sidebar-content sticky-sidebar-one">
           <div className="sidebar-header">

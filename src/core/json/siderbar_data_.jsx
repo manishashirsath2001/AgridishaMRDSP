@@ -3,322 +3,266 @@ import React from "react";
 import * as Icon from "react-feather";
 
 export const SidebarData = [
-  {
 
-    submenuHdr: "Main",
-    submenuItems: [
-      {
-        label: "Main",
-        link: "/admin-dashboard",
-        submenu: true,
-        showSubRoute: false,
-        submenuHdr: "Main",
-        icon: <Icon.Grid />,
-        submenuItems: [
-          {
-            label: "Dashboard",
-            icon: <Icon.Grid />,
-            submenu: true,
-            showSubRoute: false,
+  // {
+  //   submenuHdr: "Masters",
+  //   submenuItems: [
+  //     {
+  //       label: "Masters",
+  //       link: "/MasterIndex",
+  //       submenu: true,
+  //       showSubRoute: false,
+  //       icon: (
+  //         <i
+  //           className="bi bi-database-fill-add me-2"
+  //           data-bs-toggle="Master"
+  //           title="ri-settings-5-line"
+  //         />
+  //       ),
+  //       submenuItems: [
 
-            submenuItems: [
-              { label: "Admin Dashboard", link: "/admin-dashboard" },
-              { label: "Sales Dashboard", link: "/sales-dashboard" },
-            ],
-          },
-          {
-            label: "Application",
-            icon: <Icon.Smartphone />,
-            submenu: true,
-            showSubRoute: false,
-            submenuItems: [
-              { label: "Chat", link: "/chat", showSubRoute: false },
-              {
-                label: "Call",
-                submenu: true,
-                submenuItems: [
-                  { label: "Video Call", link: "/video-call" },
-                  { label: "Audio Call", link: "/audio-call" },
-                  { label: "Call History", link: "/call-history" },
-                ],
-              },
-              { label: "Calendar", link: "/calendar", showSubRoute: false },
-              { label: "Email", link: "/email", showSubRoute: false },
-              { label: "To Do", link: "/todo", showSubRoute: false },
-              { label: "Notes", link: "/notes", showSubRoute: false },
-              { label: "File Manager", link: "/file-manager", showSubRoute: false },
-              { label: "Social Feed", link: "/social-feed", showSubRoute: false },
-              { label: "Kanban", link: "/kanban", showSubRoute: false },
-            ],
-          },
-        ],
-      },
+  //         {
+  //           label: "Services Master",
+  //           link: "/ServicesMaster",
+  //           icon: (
+  //             <i
+  //               className="ri-settings-5-line me-2"
+  //               data-bs-toggle="ServicesMaster"
+  //               title="ri-settings-5-line"
+  //             />
+  //           ),
 
-
-
-
-    ],
-
-  },
-  {
-    submenuHdr: "Masters",
-    submenuItems: [
-      {
-        label: "Masters",
-        link: "/MasterIndex",
-        submenu: true,
-        showSubRoute: false,
-        icon: (
-          <i
-            className="bi bi-database-fill-add me-2"
-            data-bs-toggle="Master"
-            title="ri-settings-5-line"
-          />
-        ),
-        submenuItems: [
-
-          {
-            label: "Services Master",
-            link: "/ServicesMaster",
-            icon: (
-              <i
-                className="ri-settings-5-line me-2"
-                data-bs-toggle="ServicesMaster"
-                title="ri-settings-5-line"
-              />
-            ),
-
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Customer Master",
-            link: "/CustomerMaster",
-            icon: (
-              <i
-                className="ri-group-line me-2"
-                data-bs-toggle="CustomerMaster"
-                title="ri-group-line"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Store Master",
-            link: "/StoreMaster",
-            icon: (
-              <i
-                className="bi bi-building me-2"
-                data-bs-toggle="StoreMaster"
-                title="bi bi-building"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "WareHouses Master",
-            link: "/WareHousesMaster",
-            icon: (
-              <i
-                className="bi bi-house me-2"
-                data-bs-toggle="WareHousesMaster"
-                title="bi bi-house"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Rack Master",
-            link: "/RackMaster",
-            icon: (
-              <i
-                className="ri-menu-line me-2"
-                data-bs-toggle="StoreMaster"
-                title="ri-menu-line"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "HSN Master",
-            link: "/HSNMaster",
-            icon: (
-              <i
-                className="bi bi-building me-2"
-                data-bs-toggle="HSNMaster"
-                title="bi bi-building"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "SateCode Master",
-            link: "/SateCodeMaster",
-            icon: (
-              <i
-                className="ri-map-pin-line me-2"
-                data-bs-toggle="SateCodeMaster"
-                title="ri-map-pin-line"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Unit Conversion Master",
-            link: "/UnitConversionMaster",
-            icon: (
-              <i
-                className="ri-exchange-line me-2"
-                data-bs-toggle="UnitConversionMaster"
-                title="ri-exchange-line"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Item Master",
-            link: "/ItemMaster",
-            icon: (
-              <i
-                className="ri-shopping-cart-2-line me-2"
-                data-bs-toggle="ItemMaster"
-                title="ri-exchange-line"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          // {
-          //   label: "Add Item",
-          //   link: "/AddItem",
-          //   icon: (
-          //     <i
-          //       className="ri-shopping-cart-2-line me-2"
-          //       data-bs-toggle="AddItem"
-          //       title="ri-exchange-line"
-          //     />
-          //   ),
-          //   showSubRoute: false,
-          //   submenu: false,
-          // },
-          {
-            label: "Access Rights",
-            link: "/AccessRight",
-            icon: (
-              <i
-                className="bi bi-person-fill-gear me-2"
-                data-bs-toggle="AccessRight"
-                title="ri-exchange-line"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "User Master",
-            link: "/UserMaster",
-            icon: (
-              <i
-                className="bi bi-person-lock me-2"
-                data-bs-toggle="AccessRight"
-                title="ri-exchange-line"
-              />
-            ),
-            showSubRoute: false,
-            submenu: false,
-          },
-        ],
-      },
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Customer Master",
+  //           link: "/CustomerMaster",
+  //           icon: (
+  //             <i
+  //               className="ri-group-line me-2"
+  //               data-bs-toggle="CustomerMaster"
+  //               title="ri-group-line"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Store Master",
+  //           link: "/StoreMaster",
+  //           icon: (
+  //             <i
+  //               className="bi bi-building me-2"
+  //               data-bs-toggle="StoreMaster"
+  //               title="bi bi-building"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "WareHouses Master",
+  //           link: "/WareHousesMaster",
+  //           icon: (
+  //             <i
+  //               className="bi bi-house me-2"
+  //               data-bs-toggle="WareHousesMaster"
+  //               title="bi bi-house"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Rack Master",
+  //           link: "/RackMaster",
+  //           icon: (
+  //             <i
+  //               className="ri-menu-line me-2"
+  //               data-bs-toggle="StoreMaster"
+  //               title="ri-menu-line"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "HSN Master",
+  //           link: "/HSNMaster",
+  //           icon: (
+  //             <i
+  //               className="bi bi-building me-2"
+  //               data-bs-toggle="HSNMaster"
+  //               title="bi bi-building"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "SateCode Master",
+  //           link: "/SateCodeMaster",
+  //           icon: (
+  //             <i
+  //               className="ri-map-pin-line me-2"
+  //               data-bs-toggle="SateCodeMaster"
+  //               title="ri-map-pin-line"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Unit Conversion Master",
+  //           link: "/UnitConversionMaster",
+  //           icon: (
+  //             <i
+  //               className="ri-exchange-line me-2"
+  //               data-bs-toggle="UnitConversionMaster"
+  //               title="ri-exchange-line"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Item Master",
+  //           link: "/ItemMaster",
+  //           icon: (
+  //             <i
+  //               className="ri-shopping-cart-2-line me-2"
+  //               data-bs-toggle="ItemMaster"
+  //               title="ri-exchange-line"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         // {
+  //         //   label: "Add Item",
+  //         //   link: "/AddItem",
+  //         //   icon: (
+  //         //     <i
+  //         //       className="ri-shopping-cart-2-line me-2"
+  //         //       data-bs-toggle="AddItem"
+  //         //       title="ri-exchange-line"
+  //         //     />
+  //         //   ),
+  //         //   showSubRoute: false,
+  //         //   submenu: false,
+  //         // },
+  //         {
+  //           label: "Access Rights",
+  //           link: "/AccessRight",
+  //           icon: (
+  //             <i
+  //               className="bi bi-person-fill-gear me-2"
+  //               data-bs-toggle="AccessRight"
+  //               title="ri-exchange-line"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "User Master",
+  //           link: "/UserMaster",
+  //           icon: (
+  //             <i
+  //               className="bi bi-person-lock me-2"
+  //               data-bs-toggle="AccessRight"
+  //               title="ri-exchange-line"
+  //             />
+  //           ),
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //       ],
+  //     },
 
 
 
 
-    ],
-  },
-  {
+  //   ],
+  // },
+  // {
 
-    submenuHdr: "Purchases",
-    submenuItems: [
-      {
-        label: "Purchases",
-        link: "/PurchaseIndex",
-        submenu: true,
-        showSubRoute: false,
-        icon: (
-          <i
-            className="bi bi-cart4 me-2"
-            data-bs-toggle="Master"
-            title="ri-settings-5-line"
-          />),
-        submenuItems: [
-          {
-            label: "Requisition",
-            link: "/RequisitionMaster",
-            icon: <Icon.ShoppingBag />,
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Quotation",
-            link: "/QuatationMaster",
-            icon: <Icon.FileMinus />,
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Order",
-            link: "/PurchaseOrderMaster",
-            icon: <Icon.FileMinus />,
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Challan",
-            link: "/ChallanIndex",
-            icon: <Icon.RefreshCw />,
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Receipt Note",
-            link: "/GoodReciptNote",
-            icon: <Icon.RefreshCw />,
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Invoice",
-            link: "/PurchaseBill",
-            icon: <Icon.RefreshCw />,
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "Return",
-            link: "/ReturnIndex",
-            icon: <Icon.RefreshCw />,
-            showSubRoute: false,
-            submenu: false,
-          },
-          {
-            label: "PO Close",
-            link: "/ReturnIndex",
-            icon: <Icon.RefreshCw />,
-            showSubRoute: false,
-            submenu: false,
-          },
-        ],
-      },
-    ],
+  //   submenuHdr: "Purchases",
+  //   submenuItems: [
+  //     {
+  //       label: "Purchases",
+  //       link: "/PurchaseIndex",
+  //       submenu: true,
+  //       showSubRoute: false,
+  //       icon: (
+  //         <i
+  //           className="bi bi-cart4 me-2"
+  //           data-bs-toggle="Master"
+  //           title="ri-settings-5-line"
+  //         />),
+  //       submenuItems: [
+  //         {
+  //           label: "Requisition",
+  //           link: "/RequisitionMaster",
+  //           icon: <Icon.ShoppingBag />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Quotation",
+  //           link: "/QuatationMaster",
+  //           icon: <Icon.FileMinus />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Order",
+  //           link: "/PurchaseOrderMaster",
+  //           icon: <Icon.FileMinus />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Challan",
+  //           link: "/ChallanIndex",
+  //           icon: <Icon.RefreshCw />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Receipt Note",
+  //           link: "/GoodReciptNote",
+  //           icon: <Icon.RefreshCw />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Invoice",
+  //           link: "/PurchaseBill",
+  //           icon: <Icon.RefreshCw />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "Return",
+  //           link: "/ReturnIndex",
+  //           icon: <Icon.RefreshCw />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //         {
+  //           label: "PO Close",
+  //           link: "/ReturnIndex",
+  //           icon: <Icon.RefreshCw />,
+  //           showSubRoute: false,
+  //           submenu: false,
+  //         },
+  //       ],
+  //     },
+  //   ],
 
-  },
+  // },
   {
     submenuHdr: "Sales",
     submenuItems: [
@@ -382,198 +326,6 @@ export const SidebarData = [
     ],
 
   },
-  // {
-
-  //   submenuHdr: "Inventory",
-  //   submenuItems: [
-  //     {
-  //       label: "Inventory",
-  //       link: "/Inventory",
-  //       submenu: true,
-  //       showSubRoute: false,
-  //       icon: (
-  //         <i
-  //           className="bi bi-cart-check-fill me-2"
-  //           data-bs-toggle="Master"
-  //           title="ri-settings-5-line"
-  //         />),
-  //       submenuItems: [
-  //         {
-  //           label: "Products",
-  //           link: "/product-list",
-  //           icon: <Icon.Box />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Create Product",
-  //           link: "/add-product",
-  //           icon: <Icon.PlusSquare />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Expired Products",
-  //           link: "/expired-products",
-  //           icon: <Icon.Codesandbox />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Low Stocks",
-  //           link: "/low-stocks",
-  //           icon: <Icon.TrendingDown />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Category",
-  //           link: "/category-list",
-  //           icon: <Icon.Codepen />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Sub Category",
-  //           link: "/sub-categories",
-  //           icon: <Icon.Speaker />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Brands",
-  //           link: "/brand-list",
-  //           icon: <Icon.Tag />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Units",
-  //           link: "/units",
-  //           icon: <Icon.Speaker />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Variant Attributes",
-  //           link: "/variant-attributes",
-  //           icon: <Icon.Layers />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Warranties",
-  //           link: "/warranty",
-  //           icon: <Icon.Bookmark />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Print Barcode",
-  //           link: "/barcode",
-  //           icon: <Icon.AlignJustify />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Print QR Code",
-  //           link: "/qrcode",
-  //           icon: <Icon.Maximize />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "MasterIndex",
-  //           link: "/MasterIndex",
-  //           icon: <Icon.Maximize />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //       ],
-  //     },
-
-
-
-
-  //   ],
-
-  // },
-  // {
-
-  //   submenuHdr: "Stock",
-  //   submenuItems: [
-  //     {
-  //       label: "Stock",
-  //       link: "/MasterIndex",
-  //       submenu: true,
-  //       showSubRoute: false,
-  //       icon: (
-  //         <i
-  //           className="bi bi-box-seam-fill me-2"
-  //           data-bs-toggle="Master"
-  //           title="ri-settings-5-line"
-  //         />),
-  //       submenuItems: [
-  //         {
-  //           label: "Manage Stock",
-  //           link: "/manage-stocks",
-  //           icon: <Icon.Package />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Stock Adjustment",
-  //           link: "/stock-adjustment",
-  //           icon: <Icon.Clipboard />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Stock Transfer",
-  //           link: "/stock-transfer",
-  //           icon: <Icon.Truck />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //       ],
-  //     },
-
-
-
-
-  //   ],
-
-  // },
-
-  // {
-
-  //   submenuHdr: "Promo",
-  //   submenuItems: [
-  //     {
-  //       label: "Promo",
-  //       link: "/MasterIndex",
-  //       submenu: true,
-  //       showSubRoute: false,
-  //       icon: (
-  //         <i
-  //           className="ri-discount-percent-line me-2"
-  //           data-bs-toggle="Master"
-  //           title="ri-settings-5-line"
-  //         />),
-  //       submenuItems: [
-  //         {
-  //           label: "Coupons",
-  //           link: "/coupons",
-  //           icon: <Icon.ShoppingCart />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //       ],
-  //     },
-  //   ],
-
-  // },
-
 
   {
 
@@ -611,55 +363,6 @@ export const SidebarData = [
 
   },
 
-  // {
-
-  //   submenuHdr: "People",
-  //   submenuItems: [
-  //     {
-  //       label: "People",
-  //       link: "/MasterIndex",
-  //       submenu: true,
-  //       showSubRoute: false,
-  //       icon: (
-  //         <i
-  //           className="bi bi-people-fill me-2"
-  //           data-bs-toggle="Master"
-  //           title="ri-settings-5-line"
-  //         />),
-  //       submenuItems: [
-  //         {
-  //           label: "Customers",
-  //           link: "/customers",
-  //           icon: <Icon.User />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Suppliers",
-  //           link: "/suppliers",
-  //           icon: <Icon.Users />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Stores",
-  //           link: "/store-list",
-  //           icon: <Icon.Home />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //         {
-  //           label: "Warehouses",
-  //           link: "/warehouse",
-  //           icon: <Icon.Archive />,
-  //           showSubRoute: false,
-  //           submenu: false,
-  //         },
-  //       ],
-  //     },
-  //   ],
-
-  // },
 
   {
 

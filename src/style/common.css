@@ -1062,8 +1062,7 @@ button:focus {
     border-radius: .35rem;
     font-size: .875rem;
     font-weight: 500;
-    line-height: 1;
-    padding: 0.3rem 0.55rem;
+    padding: 0.2rem 0.55rem;
 }
 
 .css-b62m3t-container .css-13cymwt-control {
@@ -1108,8 +1107,13 @@ button:focus {
     font-size: 14px;
     font-weight: 600;
     color: #000;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
 }
+
+.row {
+    --bs-gutter-x: 0.5rem;
+}
+
 
 
 
@@ -1431,4 +1435,19 @@ ul {
         align-items: center;
     }
 
+}
+
+
+.rbtcolor {
+    /* background-color: #bab9b6; */
+    background-color: #B3C8CF;
+
+}
+
+.form-control[type=file] {
+    padding: 0.2rem 0.5rem;
+}
+
+.input-groupicon.calender-input input {
+    padding-left: 12px;
 }

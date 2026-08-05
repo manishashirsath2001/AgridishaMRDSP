@@ -12,8 +12,8 @@
 .signin-box {
     display: flex;
     width: 100%;
-    height: 550px;
-    max-width: 1200px;
+    height: 500px;
+    max-width: 1100px;
     background: white;
     border-radius: 15px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
@@ -27,7 +27,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ec8a44, #f3b64c);
+    background: linear-gradient(135deg, #ecd1f3ff, #83377eff);
     padding: 40px;
     color: white;
     box-sizing: border-box;
@@ -35,13 +35,37 @@
 
 .content-box {
     text-align: center;
-    max-width: 300px;
+    width: 100%;
+    height: 100%;
 }
+
+.image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 70%;
+    margin: 55px auto 0 auto;
+    overflow: hidden;
+}
+
+
 
 .image-box img {
     width: 100%;
-    max-width: 500px;
+    height: 100%;
+    object-fit: cover;
+
 }
+
+
+/* .image-box img {
+    width: 200%;
+    height: auto;
+    transform: scale(2);
+  
+} */
+
 
 /* 📌 Right Side */
 .signin-right {
@@ -88,7 +112,7 @@
 .btn-login {
     width: 100%;
     padding: 12px;
-    background-color: #ff9f43;
+    background-color: #791f62ff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -96,7 +120,7 @@
 }
 
 .btn-login:hover {
-    background-color: #df7716;
+    background-color: #701c5eff;
 }
 
 /* 📌 Social Icons Container */
@@ -147,6 +171,11 @@
     height: auto;
 }
 
+.img {
+    width: 150px;
+    height: auto;
+}
+
 /* 📌 Signup text */
 .signup-text {
     font-weight: 500;
@@ -179,7 +208,7 @@
     }
 
     .content-box {
-        max-width: 100%;
+        max-width: 600%;
     }
 
     .social-icons {

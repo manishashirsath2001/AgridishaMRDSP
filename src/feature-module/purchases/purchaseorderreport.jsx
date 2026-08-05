@@ -74,8 +74,8 @@ const PurchaseOrderReport = () => {
           <div className="page-header">
             <div className="add-item d-flex">
               <div className="page-title">
-                <h4>खरेदी आदेश अहवाल</h4>
-                <h6>तुमचा खरेदी आदेश अहवाल व्यवस्थापित करा</h6>
+                <h4>Purchase order report</h4>
+                <h6>Manage your Purchase order report</h6>
               </div>
             </div>
             <ul className="table-top-head">
@@ -233,7 +233,7 @@ const PurchaseOrderReport = () => {
                             data-feather="search"
                             className="feather-search"
                           />{" "}
-                          शोधा{" "}
+                          Search{" "}
                         </Link>
                       </div>
                     </div>
@@ -251,10 +251,10 @@ const PurchaseOrderReport = () => {
                           <span className="checkmarks" />
                         </label>
                       </th>
-                      <th>उत्पादनाचे नाव</th>
-                      <th>खरेदी केलेली रक्कम</th>
-                      <th>खरेदी केलेली प्रमाण</th>
-                      <th>साठ्यातील प्रमाण</th>
+                      <th>Product Name</th>
+                      <th>Purchased amount</th>
+                      <th>Purchased QTY</th>
+                      <th>Instock QTY</th>
                     </tr>
                   </thead>
                   <tbody>

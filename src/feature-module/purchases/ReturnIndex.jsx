@@ -34,14 +34,14 @@ function ReturnIndex() {
             <div className="content">
                 <div className="page-header">
                     <div className="page-title">
-                        <h3>सूचीकडे परत जा</h3>
+                        <h3>Return Index</h3>
                     </div>
                     <ul className="table-top-head">
                         <li>
                             <div className="page-btn">
                                 <Link to={route.PurchaseIndex} className="btn btn-secondary">
                                     <ArrowLeft className="me-2" />
-                                    मुख्य पृष्ठावर परत जा
+                                    Back to Home
                                 </Link>
                             </div>
                         </li>

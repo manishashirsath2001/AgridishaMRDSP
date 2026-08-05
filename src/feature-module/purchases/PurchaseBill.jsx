@@ -175,33 +175,33 @@ const PurchaseBill = () => {
 
     const columns = [
         {
-            title: "बिल क्र.",
+            title: "Bill No",
             dataIndex: "pbbillno",
             sorter: (a, b) => a.pbbillno.length - b.pbbillno.length,
         },
         {
-            title: "बिल तारीख",
+            title: "Bill Date",
             dataIndex: "pbdate",
             sorter: (a, b) => a.pbdate.length - b.pbdate.length,
         },
         {
-            title: "चलान क्र.",
+            title: "Challan No",
             dataIndex: "pbchallanno",
             sorter: (a, b) => a.pbchallanno.length - b.pbchallanno.length,
         },
         {
-            title: "विक्रेता नाव",
+            title: "Vendor Name",
             dataIndex: "pbvendorid",
             sorter: (a, b) => a.pbvendorid.length - b.pbvendorid.length,
         },
         {
-            title: "निर्धारित रक्कम",
+            title: "Net Amount",
             dataIndex: "pbnetamount",
             sorter: (a, b) => a.pbnetamount.length - b.pbnetamount.length,
         },
 
         {
-            title: "क्रिया",
+            title: "Action",
             dataIndex: "action",
             render: (_, record) => (
                 <div className="action-table-data">
@@ -234,13 +234,13 @@ const PurchaseBill = () => {
 
     const showConfirmationAlert = (pbaid) => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्ही हे परत करू शकणार नाही!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय, हे हटवा!",
+            confirmButtonText: "Yes, delete it!",
             cancelButtonColor: "#ff0000",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
                 OndeletePurchaseChallan(pbaid)
@@ -457,8 +457,8 @@ const PurchaseBill = () => {
                 <div className="page-header">
                     <div className="add-item d-flex">
                         <div className="page-title">
-                            <h3>खरेदी बिल मास्टर</h3>
-                            <h6>तुम्ही तुमचा खरेदी बिल मास्टर व्यवस्थापित करा</h6>
+                            <h3>Purchase Bill Master</h3>
+                            <h6>Manage your Purchase Bill Master</h6>
                         </div>
                     </div>
                     <ul className="table-top-head">
@@ -518,13 +518,13 @@ const PurchaseBill = () => {
                             data-bs-target="#AddPurchaseInvoice"
                         >
                             <PlusCircle className="me-2" />
-                            नवीन खरेदी जोडा
+                            Add New Purchase
                         </Link>
                     </div>
                     <div className="page-btn">
                         <Link to={route.PurchaseIndex} className="btn btn-secondary">
                             <ArrowLeft className="me-2" />
-                            परत अनुक्रमणिकेकडे
+                            Back to Index
                         </Link>
                     </div>
                 </div>

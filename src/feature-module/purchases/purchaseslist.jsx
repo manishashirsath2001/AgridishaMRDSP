@@ -39,24 +39,24 @@ const PurchasesList = () => {
   };
   const columns = [
     {
-      title: "पुरवठादाराचे नाव",
+      title: "SupplierName",
       dataIndex: "supplierName",
       sorter: (a, b) => a.supplierName.length - b.supplierName.length,
     },
     {
-      title: "संदर्भ",
+      title: "Reference",
       dataIndex: "reference",
       sorter: (a, b) => a.reference.length - b.reference.length,
     },
 
     {
-      title: "दिनांक",
+      title: "Date",
       dataIndex: "date",
       sorter: (a, b) => a.date.length - b.date.length,
     },
 
     {
-      title: "स्थिती",
+      title: "Status",
       dataIndex: "status",
       render: (text) => (
         <span
@@ -69,22 +69,22 @@ const PurchasesList = () => {
       sorter: (a, b) => a.status.length - b.status.length,
     },
     {
-      title: "एकूण रक्कम",
+      title: "GrandTotal",
       dataIndex: "grandTotal",
       sorter: (a, b) => a.grandTotal.length - b.grandTotal.length,
     },
     {
-      title: "भरणा केलेला",
+      title: "Paid",
       dataIndex: "paid",
       sorter: (a, b) => a.paid.length - b.paid.length,
     },
     {
-      title: "देय",
+      title: "Due",
       dataIndex: "due",
       sorter: (a, b) => a.due.length - b.due.length,
     },
     {
-      title: "तयार केलेले",
+      title: "CreatedBy",
       dataIndex: "createdBy",
       render: (text) => (
         <span
@@ -98,7 +98,7 @@ const PurchasesList = () => {
     },
 
     {
-      title: "क्रिया",
+      title: "Actions",
       dataIndex: "actions",
       key: "actions",
       render: () => (
@@ -218,9 +218,8 @@ const PurchasesList = () => {
           <div className="page-header transfer">
             <div className="add-item d-flex">
               <div className="page-title">
-                <h4>खरेदी सूची</h4>
-                <h6>तुमच्या खरेदी व्यवस्थापित करा</h6>
-
+                <h4>Purchase List</h4>
+                <h6>Manage your purchases</h6>
               </div>
             </div>
             <ul className="table-top-head">
@@ -283,7 +282,7 @@ const PurchasesList = () => {
                   data-bs-target="#add-units"
                 >
                   <PlusCircle className="me-2" />
-                  नवीन खरेदी जोडा
+                  Add New Purchase
                 </Link>
               </div>
               <div className="page-btn import">
@@ -294,7 +293,7 @@ const PurchasesList = () => {
                   data-bs-target="#view-notes"
                 >
                   <Download className="me-2" />
-                  खरेदी आयात करा
+                  Import Purchase
                 </Link>
               </div>
             </div>

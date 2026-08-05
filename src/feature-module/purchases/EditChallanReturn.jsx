@@ -190,13 +190,13 @@ function EditChallanReturn({ PRAID }) {
     const MySwal = withReactContent(Swal);
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला हे डेटा जतन करायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to save this data?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "जतन करा",
+            confirmButtonText: "SAVE",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "CANCEL",
         }).then((result) => {
             if (result.isConfirmed) {
                 validateinput();
@@ -412,13 +412,13 @@ function EditChallanReturn({ PRAID }) {
     // const MySwal = withReactContent(Swal);
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला बाहेर जायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("EditChalllanreturn");
@@ -472,16 +472,16 @@ function EditChallanReturn({ PRAID }) {
                 aria-labelledby="exampleModalFullscreenLabel"
                 aria-hidden="true">
                 <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="modal-content">
-                                <div className="page-wrapper-new p-0">
-                                    <div className="content ">
+                    <div className="modal-content mbgcolor">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
+                                <div className="page-wrapper-new p-0 mbgcolor">
+                                    <div className="content mbgcolor">
                                         <form onSubmit={handleSubmit}>
                                             <div className="modal-header border-0 custom-modal-header  ">
                                                 <div className="page-title d-flex justify-content-between align-items-center w-75 ">
                                                     <div className="page-title ">
-                                                        <h4>खरेदी चलान परतावा:</h4>
+                                                        <h4>Purchase Challan Return:</h4>
                                                     </div>
                                                 </div>
                                                 <div className="page-btn">
@@ -491,7 +491,7 @@ function EditChallanReturn({ PRAID }) {
                                                         onClick={showExitAlert}>
 
                                                         <ArrowLeft className="me-2" />
-                                                        सूचिके कडे परत जा
+                                                        Back to index
                                                     </Link>
                                                 </div>
                                             </div>
@@ -524,7 +524,7 @@ function EditChallanReturn({ PRAID }) {
                                                     <div className="row">
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">व्यवहार क्रमांक</label>
+                                                                <label className="form-label required">Transaction No</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -536,7 +536,7 @@ function EditChallanReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="input-blocks">
-                                                                <label className="form-label required">व्यवहार तारीख</label>
+                                                                <label className="form-label required">Transaction Date</label>
                                                                 <div className="input-groupicon calender-input">
                                                                     <input
                                                                         type="date"
@@ -550,7 +550,7 @@ function EditChallanReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">चलान क्रमांक</label>
+                                                                <label className="form-label required">Challan No</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -563,7 +563,7 @@ function EditChallanReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="input-blocks">
-                                                                <label className="form-label required">चलान तारीख</label>
+                                                                <label className="form-label required">Challan Date</label>
                                                                 <div className="input-groupicon calender-input">
                                                                     <input
                                                                         type="date"
@@ -582,7 +582,7 @@ function EditChallanReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-5 col-md-6 col-sm-12">
                                                             <div className="add-product">
-                                                                <label className="form-label required">विक्रेत्याचे नाव</label>
+                                                                <label className="form-label required">Vendor</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -596,7 +596,7 @@ function EditChallanReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-4 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">प्रेषक</label>
+                                                                <label className="form-label required">Consigner</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -610,7 +610,7 @@ function EditChallanReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">भरणा पद्धत</label>
+                                                                <label className="form-label required">Payment Mode</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -623,7 +623,7 @@ function EditChallanReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-12 col-sm-6 col-12">
                                                             <div className="mb-5">
-                                                                <label className="form-label">वर्णन</label>
+                                                                <label className="form-label">Narration</label>
                                                                 <textarea
                                                                     className="form-control mb-1"
                                                                     value={formData.Narration || ""}
@@ -696,7 +696,7 @@ function EditChallanReturn({ PRAID }) {
                                                             </div>
                                                         </div> */}
                                                     <div className="row border border-1 p-3">
-                                                        <h5>खरेदी चलान परतावा तपशील:</h5>
+                                                        <h5>Purchase Challan Return Detail:</h5>
                                                         <div className="col-lg-12">
                                                             <div className="table-responsive" style={{ maxHeight: "200px", overflowY: "auto" }}>
                                                                 <table className="table table-bordered" style={{ borderCollapse: "collapse" }}>
@@ -710,13 +710,13 @@ function EditChallanReturn({ PRAID }) {
                                                                         }}
                                                                     >
                                                                         <tr>
-                                                                            <th>उत्पादन</th>
-                                                                            <th>बॅच क्रमांक</th>
-                                                                            <th>वैधता समाप्ती तारीख</th>
-                                                                            <th>माप युनिट</th>
-                                                                            <th>प्रमाण</th>
-                                                                            <th>एकूण</th>
-                                                                            <th>परताव्याची प्रमाण</th>
+                                                                            <th>Product</th>
+                                                                            <th>Batch NO.</th>
+                                                                            <th>Expiry Date</th>
+                                                                            <th>UOM</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>Total</th>
+                                                                            <th>Return Quantity</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -745,7 +745,7 @@ function EditChallanReturn({ PRAID }) {
                                                                         ) : (
                                                                             <tr>
                                                                                 <td colSpan="7" className="text-center">
-                                                                                    कोणतीही उत्पादने उपलब्ध नाहीत
+                                                                                    No Products Available
                                                                                 </td>
                                                                             </tr>
                                                                         )}
@@ -762,10 +762,10 @@ function EditChallanReturn({ PRAID }) {
                                                                 // data-bs-dismiss="modal"
                                                                 onClick={showExitAlert}
                                                             >
-                                                                बाहेर जा
+                                                                Cancel
                                                             </button>
                                                             <button className="btn btn-submit">
-                                                                जतन करा
+                                                                Save Purchase
                                                             </button>
                                                         </div>
                                                     </div>

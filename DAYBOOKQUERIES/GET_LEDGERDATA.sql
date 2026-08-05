@@ -1,0 +1,112 @@
+﻿
+CREATE FUNCTION GET_LedgerData
+(	
+		@OrganizationID			VARCHAR(24) = '',
+		@DivisionID				VARCHAR(24) = '',
+		@ACCAID					VARCHAR(24) = '',
+		@SDATE					VARCHAR(50) = '',
+		@EDATE					VARCHAR(50) = ''
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	WITH cteVOUCHER AS (
+	SELECT	VoucherDate														AS DATE
+			
+			,CASE
+				WHEN DRACC = ACC.ACCAID THEN VoucherAmount
+				ELSE 0
+			END																AS DRAMT,
+			CASE
+				WHEN CRACC = ACC.ACCAID THEN VoucherAmount
+				ELSE 0
+			END																AS CRAMT,
+			CASE
+				WHEN DRACC = ACC.ACCAID THEN N'जमा'
+				WHEN CRACC = ACC.ACCAID THEN N'नावे'
+			END																AS DRCR,
+			ACC.ACCAID,
+			ACC.GLRPID,
+			ACC.MGRPID,
+			ACC.SGRPID
+	FROM	ST_VOUCHER V
+		CROSS APPLY	(
+				SELECT	*
+				FROM	tblACCOUNTS ACC
+				WHERE	ACC.ACCAID IN (DRACC, CRACC)
+					AND ISDELETED = 0
+		) ACC
+	WHERE	V.IsDeleted					= 0
+		AND OrganizationID				= @OrganizationID	
+		AND	DivisionID					= @DivisionID
+		AND	CAST(VoucherDate AS DATE)	BETWEEN  CAST(@SDATE AS DATE) AND CAST(@EDATE AS DATE)
+		AND VoucherAmount				> 0
+
+),
+
+cteACCOUNTDATA AS (
+
+SELECT	 C.DATE				AS DATE	
+		,C.DRAMT			AS DRAMT	
+		,C.CRAMT			AS CRAMT	
+		,C.DRCR				AS DRCR	
+		,C.ACCAID			AS ACCAID
+		,C.GLRPID			AS GLRPID
+		,C.MGRPID			AS MGRPID
+		,C.SGRPID			AS SGRPID
+		,A.ACCTM			AS GENRALLAGER
+		,B.ACCTM			AS SUBLAGER
+		,D.ACCTM			AS LAGER
+FROM	CTEVOUCHER C
+	INNER JOIN tblACCOUNTS A ON A.ISDELETED = 0 AND A.ACCAID = C.ACCAID
+	INNER JOIN tblACCOUNTS B ON B.ISDELETED = 0 AND B.ACCAID = C.SGRPID
+	INNER JOIN tblACCOUNTS D ON D.ISDELETED = 0 AND D.ACCAID = C.MGRPID
+WHERE C.ACCAID  = @ACCAID
+ 
+UNION ALL 
+
+SELECT	 @SDATE				AS DATE	
+		,CASE
+			WHEN COALESCE(SUM(VoucherAmount), 0) > 0 THEN SUM(VoucherAmount)
+			ELSE 0
+		END										AS DRAMT
+		,CASE
+			WHEN COALESCE(SUM(VoucherAmount), 0) < 0 THEN SUM(VoucherAmount)
+			ELSE 0
+		END										AS CRAMT	
+		,CASE
+			WHEN COALESCE(SUM(VoucherAmount), 0) > 0 THEN N'जमा'
+			WHEN COALESCE(SUM(VoucherAmount), 0) < 0 THEN N'नावे'
+			ELSE ''
+		END										AS CRDR
+		,'CASH'									AS ACCAID
+		,'CASH'									AS GLRPID
+		,'CASH'									AS MGRPID
+		,'CASH'									AS SGRPID
+		,N'आरंभीची शिल्लक'						AS GENRALLAGER
+		,N'आरंभीची शिल्लक'						AS SUBLAGER
+		,N'आरंभीची शिल्लक'						AS LAGER
+FROM	ST_Voucher	
+WHERE	IsDeleted						= 0
+		AND OrganizationID				= @OrganizationID	
+		AND	DivisionID					= @DivisionID
+		AND	CAST(VoucherDate AS DATE)	< @SDATE
+		AND VoucherAmount				> 0
+		AND (@ACCAID = DRACC OR @ACCAID = CRACC)
+)
+
+SELECT	 COALESCE(DATE			,'')		AS DATE			
+		,COALESCE(DRAMT			,0)			AS DRAMT			
+		,COALESCE(CRAMT			,0)			AS CRAMT			
+		,COALESCE(DRCR			,'')		AS DRCR			
+		,COALESCE(ACCAID		,'')		AS ACCAID		
+		,COALESCE(GLRPID		,'')		AS GLRPID		
+		,COALESCE(MGRPID		,'')		AS MGRPID		
+		,COALESCE(SGRPID		,'')		AS SGRPID		
+		,COALESCE(GENRALLAGER	,'')		AS GENRALLAGER	
+		,COALESCE(SUBLAGER		,'')		AS SUBLAGER		
+		,COALESCE(LAGER			,'')		AS LAGER			
+FROM	cteACCOUNTDATA
+)
+GO

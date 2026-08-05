@@ -30,9 +30,9 @@ const AddPurchaseChallanMaster = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">चलन क्रमांक</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Challan No</Tooltip>}
                 >
-                    <div>चलन क्रमांक</div>
+                    <div>Challan No</div>
                 </OverlayTrigger>
             ),
             dataIndex: "challanNo",
@@ -51,9 +51,9 @@ const AddPurchaseChallanMaster = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">चलन तारीख</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Challan Date</Tooltip>}
                 >
-                    <div className="text-center">चलन तारीख</div>
+                    <div className="text-center">Challan Date</div>
                 </OverlayTrigger>
             ),
             dataIndex: "Purchasedate",
@@ -71,9 +71,9 @@ const AddPurchaseChallanMaster = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">पुरवठ्याचे ठिकाण</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Place of Supply</Tooltip>}
                 >
-                    <div>पुरवठ्याचे ठिकाण</div>
+                    <div>Place of Supply</div>
                 </OverlayTrigger>
             ),
             dataIndex: "Placeofsupply",
@@ -91,9 +91,9 @@ const AddPurchaseChallanMaster = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">पुरवठादाराचे नाव</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Vendor Name</Tooltip>}
                 >
-                    <div>पुरवठादाराचे नाव</div>
+                    <div>Vendor Name</div>
                 </OverlayTrigger>
             ),
             dataIndex: "Vendor",
@@ -111,9 +111,9 @@ const AddPurchaseChallanMaster = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">करयोग्य रक्कम</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Taxable Amount</Tooltip>}
                 >
-                    <div className="text-center">करयोग्य रक्कम</div>
+                    <div className="text-center">Taxable Amount</div>
                 </OverlayTrigger>
             ),
             dataIndex: "TaxableValue",
@@ -131,9 +131,9 @@ const AddPurchaseChallanMaster = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">निव्वळ रक्कम</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Net Amount</Tooltip>}
                 >
-                    <div className="text-center">निव्वळ रक्कम</div>
+                    <div className="text-center">Net Amount</div>
                 </OverlayTrigger>
             ),
             dataIndex: "Total",
@@ -151,9 +151,9 @@ const AddPurchaseChallanMaster = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">क्रिया</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Action</Tooltip>}
                 >
-                    <div className="text-center">क्रिया</div>
+                    <div className="text-center">Action</div>
                 </OverlayTrigger>
             ),
             dataIndex: "action",
@@ -190,18 +190,18 @@ const AddPurchaseChallanMaster = () => {
     const MySwal = withReactContent(Swal);
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "आपण हे परत करू शकणार नाही!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय, डिलीट करा!",
+            confirmButtonText: "Yes, delete it!",
             cancelButtonColor: "#ff0000",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
                 MySwal.fire({
-                    title: "हटवले!",
-                    text: "तुमची फाइल हटवण्यात आली आहे.",
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
                     className: "btn btn-success",
                     confirmButtonText: "OK",
                     customClass: {
@@ -268,8 +268,8 @@ const AddPurchaseChallanMaster = () => {
                 <div className="page-header">
                     <div className="add-item d-flex">
                         <div className="page-title">
-                            <h3>खरेदी चालान जोडा</h3>
-                            <h6>चालान खरेदी व्यवस्थापित करा</h6>
+                            <h3>Add Purchase Challan</h3>
+                            <h6>Manage Purchase Challan</h6>
                         </div>
                     </div>
                     <ul className="table-top-head">
@@ -327,13 +327,13 @@ const AddPurchaseChallanMaster = () => {
                             data-bs-toggle="modal"
                             data-bs-target="#AddPurchasechallan"
                         >
-                            <PlusCircle className="me-2 iconsize" /> खरेदी चालान जोडा
+                            <PlusCircle className="me-2 iconsize" /> Add Purchase Challan
                         </button>
                     </div>
                     <div className="page-btn">
                         <Link to={route.PurchaseIndex} className="btn btn-secondary">
                             <ArrowLeft className="me-2" />
-                            अनुक्रमणिकेकडे परत
+                            Back to Index
                         </Link>
                     </div>
                 </div>

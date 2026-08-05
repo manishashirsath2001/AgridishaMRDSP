@@ -14,16 +14,12 @@ import {
     ArrowLeft,
     ChevronUp,
     Edit,
-
     PlusCircle,
     RotateCcw,
-
-
     Trash2,
 } from "feather-icons-react/build/IconComponents";
 import { baseUrl } from "../../core/json/custom";
 import { getUserData } from "../../Context/UserData";
-
 const CompanyInfo = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,7 +30,6 @@ const CompanyInfo = () => {
         console.log("user", userdetail);
         console.log("getUserData", getUserData);
     }
-
     useEffect(() => {
         const handleShortcut = (e) => {
             if (e.ctrlKey && e.key === 'a') {
@@ -46,19 +41,15 @@ const CompanyInfo = () => {
                 navigate(route.AppAdminIndex);
             }
         };
-
         window.addEventListener('keydown', handleShortcut);
-
         return () => {
             window.removeEventListener('keydown', handleShortcut);
         };
     }, [navigate]);
-
     const onEditClick = (cinfoid) => {
         navigate(route.AddCompanyInfo, { state: { CINFOID: cinfoid } });
     };
     const columns = [
-
         {
             title: "Company ID",
             dataIndex: "companyid",
@@ -112,14 +103,12 @@ const CompanyInfo = () => {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
             axios({
                 method: "POST",
                 url: baseUrl.Url + "/backend/api/SP_DeleteCompanyInfo",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
-
             Swal.fire({
                 icon: "success",
                 title: "Deleted!",
@@ -172,16 +161,13 @@ const CompanyInfo = () => {
                                 cbankname: item.cbankname,
                                 cbranchname: item.cbranchname
                             }))
-
                         );
                     })
-
             } catch (error) {
                 console.error("Error fetching Customer Data:", error);
             } finally {
                 setLoading(false);
             }
-
         } catch (error) {
             console.error("Submission Error:", error);
             Swal.fire({
@@ -190,7 +176,6 @@ const CompanyInfo = () => {
                 text: "Failed to save data. Please try again.",
             });
         }
-
     };
     const showConfirmationAlert = (cinfoid) => {
         MySwal.fire({
@@ -211,9 +196,6 @@ const CompanyInfo = () => {
     };
     const [Customer, setCustomer] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    // Empty data source
-    // const dataSource = [Customer];
     const renderTooltip = (props) => (
         <Tooltip id="pdf-tooltip" {...props}>
             Pdf
@@ -239,8 +221,6 @@ const CompanyInfo = () => {
             Collapse
         </Tooltip>
     );
-
-
     useEffect(() => {
         const fetchCustomer = async () => {
             try {
@@ -252,7 +232,6 @@ const CompanyInfo = () => {
                     "Content-Type": "application/json",
                     Accept: "*/*",
                 };
-
                 axios({
                     method: "POST",
                     url: baseUrl.Url + "/backend/api/GET_CompanyInfo",
@@ -290,7 +269,6 @@ const CompanyInfo = () => {
                                 cbranchname: item.cbranchname,
                                 facebookid: item.facebookid,
                             }))
-
                         );
                     })
             } catch (error) {
@@ -299,13 +277,8 @@ const CompanyInfo = () => {
                 setLoading(false);
             }
         };
-
         fetchCustomer();
     }, []);
-
-
-
-
     const [searchQuery, setSearchQuery] = useState("");
     const handleSearch = (event) => {
         setSearchQuery(event.target.value);
@@ -313,20 +286,17 @@ const CompanyInfo = () => {
             const payload = {
                 "cinfoid": "%",
                 "keyword": event.target.value
-
             }
             const headers = {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
             axios({
                 method: "POST",
                 url: baseUrl.Url + "/backend/api/GET_CompanyInfo/_Search",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
-
                 .then((response) => {
                     if (response.status != 200) throw new Error("Failed to send ");
                     console.log("response", response.data);
@@ -336,7 +306,6 @@ const CompanyInfo = () => {
             console.error("Error while searching  data:", error);
         }
     };
-
     return (
         <div className="page-wrapper">
             <div className="content">
@@ -344,65 +313,8 @@ const CompanyInfo = () => {
                     <div className="add-item d-flex">
                         <div className="page-title">
                             <h3>Manage Company Details</h3>
-                            {/* <h6>Manage Vendor</h6> */}
                         </div>
                     </div>
-                    {/* <ul className="table-top-head">
-            <li>
-              <OverlayTrigger placement="top" overlay={renderTooltip}>
-                <Link>
-                  <ImageWithBasePath src="assets/img/icons/pdf.svg" alt="img" />
-                </Link>
-              </OverlayTrigger>
-            </li>
-            <li>
-              <OverlayTrigger placement="top" overlay={renderExcelTooltip}>
-                <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                  <ImageWithBasePath
-                    src="assets/img/icons/excel.svg"
-                    alt="img"
-                  />
-                </Link>
-              </OverlayTrigger>
-            </li>
-            <li>
-              <OverlayTrigger placement="top" overlay={renderPrinterTooltip}>
-                <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                  <i data-feather="printer" className="feather-printer" />
-                </Link>
-              </OverlayTrigger>
-            </li>
-            <li>
-              <OverlayTrigger placement="top" overlay={renderRefreshTooltip}>
-                <Link data-bs-toggle="tooltip" data-bs-placement="top"
-                // onClick={OnReloadData}
-                >
-                  <RotateCcw />
-                </Link>
-              </OverlayTrigger>
-            </li>
-            <li>
-              <OverlayTrigger placement="top" overlay={renderCollapseTooltip}>
-                <Link
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  id="collapse-header"
-                  className={data ? "active" : ""}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    dispatch(setToogleHeader(!data));
-                  }}
-                >
-                  <ChevronUp />
-                </Link>
-              </OverlayTrigger>
-            </li>
-          </ul>
-          <div className="page-btn">
-            <Link to={route.AddCompany} className="btn btn-added">
-              <PlusCircle className="me-2 iconsize" /> Add Company
-            </Link>
-          </div> */}
                     <div className="page-btn">
                         <Link to={route.AppAdminIndex} className="btn btn-secondary">
                             <ArrowLeft className="me-2" />
@@ -439,12 +351,9 @@ const CompanyInfo = () => {
                         )}
                     </div>
                 </div>
-
-
                 <Brand />
             </div>
         </div>
     );
 };
-
 export default CompanyInfo;

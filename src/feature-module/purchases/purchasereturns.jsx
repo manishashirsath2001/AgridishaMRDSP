@@ -28,7 +28,7 @@ const PurchaseReturns = () => {
   const [searchText, setSearchText] = useState("");
   const columns = [
     {
-      title: "फोटो",
+      title: "Image",
       dataIndex: "img",
       render: (text, record) => (
 
@@ -40,24 +40,24 @@ const PurchaseReturns = () => {
       sorter: (a, b) => a.img.length - b.img.length,
     },
     {
-      title: "दिनांक",
+      title: "Date",
       dataIndex: "date",
       sorter: (a, b) => a.date.length - b.date.length,
     },
 
     {
-      title: "पुरवठादार",
+      title: "Supplier",
       dataIndex: "supplier",
       sorter: (a, b) => a.supplier.length - b.supplier.length,
     },
     {
-      title: "संदर्भ",
+      title: "Reference",
       dataIndex: "reference",
       sorter: (a, b) => a.reference.length - b.reference.length,
     },
 
     {
-      title: "स्थिती",
+      title: "Status",
       dataIndex: "status",
       render: (text) => (
         <span
@@ -70,22 +70,22 @@ const PurchaseReturns = () => {
       sorter: (a, b) => a.status.length - b.status.length,
     },
     {
-      title: "एकूण रक्कम",
+      title: "GrandTotal",
       dataIndex: "grandTotal",
       sorter: (a, b) => a.grandTotal.length - b.grandTotal.length,
     },
     {
-      title: "भरणा केलेला",
+      title: "Paid",
       dataIndex: "paid",
       sorter: (a, b) => a.paid.length - b.paid.length,
     },
     {
-      title: "देय",
+      title: "Due",
       dataIndex: "due",
       sorter: (a, b) => a.due.length - b.due.length,
     },
     {
-      title: "भरणा स्थिती",
+      title: "PaymentStatus",
       dataIndex: "paymentStatus",
       render: (text) => (
         <span
@@ -99,7 +99,7 @@ const PurchaseReturns = () => {
     },
 
     {
-      title: "क्रिया",
+      title: "Actions",
       dataIndex: "actions",
       key: "actions",
       render: () => (
@@ -214,8 +214,8 @@ const PurchaseReturns = () => {
           <div className="page-header">
             <div className="add-item d-flex">
               <div className="page-title">
-                <h4>खरेदी परतफेड सूची</h4>
-                <h6>तुमच्या परतफेड व्यवस्थापित करा</h6>
+                <h4>Purchase Return List</h4>
+                <h6>Manage your Returns</h6>
               </div>
             </div>
             <ul className="table-top-head">
@@ -277,7 +277,7 @@ const PurchaseReturns = () => {
                 data-bs-target="#add-sales-new"
               >
                 <PlusCircle className="me-2" />
-                खरेदी परतफेड जोडा
+                Add Purchase Return
               </Link>
             </div>
           </div>
@@ -383,7 +383,7 @@ const PurchaseReturns = () => {
                             data-feather="search"
                             className="feather-search"
                           />{" "}
-                          शोधा{" "}
+                          Search{" "}
                         </Link>
                       </div>
                     </div>

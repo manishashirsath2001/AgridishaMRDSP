@@ -6,7 +6,7 @@ import Brand from "../../core/modals/inventory/brand";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { all_routes } from "../../Router/all_routes";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Tooltip, Tabs, Tab } from "react-bootstrap";
 import Table from "../../core/pagination/datatable";
 import { setToogleHeader } from "../../core/redux/action";
 import axios from 'axios';
@@ -17,20 +17,16 @@ import marathiFontBase64 from "../../style/fonts/NotoSansDevanagari"
 import { saveAs } from 'file-saver';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-
 import {
     ArrowLeft,
     ChevronUp,
     Edit,
     Eye,
-
+    Bell,
     PlusCircle,
     RotateCcw,
-
-
     Trash2,
 } from "feather-icons-react/build/IconComponents";
-
 const AppNotification = () => {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.toggle_header);
@@ -40,30 +36,32 @@ const AppNotification = () => {
     const onEditClick = (notiID) => {
         navigate(route.AddAppNotification, { state: { notiID: notiID } });
     };
-
+    const onEditNotiClick = (notiID) => {
+        navigate(route.DisplayNotification, {
+            state: {
+                notiID: notiID,
+                selectedTab: selectedTab
+            }
+        });
+    };
+    const [selectedTab, setSelectedTab] = useState("Transporter");
     const columns = [
-
         {
             title: "शीर्षक",
             dataIndex: "notiTitle",
-            // sorter: (a, b) => a.sku.length - b.sku.length,
         },
         {
-            title: "तारीख",
+            title: "सुरुवातीची तारीख",
             dataIndex: "notiSDate",
-            // sorter: (a, b) => a.category.length - b.category.length,
         },
         {
             title: "समाप्ती तारीख",
             dataIndex: "notiEDate",
-            // sorter: (a, b) => a.brand.length - b.brand.length,
         },
-
-
-
         {
-            title: "Action",
+            title: "कृती",
             dataIndex: "action",
+            align: "center",
             render: (_, record) => (
                 <div className="action-table-data">
                     <div className="edit-delete-action">
@@ -81,26 +79,17 @@ const AppNotification = () => {
                                 <Trash2 className="feather-trash-2" />
                             </Link>
                         </OverlayTrigger>
-                        {/* <OverlayTrigger
-                     placement="top"
-                     overlay={<Tooltip id="approve-tooltip">Proceed </Tooltip>}
-                 >
-                     <Link className="me-2 p-2" to="#" data-bs-toggle="modal" data-bs-target="#AddSaleQuotation" style={{ color: 'green' }}>
-                         <i data-feather="arrow-right-circle" className="feather-arrow-right-circle"></i>
-                     </Link>
-                 </OverlayTrigger> */}
+                        <OverlayTrigger placement="top" overlay={<Tooltip id="notification-tooltip">Notification</Tooltip>}>
+                            <a className="me-2 p-2" onClick={() => { onEditNotiClick(record.notiID) }}>
+                                <Bell className="feather-bell text-warning" style={{ fontSize: '1rem', width: '1rem', height: '1rem' }} />
+                            </a>
+                        </OverlayTrigger>
+
                     </div>
                 </div>
             ),
-
-
-
         },
     ];
-
-
-
-
     const [Notification, setNotification] = useState([]);
     useEffect(() => {
         try {
@@ -114,10 +103,9 @@ const AppNotification = () => {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
             axios({
                 method: "POST",
-                url: baseUrl.Url + "/backend/api/GET_Notification",
+                url: baseUrl.Url + "/api/GET_Notification",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
@@ -126,32 +114,38 @@ const AppNotification = () => {
                     const DATA = response.data;
                     setNotification(DATA);
                 })
-
         } catch (error) {
             console.error("Error fetching Access Right Data:", error);
         }
     }, []);
-
-    useEffect(() => {
-        const handleShortcut = (e) => {
-            if (e.ctrlKey && e.key === 'a') {
-                e.preventDefault();
-                navigate(route.AddAppNotification);
-            }
-            if (e.ctrlKey && e.key === 'e') {
-                e.preventDefault();
-                navigate(route.AppAdminIndex);
-            }
-        };
-
-        window.addEventListener('keydown', handleShortcut);
-
-        return () => {
-            window.removeEventListener('keydown', handleShortcut);
-        };
-    }, [navigate]);
-
-
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const payload = {
+    //                 notiID: "%",
+    //                 keyword: '%',
+    //                 companyid: "",
+    //                 deptid: "",
+    //             };
+    //             const headers = {
+    //                 "Content-Type": "application/json",
+    //                 Accept: "*/*",
+    //             };
+    //             const url =
+    //                 selectedTab === "Transporter"
+    //                     ? baseUrl.Url + "/backend/api/GET_AdminNotificationForTransporter"
+    //                     : baseUrl.Url + "/backend/api/GET_AdminNotificationForFarmer";
+    //             const response = await axios.post(url, payload, { headers });
+    //             if (response.status !== 200) {
+    //                 throw new Error("Failed to fetch data");
+    //             }
+    //             setNotification(response.data);
+    //         } catch (error) {
+    //             console.error("Error fetching notification data:", error);
+    //         }
+    //     };
+    //     fetchData();
+    // }, [selectedTab]);
 
     const OndeleteNotification = async (notiID) => {
         try {
@@ -160,24 +154,19 @@ const AppNotification = () => {
                 keyword: '%',
                 companyid: "",
                 deptid: "",
-
             };
             const headers = {
                 "Content-Type": "application/json",
                 Accept: "*/*",
             };
-
-            // Perform the delete API call
             axios({
                 method: "POST",
-                url: baseUrl.Url + "/backend/api/SP_DeleteNotification",
+                url: baseUrl.Url + "/api/SP_DeleteNotification",
                 data: JSON.stringify(payload),
                 headers: headers,
             })
                 .then((response) => {
                     if (response.status !== 200) throw new Error("Failed to Delete Data");
-
-                    // Display success or failure message
                     MySwal.fire({
                         title: response.data[0].responseCode === "FAILURE" ? "Deletion Not Allowed" : "Deleted!",
                         text: response.data[0].responseCode === "FAILURE"
@@ -189,8 +178,6 @@ const AppNotification = () => {
                             confirmButton: response.data[0].responseCode === "FAILURE" ? "btn btn-danger" : "btn btn-success",
                         },
                     });
-
-                    // After deletion, filter out the deleted account from the current state
                     setNotification((prevState) => prevState.filter((Notification) => Notification.notiID !== notiID));
                 })
                 .catch((error) => {
@@ -200,9 +187,6 @@ const AppNotification = () => {
             console.error("Error deleting account:", error);
         }
     };
-
-
-
     const showConfirmationAlert = (notiID) => {
         MySwal.fire({
             title: "Are you sure?",
@@ -220,9 +204,6 @@ const AppNotification = () => {
             }
         });
     }
-
-
-    // Empty data source
     const dataSource = [];
     const renderTooltip = (props) => (
         <Tooltip id="pdf-tooltip" {...props}>
@@ -250,70 +231,22 @@ const AppNotification = () => {
         </Tooltip>
     );
 
-    // const generatePDF = (Notification) => {
-    //     const doc = new jsPDF();
-    //     const pageWidth = doc.internal.pageSize.getWidth();
-    //     const pageHeight = doc.internal.pageSize.getHeight();
-
-    //     doc.setFontSize(12);
-    //     doc.setFont("Helvetica", "bold");
-    //     const title = "Sale challan Report";
-    //     const titleWidth = doc.getTextWidth(title);
-
-    //     const borderMargin = 10;
-    //     doc.rect(borderMargin, borderMargin, pageWidth - borderMargin * 2, pageHeight - borderMargin * 2);
-
-    //     doc.text(title, (pageWidth - titleWidth) / 2, 20);
-    //     doc.setLineWidth(0.5);
-    //     doc.line((pageWidth - titleWidth) / 2, 22, (pageWidth + titleWidth) / 2, 22);
-
-    //     doc.setFontSize(13);
-    //     doc.setFont("Helvetica", "normal");
-    //     let yPosition = 15;
-
-    //     const tableColumn = ["शीर्षक", "तारीख", "समाप्ती तारीख"];
-    //     const tableRows = Notification.map((item) => [
-    //         item.notiTitle,
-    //         item.notiSDate,
-    //         item.notiNDate,
-
-    //     ]);
-
-
-    //     autoTable(doc, {
-    //         startY: yPosition + 10,
-    //         head: [tableColumn],
-    //         body: tableRows,
-    //         theme: 'grid',
-    //         styles: { fontSize: 10, halign: "center", lineColor: [0, 0, 0], lineWidth: 0.20 },
-    //         headStyles: { fillColor: [169, 169, 169], textColor: 0, fontStyle: "bold" },
-    //         bodyStyles: { textColor: 0 },
-    //     });
-
-    //     doc.save("Report.pdf");
-    // };
     const generatePDF = (Notification) => {
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.getWidth();
-
         const cleanBase64 = marathiFontBase64.replace(/^data:font\/ttf;base64,/, "");
-
         doc.addFileToVFS("NotoSansDevanagari.ttf", cleanBase64);
         doc.addFont("NotoSansDevanagari.ttf", "NotoSansDevanagari", "normal");
         doc.setFont("NotoSansDevanagari", "normal");
         doc.setFontSize(16);
-
         console.log(doc.getFontList());
-
         const title = " सुचना अहवाल";
         doc.text(title, (pageWidth - doc.getTextWidth(title)) / 2, 20);
-
-        const tableColumn = ["शीर्षक", "तारीख", "समाप्ती तारीख"];
+        const tableColumn = [["टायटल", "सुरुवातीची तारीख", "समाप्ती तारीख"]];
         const tableRows = Notification.map((item) => [
             item.notiTitle,
             item.notiSDate,
-            item.notiNDate,
-
+            item.notiEDate,
         ]);
         autoTable(doc, {
             startY: 30,
@@ -322,56 +255,71 @@ const AppNotification = () => {
             styles: { font: "NotoSansDevanagari", fontStyle: "normal", fontSize: 12 },
             headStyles: { fontStyle: "normal", fillColor: [0, 102, 204], textColor: 255, fontSize: 14 },
             alternateRowStyles: { fillColor: [240, 240, 240] },
+            columnStyles: {
+                0: {
+                    font: "normal",
+                    fontSize: 12
+                },
+                1: {
+                    font: "normal",
+                    fontSize: 12
+                },
+                2: {
+                    font: "normal",
+                    fontSize: 12
+                }
+            }
         });
-
         window.open(doc.output("bloburl"), "_blank");
     };
-
-
-
     const exportToExcel = async () => {
         try {
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet("Acoounts Report");
-
-
             const headingRow = worksheet.addRow(["Acoounts Report"]);
             headingRow.getCell(1).font = { bold: true, size: 16 };
             headingRow.getCell(1).alignment = { horizontal: "center", vertical: "middle" };
-
-
             worksheet.mergeCells("A1:E1");
-
-
-            const headers = ["शीर्षक", "तारीख", "समाप्ती तारीख"];
+            const headers = ["शीर्षक", " सुरुवातीची तारीख", "समाप्ती तारीख"];
             const headerRow = worksheet.addRow(headers);
-
             headerRow.eachCell((cell) => {
                 cell.font = { bold: true, color: { argb: "FFFFFF" } };
                 cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "808080" } };
                 cell.alignment = { horizontal: "center", vertical: "middle" };
             });
-
             const columnWidths = [40, 40, 40, 40];
             columnWidths.forEach((width, index) => {
                 worksheet.getColumn(index + 1).width = width;
             });
-
-            Notification.forEach(({ notiTitle, notiSDate, notiNDate }) => {
-                const row = worksheet.addRow([notiTitle, notiSDate, notiNDate]);
+            Notification.forEach(({ notiTitle, notiSDate, notiEDate }) => {
+                const row = worksheet.addRow([notiTitle, notiSDate, notiEDate]);
                 row.eachCell((cell) => {
                     cell.alignment = { horizontal: "center", vertical: "middle" };
                 });
             });
-
             const buffer = await workbook.xlsx.writeBuffer();
             const data = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
             saveAs(data, "Acoounts.xlsx");
-
         } catch (error) {
             console.error("Error generating the Excel file:", error);
         }
     };
+    useEffect(() => {
+        const handleShortcut = (e) => {
+            if (e.ctrlKey && e.key === 'a') {
+                e.preventDefault();
+                navigate(route.AddAppNotification);
+            }
+            if (e.ctrlKey && e.key === 'e') {
+                e.preventDefault();
+                navigate(route.AppAdminIndex);
+            }
+        };
+        window.addEventListener('keydown', handleShortcut);
+        return () => {
+            window.removeEventListener('keydown', handleShortcut);
+        };
+    }, [navigate]);
 
     return (
         <div className="page-wrapper">
@@ -380,7 +328,6 @@ const AppNotification = () => {
                     <div className="add-item d-flex">
                         <div className="page-title">
                             <h3>सूचना</h3>
-
                         </div>
                     </div>
                     <ul className="table-top-head">
@@ -441,7 +388,24 @@ const AppNotification = () => {
                         </Link>
                     </div>
                 </div>
-
+                {/* <div className="row mb-3">
+                    <div className="col-md-6 p-0">
+                        <button
+                            className={`w-100 btn ${selectedTab === "Transporter" ? "btn-primary" : "btn-outline-primary"}`}
+                            onClick={() => setSelectedTab("Transporter")}
+                        >
+                            Transporter
+                        </button>
+                    </div>
+                    <div className="col-md-6 p-0">
+                        <button
+                            className={`w-100 btn ${selectedTab === "Farmer" ? "btn-primary" : "btn-outline-primary"}`}
+                            onClick={() => setSelectedTab("Farmer")}
+                        >
+                            Farmer
+                        </button>
+                    </div>
+                </div> */}
                 <div className="card table-list-card">
                     <div className="card-body">
                         <div className="table-responsive">
@@ -449,11 +413,9 @@ const AppNotification = () => {
                         </div>
                     </div>
                 </div>
-
                 <Brand />
             </div>
         </div>
     );
 };
-
 export default AppNotification;

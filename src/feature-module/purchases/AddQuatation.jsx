@@ -95,13 +95,13 @@ function AddQuatation({ praid, vandorid }) {
     const MySwal = withReactContent(Swal);
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला बाहेर जायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("addquatation");
@@ -136,14 +136,14 @@ function AddQuatation({ praid, vandorid }) {
                 aria-hidden="true"
             >
                 <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="modal-content">
+                    <div className="modal-content mbgcolor">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
                                 <div className="page-wrapper-new p-0">
                                     <div className="content">
                                         <div className="modal-header border-0 custom-modal-header">
                                             <div className="page-title">
-                                                <h4>विक्रेता शोधा</h4>
+                                                <h4>Search Vendor</h4>
                                             </div>
                                             <div className="d-flex justify-content-between align-items-center">
                                                 <ul className="table-top-head">
@@ -155,7 +155,7 @@ function AddQuatation({ praid, vandorid }) {
                                                             onClick={showExitAlert}
                                                         >
                                                             <ArrowLeft className="me-2" />
-                                                            कोटेशन मास्टर कडे परत
+                                                            Back to Quotation Master
                                                         </button>
                                                     </li>
                                                 </ul>
@@ -178,61 +178,63 @@ function AddQuatation({ praid, vandorid }) {
                                                                 className="btn btn-primary ms-3 mt-1 mt-sm-0"
                                                                 onClick={() => OnSearchClick(searchQuery)}
                                                             >
-                                                                शोधा
+                                                                Search
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div className="col-lg-12">
-                                                    <div className="modal-body-table">
-                                                        <div className="table-responsive">
-                                                            <table className="table datanew">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>विक्रेत्याचे नाव</th>
-                                                                        <th>विक्रेत्याचा संपर्क क्रमांक</th>
-                                                                        <th>विक्रेत्याचा ईमेल</th>
-                                                                        <th>कोटेशन स्थिती</th>
-                                                                        <th>स्थिती</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    {vendors?.length > 0 ? (
-                                                                        vendors.map((vendor, index) => (
-                                                                            <tr key={index}>
-                                                                                <td>{vendor.ccompanyname}</td>
-                                                                                <td>{vendor.ccontactpersonmobile}</td>
-                                                                                <td>{vendor.cemail}</td>
-                                                                                <td>
-                                                                                    <span
-                                                                                        className={`badges ${vendor.status === 1 ? "status-badge" : "badge-bgdanger"
-                                                                                            }`}
-                                                                                    >
-                                                                                        {vendor.status === 1 ? "Completed" : "Pending"}
-                                                                                    </span>
-                                                                                </td>
-
-                                                                                <td>
-                                                                                    <Link
-                                                                                        to="#"
-                                                                                        className="btn btn-added"
-                                                                                        data-bs-toggle="modal"
-                                                                                        data-bs-target="#onprocedquatation"
-                                                                                        onClick={() => onVendorEditClick(vendor.caid, vendor.praid, vendor.cstate)}
-                                                                                    >
-                                                                                        <Eye className="feather-view" />
-                                                                                    </Link>
-                                                                                </td>
-                                                                            </tr>
-                                                                        ))
-                                                                    ) : (
+                                                <div className="border p-3 rounded shadow-sm mt-2">
+                                                    <div className="col-lg-12">
+                                                        <div className="modal-body-table overflow-auto max-vh-100" >
+                                                            <div className="table-responsive" style={{ height: "calc(40vh - 120px)" }}>
+                                                                <table className="table table-bordered table-sm">
+                                                                    <thead className="thead-dark" style={{ position: 'sticky', top: 0, zIndex: 1, backgroundColor: '#343a40' }}>
                                                                         <tr>
-                                                                            <td colSpan="5">कोणतेही विक्रेते आढळले नाहीत</td>
+                                                                            <th>Vendor Name</th>
+                                                                            <th>Vendor Contact Number</th>
+                                                                            <th>Vendor Email</th>
+                                                                            <th>Quatation status</th>
+                                                                            <th>Action</th>
                                                                         </tr>
-                                                                    )}
-                                                                </tbody>
-                                                            </table>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {vendors?.length > 0 ? (
+                                                                            vendors.map((vendor, index) => (
+                                                                                <tr key={index}>
+                                                                                    <td>{vendor.ccompanyname}</td>
+                                                                                    <td>{vendor.ccontactpersonmobile}</td>
+                                                                                    <td>{vendor.cemail}</td>
+                                                                                    <td>
+                                                                                        <span
+                                                                                            className={`badges ${vendor.status === 1 ? "status-badge" : "badge-bgdanger"
+                                                                                                }`}
+                                                                                        >
+                                                                                            {vendor.status === 1 ? "Completed" : "Pending"}
+                                                                                        </span>
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        <Link
+                                                                                            to="#"
+                                                                                            className="btn btn-added"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#onprocedquatation"
+                                                                                            onClick={() => onVendorEditClick(vendor.caid, vendor.praid, vendor.cstate)}
+                                                                                        >
+                                                                                            <Eye className="feather-view" />
+                                                                                        </Link>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            ))
+                                                                        ) : (
+                                                                            <tr>
+                                                                                <td colSpan="5">No vendors found</td>
+                                                                            </tr>
+                                                                        )}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -244,7 +246,7 @@ function AddQuatation({ praid, vandorid }) {
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#analize"
                                                     >
-                                                        तपासा
+                                                        Analyze
                                                     </Link>
                                                 </div>
 
@@ -256,10 +258,10 @@ function AddQuatation({ praid, vandorid }) {
                                                             // data-bs-dismiss="modal"
                                                             onClick={showExitAlert}
                                                         >
-                                                            बाहेर जा
+                                                            Exit
                                                         </button>
                                                         <Link to="#" className="btn btn-submit">
-                                                            जतन करा
+                                                            Save
                                                         </Link>
                                                     </div>
                                                 </div>

@@ -641,13 +641,13 @@ function AddPurchasechallan({ pcaid }) {
                 return;
             }
             MySwal.fire({
-                title: 'तुम्हाला खात्री आहे का?',
-                text: 'तुम्हाला हि डेटा जतन करायचा आहे का?',
+                title: 'Are you sure?',
+                text: 'Do you want to save this data?',
                 showCancelButton: true,
                 confirmButtonColor: '#00ff00',
-                confirmButtonText: 'जतन करा',
+                confirmButtonText: 'SAVE',
                 cancelButtonColor: '#092C4C',
-                cancelButtonText: 'रद्द करा',
+                cancelButtonText: 'CANCEL',
             }).then((result) => {
                 if (result.isConfirmed) {
                     handleFormSubmission();
@@ -676,13 +676,13 @@ function AddPurchasechallan({ pcaid }) {
     const navigate = useNavigate();
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला बाहेर पडायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("AddPurchasechallan");
@@ -793,7 +793,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "चलन क्रमांक आवश्यक आहे",
+                text: "Challan No is required",
             }).then(() => {
                 PCTRNNORef.current.focus();
             });
@@ -804,7 +804,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "चलन दिनांक आवश्यक आहे आणि तो वैध दिनांक असावा",
+                text: "Challan Date is required and must be a valid date.",
             }).then(() => {
                 PCDATERef.current.focus();
             });
@@ -815,7 +815,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "वाहन क्रमांक आवश्यक आहे",
+                text: "Vehicle No is required",
             }).then(() => {
                 PCVNORef.current.focus();
             });
@@ -826,7 +826,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "पुरवठ्याचे ठिकाण आवश्यक आहे",
+                text: "Place of Supply is required",
             }).then(() => {
                 PCPOSUPPLYRef.current.focus();
             });
@@ -837,7 +837,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "पुरवठादार आवश्यक आहे",
+                text: "Supplier is required",
             }).then(() => {
                 PCSELLERRef.current.focus();
             });
@@ -848,7 +848,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "प्रेषक आवश्यक आहे",
+                text: "Consigner is required",
             }).then(() => {
                 PCCONSIGNERRef.current.focus();
             });
@@ -859,7 +859,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "वर्णन आवश्यक आहे",
+                text: "Narration is required",
             }).then(() => {
                 PCNARRATIONRef.current.focus();
             });
@@ -870,7 +870,7 @@ function AddPurchasechallan({ pcaid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "जतन करण्यापूर्वी कृपया किमान एक उत्पादन जोडा.",
+                text: "Please add at least one product before saving.",
             });
             return;
         }
@@ -1247,7 +1247,7 @@ function AddPurchasechallan({ pcaid }) {
             aria-hidden="true"
         >
             <div className="modal-dialog modal-fullscreen">
-                <div className="modal-content">
+                <div className="modal-content mbgcolor">
                     {/* <div className="modal-header">
                         <h4
                             className="modal-title"
@@ -1262,11 +1262,11 @@ function AddPurchasechallan({ pcaid }) {
                             aria-label="Close"
                         />
                     </div> */}
-                    <div className="modal-body">
-                        <div className="content">
-                            <div className="modal-header border-0 custom-modal-header">
+                    <div className="modal-body mbgcolor">
+                        <div className="content mbgcolor">
+                            <div className="modal-header border-0 custom-modal-header mbgcolor">
                                 <div className="page-title">
-                                    <h4>नवीन खरेदी चलन जोडा</h4>
+                                    <h4>Add New Purchase challan</h4>
                                 </div>
                                 <div className="page-btn">
                                     <Link className="btn btn-secondary"
@@ -1275,7 +1275,7 @@ function AddPurchasechallan({ pcaid }) {
                                         onClick={showExitAlert}
                                     >
                                         <ArrowLeft className="me-2" />
-                                        अनुक्रमणिकेकडे परत
+                                        Back to index
                                     </Link>
                                 </div>
                             </div>
@@ -1285,7 +1285,7 @@ function AddPurchasechallan({ pcaid }) {
                                     <div className="row">
                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                             <div className="mb-3 add-product form-label">
-                                                <label className="form-label text-dark required">चलन क्रमांक</label>
+                                                <label className="form-label text-dark required">Challan No</label>
                                                 <input
                                                     ref={PCTRNNORef}
                                                     type="text"
@@ -1300,7 +1300,7 @@ function AddPurchasechallan({ pcaid }) {
                                         </div>
                                         <div className="col-lg-3 col-sm-6 col-12">
                                             <div className="input-blocks">
-                                                <label className="form-label text-dark required">खरेदी तारीख</label>
+                                                <label className="form-label text-dark required">Purchase Date</label>
                                                 <div className="input-groupicon calender-input">
                                                     <div className="info-img" />
                                                     <input
@@ -1323,7 +1323,7 @@ function AddPurchasechallan({ pcaid }) {
                                         </div>
                                         <div className="col-lg-3 col-md-4 col-sm-12">
                                             <div className="mb-3 add-product form-label">
-                                                <label className="form-label text-dark required">वाहन क्रमांक</label>
+                                                <label className="form-label text-dark required">Vehicle No</label>
                                                 <input
                                                     ref={PCVNORef}
                                                     type="text"
@@ -1338,7 +1338,7 @@ function AddPurchasechallan({ pcaid }) {
                                         </div>
                                         <div className="col-lg-3 col-md-4 col-sm-12">
                                             <div className="mb-3 add-product form-label">
-                                                <label className="form-label text-dark required">पुरवठ्याचे ठिकाण</label>
+                                                <label className="form-label text-dark required">Place of supply</label>
                                                 <Select
                                                     ref={PCPOSUPPLYRef}
                                                     classNamePrefix="react-select"
@@ -1395,7 +1395,7 @@ function AddPurchasechallan({ pcaid }) {
                                         <div className="row">
                                             {/* Payment Mode - 4 columns */}
                                             <div className='col-lg-4 col-sm-12'>
-                                                <label className="form-label text-dark required">भरणा पद्धती</label>
+                                                <label className="form-label text-dark required">Payment Mode</label>
                                                 <Select
                                                     classNamePrefix="react-select"
                                                     options={paymentmode}
@@ -1413,7 +1413,7 @@ function AddPurchasechallan({ pcaid }) {
 
                                             {/* Consigner - Remaining 8 columns */}
                                             <div className='col-lg-8 col-sm-12'>
-                                                <label className="form-label text-dark">प्रेषक</label>
+                                                <label className="form-label text-dark">Consigner</label>
                                                 <input
                                                     ref={PCCONSIGNERRef}
                                                     type="text"
@@ -1463,12 +1463,12 @@ function AddPurchasechallan({ pcaid }) {
                                     <div className="row mb-3 mt-3">
                                         <div className="addproduct-icon">
                                             <h5>
-                                                <span>पुरवठादाराची माहिती :</span>
+                                                <span>Vendor Details :</span>
                                             </h5>
                                         </div>
                                         <div className="col-lg-3 col-md-3 col-12">
                                             <div className="form-label">
-                                                <label className='form-label required'>विक्रेत्याचे नाव:</label>
+                                                <label className='form-label required'>Vendor Name:</label>
                                                 <Select
                                                     ref={PCSELLERRef}
                                                     classNamePrefix="react-select"
@@ -1489,7 +1489,7 @@ function AddPurchasechallan({ pcaid }) {
 
                                         <div className="col-lg-3 col-md-3 col-12">
                                             <div className="form-label">
-                                                <label>पुरवठादाराचा संपर्क:</label>
+                                                <label>Vendor Contact:</label>
                                                 <input
                                                     type="number"
                                                     name="QVCONTACT"
@@ -1503,7 +1503,7 @@ function AddPurchasechallan({ pcaid }) {
 
                                         <div className="col-lg-3 col-md-3 col-12">
                                             <div className="form-label">
-                                                <label>पुरवठादाराचा ईमेल:</label>
+                                                <label>Vendor Email:</label>
                                                 <input
                                                     type="email"
                                                     name="QVEMAIL"
@@ -1517,7 +1517,7 @@ function AddPurchasechallan({ pcaid }) {
 
                                         <div className="col-lg-3 col-md-3 col-12">
                                             <div className="form-label">
-                                                <label>पुरवठादाराची राज्य:</label>
+                                                <label>Vendor State:</label>
                                                 <Select
                                                     classNamePrefix="react-select"
                                                     options={states}
@@ -1545,7 +1545,7 @@ function AddPurchasechallan({ pcaid }) {
                                                 >
                                                     <div className="addproduct-icon">
                                                         <h5>
-                                                            <span>बँक तपशील :</span>
+                                                            <span>Bank Details :</span>
                                                         </h5>
                                                     </div>
                                                 </div>
@@ -1559,7 +1559,7 @@ function AddPurchasechallan({ pcaid }) {
                                                 <div className="accordion-body">
                                                     <div className="row">
                                                         <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                            <label className="form-label">बँकेचे नाव:</label>
+                                                            <label className="form-label">Bank Name:</label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -1569,7 +1569,7 @@ function AddPurchasechallan({ pcaid }) {
                                                             />
                                                         </div>
                                                         <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                            <label className="form-label">खाते क्रमांक:</label>
+                                                            <label className="form-label">Account Number:</label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -1580,7 +1580,7 @@ function AddPurchasechallan({ pcaid }) {
                                                         </div>
 
                                                         <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                            <label className="form-label">आयएफएससी कोड:</label>
+                                                            <label className="form-label">IFSC Code:</label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -1591,7 +1591,7 @@ function AddPurchasechallan({ pcaid }) {
                                                         </div>
 
                                                         <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                            <label className="form-label">शाखेचे नाव:</label>
+                                                            <label className="form-label">Branch Name:</label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -1609,7 +1609,7 @@ function AddPurchasechallan({ pcaid }) {
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="form-label add-product form-label">
-                                                <label className="form-label text-dark required">वर्णन</label>
+                                                <label className="form-label text-dark required">Narration</label>
                                                 <textarea
                                                     ref={PCNARRATIONRef}
                                                     rows={2}
@@ -1637,17 +1637,17 @@ function AddPurchasechallan({ pcaid }) {
                                                             <table className="table table-bordered">
                                                                 <thead className="thead-dark">
                                                                     <tr>
-                                                                        <th className="col-3">उत्पादन</th>
-                                                                        <th className="col-1">माप युनिट</th>
-                                                                        <th className="col-1">HSN कोड</th>
-                                                                        <th className="col-1">प्रमाण</th>
-                                                                        <th className="col-1">दर</th>
-                                                                        <th className="col-1">करयोग्य मूल्य</th>
+                                                                        <th className="col-3">Product</th>
+                                                                        <th className="col-1">UOM</th>
+                                                                        <th className="col-1">HSN Code</th>
+                                                                        <th className="col-1">Quantity</th>
+                                                                        <th className="col-1">Rate</th>
+                                                                        <th className="col-1">Taxable Value</th>
                                                                         <th className="col-1">CGST</th>
                                                                         <th className="col-1">SGST</th>
                                                                         <th className="col-1">IGST</th>
-                                                                        <th className="col-1">एकूण</th>
-                                                                        <th className="col-1">क्रिया</th>
+                                                                        <th className="col-1">Total</th>
+                                                                        <th className="col-1">Action</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -1694,7 +1694,7 @@ function AddPurchasechallan({ pcaid }) {
                                                                 <tfoot>
 
                                                                     <td colSpan="4"></td> {/* Empty cells for alignment */}
-                                                                    <td><strong>एकूण करयोग्य:</strong></td>
+                                                                    <td><strong>Total Taxable:</strong></td>
                                                                     <td>
                                                                         <input
                                                                             type="text"
@@ -1705,7 +1705,7 @@ function AddPurchasechallan({ pcaid }) {
                                                                         />
                                                                     </td>
                                                                     <td colSpan="2"></td>
-                                                                    <td><strong>एकूण:</strong></td>
+                                                                    <td><strong>Total:</strong></td>
                                                                     <td>
                                                                         <input
                                                                             type="text"
@@ -1729,7 +1729,7 @@ function AddPurchasechallan({ pcaid }) {
                                         <div className="row mt-5">
                                             <div className="col-lg-7 col-sm-12 col-12">
                                                 <div className="mb-3 add-product form-label">
-                                                    <label className="form-label text-dark required">उत्पादन / सेवा</label>
+                                                    <label className="form-label text-dark required">Product / Service</label>
                                                     <Select
                                                         ref={PCDPRODUCTRef}
                                                         classNamePrefix="react-select"
@@ -1748,7 +1748,7 @@ function AddPurchasechallan({ pcaid }) {
                                             </div>
                                             <div className="col-lg-2 col-sm-6 col-12">
                                                 <div className="mb-2 add-product form-label">
-                                                    <label className="form-label text-dark required">HSN कोड</label>
+                                                    <label className="form-label text-dark required">HSN code</label>
                                                     <input
                                                         type="number"
                                                         className="form-control"
@@ -1761,7 +1761,7 @@ function AddPurchasechallan({ pcaid }) {
                                             </div>
                                             <div className="col-lg-3 col-sm-6 col-12">
                                                 <div className="mb-2 add-product form-label">
-                                                    <label className="form-label text-dark required">माप युनिट</label>
+                                                    <label className="form-label text-dark required">Unit of Measurement</label>
                                                     <Select
                                                         ref={PCDUOMRef}
                                                         classNamePrefix="react-select"
@@ -1783,7 +1783,7 @@ function AddPurchasechallan({ pcaid }) {
                                         <div className="row">
                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                 <div className="mb-3 add-product form-label">
-                                                    <label className="form-label text-dark required">प्रमाण</label>
+                                                    <label className="form-label text-dark required">Quantity</label>
                                                     <input
                                                         ref={PCDQUANTITYRef}
                                                         type="number"
@@ -1798,7 +1798,7 @@ function AddPurchasechallan({ pcaid }) {
 
                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                 <div className="mb-3 add-product form-label">
-                                                    <label className="form-label text-dark">दर</label>
+                                                    <label className="form-label text-dark">Rate</label>
                                                     <input
                                                         ref={PCDRATERef}
                                                         type="number"
@@ -1813,7 +1813,7 @@ function AddPurchasechallan({ pcaid }) {
 
                                             <div className="col-lg-3 col-md-6 col-sm-12">
                                                 <div className="mb-3 add-product form-label">
-                                                    <label className="form-label text-dark">करयोग्य मूल्य</label>
+                                                    <label className="form-label text-dark">Taxable Value</label>
                                                     <input
                                                         ref={PCDTAXABLERef}
                                                         type="number"
@@ -1873,7 +1873,7 @@ function AddPurchasechallan({ pcaid }) {
                                             </div>
                                             <div className="col-lg-2 col-md-6 col-sm-12">
                                                 <div className="mb-3 add-product form-label">
-                                                    <label className="form-label text-dark">एकूण</label>
+                                                    <label className="form-label text-dark">Total</label>
                                                     <input
                                                         type="number"
                                                         className="form-control"
@@ -1886,7 +1886,7 @@ function AddPurchasechallan({ pcaid }) {
                                             </div>
                                             <div className="col-lg-2 col-md-6 col-sm-12">
                                                 <div className="mb-3 add-product form-label">
-                                                    <label className="form-label text-dark">बैच क्रमांक</label>
+                                                    <label className="form-label text-dark">Batch No</label>
                                                     <input
                                                         type="text"
                                                         className="form-control"
@@ -1900,7 +1900,7 @@ function AddPurchasechallan({ pcaid }) {
                                             </div>
                                             <div className="col-lg-2 col-md-6 col-sm-12">
                                                 <div className="mb-3 add-product form-label">
-                                                    <label className="form-label text-dark">एकूण</label>
+                                                    <label className="form-label text-dark">Total</label>
                                                     <input
                                                         type="date"
                                                         className="form-control"
@@ -1923,7 +1923,7 @@ function AddPurchasechallan({ pcaid }) {
                                                             className="btn btn-primary"
                                                             onClick={handleAddProduct}
                                                         >
-                                                            उत्पादन जोडा
+                                                            Add Product
                                                         </button>
                                                     </div>
                                                 </div>
@@ -1939,13 +1939,13 @@ function AddPurchasechallan({ pcaid }) {
                                                 // data-bs-dismiss="modal"
                                                 onClick={showExitAlert}
                                             >
-                                                बाहेर पडा
+                                                Exit
                                             </button>
                                             <button
                                                 type="submit"
                                                 className="btn btn-submit"
                                             >
-                                                जतन करा
+                                                Save
                                             </button>
                                         </div>
                                     </div>

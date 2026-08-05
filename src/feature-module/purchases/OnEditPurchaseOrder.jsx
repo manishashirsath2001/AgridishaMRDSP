@@ -567,8 +567,8 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                     } else {
 
                         MySwal.fire({
-                            title: "तुम्ही खात्री आहे का?",
-                            text: "तुम्हाला हा डेटा जतन करायचा आहे का?",
+                            title: "Are you sure?",
+                            text: "Do you want to save this data?",
                             showCancelButton: true,
                             confirmButtonColor: "#00ff00",
                             confirmButtonText: "SAVE",
@@ -589,13 +589,13 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
     };
     const showExitAlert = () => {
         MySwal.fire({
-            title: "आपल्याला खात्री आहे का?",
-            text: "तुम्हाला बाहेर जायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("onEditpurchaseorder");
@@ -670,7 +670,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "वितरण तारीख निवडली जावी.",
+                text: "Delivery Date must be selected.",
             }).then(() => {
                 PODDATERef.current.focus();
             });
@@ -681,7 +681,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "वितरण स्थान निवडले जावे.",
+                text: "Delivery Place must be selected.",
             }).then(() => {
                 POPLACERef.current.focus();
             });
@@ -693,7 +693,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "नियुक्त तारीख निवडली जावी.",
+                text: "Due Date must be selected.",
             }).then(() => {
                 PODUEDATERef.current.focus();
             });
@@ -705,7 +705,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "वर्णन रिकामे ठवू शकत नाही.",
+                text: "Description cannot be empty.",
             }).then(() => {
                 PODESCRIPTIONRef.current.focus();
             });
@@ -716,7 +716,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "अटी व शर्ती रिकाम्या ठवू शकत नाही.",
+                text: "Terms and Conditions cannot be empty.",
             }).then(() => {
                 POTERMSANDCONDITIONRef.current.focus();
             });
@@ -727,7 +727,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया पेमेंटच्या देय तारीख निवडा",
+                text: "Please select a Payment Due Date.",
             });
             return;
         }
@@ -737,7 +737,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "दिवसांची संख्या रिकाम्या ठवू शकत नाही.",
+                text: "Number of days cannot be empty.",
             });
             return;
         }
@@ -747,7 +747,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "भरणा अटी रिकाम्या ठवू शकत नाही.",
+                text: "Payment Terms cannot be empty.",
             }).then(() => {
                 POPTERMSRef.current.focus();
             });
@@ -863,16 +863,16 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
             // data-bs-target="#AddPurchaseorder"
             // data-bs-dismiss="modal"
             >
-                <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
+                <div className="modal-dialog modal-fullscreen mbgcolor">
+                    <div className="modal-content mbgcolor">
 
-                        <div className="modal-body">
-                            <div className="modal-content">
-                                <div className="page-wrapper-new p-0">
-                                    <div className="content">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
+                                <div className="page-wrapper-new p-0 mbgcolor">
+                                    <div className="content mbgcolor">
                                         <div className="modal-header border-0 custom-modal-header">
                                             <div className="page-title">
-                                                <h4>खरेदी आदेश जोडा</h4>
+                                                <h4>Add Purchase Order</h4>
                                             </div>
                                             <div className="d-flex justify-content-between align-items-center">
                                                 <ul className="table-top-head">
@@ -888,7 +888,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                             >
                                                                 <ArrowLeft className="me-2" />
-                                                                खरेदी संपादित करण्यासाठी परत जा
+                                                                Back to Editpurchase
                                                             </button>
                                                         </div>
                                                     </li>
@@ -901,7 +901,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                 <div className="row">
                                                     <div className="col-md-3 col-sm-6 col-12">
                                                         <div className="mb-3 add-product">
-                                                            <label className="form-label">कोटेशन नंबर</label>
+                                                            <label className="form-label">Quotation Number</label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -916,7 +916,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-md-3 col-sm-12">
                                                         <div className="mb-3 add-product">
-                                                            <label className="form-label">कोटेशन तारीख</label>
+                                                            <label className="form-label">Quotation Date</label>
                                                             <div className="input-groupicon calender-input">
                                                                 <input
                                                                     type="date"
@@ -932,7 +932,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-md-3 col-sm-6 col-12">
                                                         <div className="mb-3 add-product">
-                                                            <label className="form-label ">खरेदी आदेश क्रमांक</label>
+                                                            <label className="form-label ">Purchase Order Number</label>
                                                             <input
                                                                 type="text"
                                                                 className="form-control"
@@ -946,7 +946,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-md-3 col-sm-6 col-12">
                                                         <div className="mb-3 add-product">
-                                                            <label className="form-label ">खरेदी आदेश तारीख</label>
+                                                            <label className="form-label ">Purchase Order Date</label>
                                                             <div className="input-groupicon calender-input">
                                                                 <input
 
@@ -995,14 +995,14 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                 <div className="accordion-header" id="headingOne">
                                                     <div data-bs-target="#collapseOne" aria-controls="collapseOne">
                                                         <div className="addproduct-icon">
-                                                            <h5><span>विक्रेता तपशील</span></h5>
+                                                            <h5><span>Vender Details</span></h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="row mb-3">
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label>विक्रेता नाव</label>
+                                                            <label>Vendor Name</label>
                                                             <input
                                                                 type="text"
                                                                 name="POVENDORNAME"
@@ -1016,7 +1016,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label>विक्रेता संपर्क</label>
+                                                            <label>Vendor Contact</label>
                                                             <input
                                                                 type="number"
                                                                 name="VENDORCONTACT"
@@ -1030,7 +1030,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label>विक्रेता ईमेल</label>
+                                                            <label>Vendor Email</label>
                                                             <input
                                                                 type="email"
                                                                 name="VENDOREMAIL"
@@ -1044,7 +1044,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label>विक्रेता राज्य</label>
+                                                            <label>Vendor State</label>
                                                             <Select
                                                                 readOnly
                                                                 classNamePrefix="react-select"
@@ -1136,7 +1136,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                 <div className="col-12">
                                                     <div className="mb-3">
-                                                        <label className="form-label ">वर्णन</label>
+                                                        <label className="form-label ">Narration</label>
                                                         <textarea
                                                             rows="5"
                                                             className="form-control"
@@ -1155,15 +1155,15 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                                 <table className="table table-bordered">
                                                                     <thead className="thead-dark">
                                                                         <tr>
-                                                                            <th className="col-3">उत्पादन नाव</th>
-                                                                            <th className="col-1">माप एकक</th>
-                                                                            <th className="col-1">प्रमाण</th>
-                                                                            <th className="col-1">दर</th>
-                                                                            <th className="col-1">करयोग्य मूल्य</th>
+                                                                            <th className="col-3">Product Name</th>
+                                                                            <th className="col-1">UOM</th>
+                                                                            <th className="col-1">Quantity</th>
+                                                                            <th className="col-1">Rate</th>
+                                                                            <th className="col-1">Taxable Value</th>
                                                                             <th className="col-1">CGST</th>
                                                                             <th className="col-1">SGST</th>
                                                                             <th className="col-1">IGST</th>
-                                                                            <th className="col-1">एकूण</th>
+                                                                            <th className="col-1">Total</th>
                                                                         </tr>
                                                                     </thead>
                                                                     {/* <tbody>
@@ -1332,7 +1332,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                                         <tr>
                                                                             <td colSpan="3"></td>
                                                                             <td className="text-end">
-                                                                                <strong>एकूण करयोग्य:</strong>
+                                                                                <strong>Total Taxable:</strong>
                                                                             </td>
                                                                             <td>
                                                                                 <input
@@ -1346,7 +1346,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                                             <td colSpan="2"></td>
                                                                             <td className="text-end">
-                                                                                <strong>एकूण:</strong>
+                                                                                <strong>Total:</strong>
                                                                             </td>
                                                                             <div className="d-flex justify-content-end">
                                                                                 <input
@@ -1368,11 +1368,11 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                 </div>
 
                                                 <div className="border p-3 rounded shadow-sm mb-4">
-                                                    <h4 className="mb-3">वितरण तपशील</h4>
+                                                    <h4 className="mb-3">Delivery Details</h4>
                                                     <div className="row">
                                                         <div className="col-md-3 col-sm-6 col-12">
                                                             <div className="mb-3">
-                                                                <label className="form-label ">वितरण तारीख</label>
+                                                                <label className="form-label ">Delivery Date</label>
                                                                 <input
                                                                     type="date"
                                                                     className="form-control"
@@ -1387,7 +1387,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                         <div className="col-md-3 col-sm-6 col-12">
                                                             <div className="mb-3">
-                                                                <label className="form-label ">वितरण स्थान</label>
+                                                                <label className="form-label ">Delivery Place</label>
                                                                 {/* <select className="form-control"
                                   name="POPLACE"
                                   value={formData.POPLACE}
@@ -1412,7 +1412,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                         <div className="col-md-3 col-sm-6 col-12">
                                                             <div className="mb-3">
-                                                                <label className="form-label ">नियत तारीख</label>
+                                                                <label className="form-label ">Due Date</label>
                                                                 <input
                                                                     type="date"
                                                                     className="form-control"
@@ -1433,7 +1433,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-12">
                                                         <div className="mb-3">
-                                                            <label className="form-label">"वर्णन</label>
+                                                            <label className="form-label">Description</label>
                                                             <textarea
                                                                 rows="5"
                                                                 className="form-control"
@@ -1451,7 +1451,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                 <div className="border p-3 rounded shadow-sm mb-4">
                                                     <div className="col-12">
                                                         <div className="mb-3">
-                                                            <label className="form-label ">अटी आणि शर्ती</label>
+                                                            <label className="form-label ">Terms And Conditions</label>
                                                             <textarea
                                                                 rows="5"
                                                                 className="form-control"
@@ -1468,7 +1468,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                     <div className="row align-items-center">
                                                         <div className="col-lg-6 col-md-6 col-12">
                                                             <div className="form-label">
-                                                                <label>भरण्याची नियत तारीख:</label>
+                                                                <label>Payment Due Date:</label>
                                                                 <Select
                                                                     ref={POPDUEDAYSRef}
                                                                     name="POPDUEDAYS"
@@ -1493,7 +1493,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                             <div className="col-lg-6 col-md-6 col-12">
                                                                 <div className="form-label">
                                                                     <div className="d-flex align-items-center mt-2">
-                                                                        <label className="mr-2">दिनांची संख्या प्रविष्ट करा:</label>
+                                                                        <label className="mr-2">Enter Number of Days:</label>
                                                                         <input
                                                                             type="number"
                                                                             className="form-control"
@@ -1587,7 +1587,7 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
 
                                                     <div className="col-12">
                                                         <div className="mb-3">
-                                                            <label className="form-label ">भरण्याच्या अटी</label>
+                                                            <label className="form-label ">Payment Terms</label>
                                                             <textarea
                                                                 rows="5"
                                                                 className="form-control"
@@ -1610,10 +1610,10 @@ function OnEditPurchaseOrder({ POAID, qamaid, vandorid }) {
                                                             data-bs-dismiss="modal"
                                                             onClick={showExitAlert}
                                                         >
-                                                            बाहेर पडणे
+                                                            Exit
                                                         </button>
                                                         <button type="submit" className="btn btn-submit">
-                                                            जतन करा
+                                                            Save
                                                         </button>
                                                     </div>
                                                 </div>

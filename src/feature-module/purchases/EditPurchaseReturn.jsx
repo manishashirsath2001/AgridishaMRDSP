@@ -183,13 +183,13 @@ function EditPurchaseReturn({ PRAID }) {
 
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला हा डेटा सेव्ह करायचा आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to save this data?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "जतन करा",
+            confirmButtonText: "SAVE",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "CANCEL",
         }).then((result) => {
             if (result.isConfirmed) {
                 // handleModalConfirm(event);
@@ -326,7 +326,7 @@ function EditPurchaseReturn({ PRAID }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया सर्व आवश्यक फील्ड्स योग्यरित्या भरा.",
+                text: "Please fill in all the required fields correctly.",
             }).then(() => {
                 BillRef.current.focus();
                 VendorRef.current.focus();
@@ -418,13 +418,13 @@ function EditPurchaseReturn({ PRAID }) {
     // const MySwal = withReactContent(Swal);
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला बाहेर पडायचे आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "हो",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("EditPurchaseReturn");
@@ -474,17 +474,17 @@ function EditPurchaseReturn({ PRAID }) {
                 aria-hidden="true"
                 style={{ display: "none" }}
             >
-                <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="modal-content">
-                                <div className="page-wrapper-new p-0">
-                                    <div className="content ">
+                <div className="modal-dialog modal-fullscreen mbgcolor">
+                    <div className="modal-content mbgcolor">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
+                                <div className="page-wrapper-new p-0 mbgcolor">
+                                    <div className="content mbgcolor ">
                                         <form onSubmit={handleSubmit}>
                                             <div className="modal-header border-0 custom-modal-header  ">
                                                 <div className="page-title d-flex justify-content-between align-items-center w-75 ">
                                                     <div className="page-title ">
-                                                        <h4>खरेदी बिल परत :</h4>
+                                                        <h4>Purchase Bill Return :</h4>
                                                     </div>
 
                                                 </div>
@@ -496,7 +496,7 @@ function EditPurchaseReturn({ PRAID }) {
                                                         onClick={showExitAlert}
                                                     >
                                                         <ArrowLeft className="me-2" />
-                                                        इंडेक्सवर परत जा
+                                                        Back to index
                                                     </Link>
                                                 </div>
                                             </div>
@@ -532,7 +532,7 @@ function EditPurchaseReturn({ PRAID }) {
                                                     <div className="row">
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">व्यवहार क्रमांक</label>
+                                                                <label className="form-label required">Transaction No</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -545,7 +545,7 @@ function EditPurchaseReturn({ PRAID }) {
 
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="input-blocks">
-                                                                <label className="form-label required">व्यवहार दिनांक</label>
+                                                                <label className="form-label required">Transaction Date</label>
                                                                 <div className="input-groupicon calender-input">
                                                                     {/* <Calendar className="info-img" />
                                                                         <DatePicker
@@ -570,7 +570,7 @@ function EditPurchaseReturn({ PRAID }) {
 
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">बिल क्रमांक</label>
+                                                                <label className="form-label required">Bill No</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -584,7 +584,7 @@ function EditPurchaseReturn({ PRAID }) {
 
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="input-blocks">
-                                                                <label className="form-label required">बिल दिनांक</label>
+                                                                <label className="form-label required">Bill Date</label>
                                                                 <div className="input-groupicon calender-input">
                                                                     {/* <Calendar className="info-img" /> */}
                                                                     <input
@@ -614,7 +614,7 @@ function EditPurchaseReturn({ PRAID }) {
 
                                                         <div className="col-lg-5 col-md-6 col-sm-12">
                                                             <div className="add-product">
-                                                                <label className="form-label required">विक्रेत्याचे नाव</label>
+                                                                <label className="form-label required">Vendor</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -629,7 +629,7 @@ function EditPurchaseReturn({ PRAID }) {
 
                                                         <div className="col-lg-4 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">प्रेषक</label>
+                                                                <label className="form-label required">Consigner</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -643,7 +643,7 @@ function EditPurchaseReturn({ PRAID }) {
                                                         </div>
                                                         <div className="col-lg-3 col-md-6 col-sm-12">
                                                             <div className="form-label">
-                                                                <label className="form-label required">पेमेंट मोड</label>
+                                                                <label className="form-label required">Payment Mode</label>
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
@@ -657,7 +657,7 @@ function EditPurchaseReturn({ PRAID }) {
 
                                                         <div className="col-lg-12 col-sm-6 col-12">
                                                             <div className="mb-5">
-                                                                <label className="form-label">वर्णन</label>
+                                                                <label className="form-label">Narration</label>
                                                                 <textarea
                                                                     className="form-control mb-1"
                                                                     value={formData.Narration || ""}
@@ -670,7 +670,7 @@ function EditPurchaseReturn({ PRAID }) {
                                                     </div>
 
                                                     <div className="row border border-1 p-3">
-                                                        <h5>खरेदी बिल परतावा तपशील:</h5>
+                                                        <h5>Purchase Bill Return Detail:</h5>
                                                         <div className="col-lg-12">
                                                             <div className="table-responsive" style={{ maxHeight: "200px", overflowY: "auto" }}>
                                                                 <table className="table table-bordered" style={{ borderCollapse: "collapse" }}>
@@ -684,13 +684,13 @@ function EditPurchaseReturn({ PRAID }) {
                                                                         }}
                                                                     >
                                                                         <tr>
-                                                                            <th>उत्पादन</th>
-                                                                            <th>बॅच नंबर</th>
-                                                                            <th>समाप्ती दिनांक</th>
-                                                                            <th>माप युनिट</th>
-                                                                            <th>प्रमाण</th>
-                                                                            <th>एकूण</th>
-                                                                            <th>परताव्याची प्रमाण</th>
+                                                                            <th>Product</th>
+                                                                            <th>Batch NO.</th>
+                                                                            <th>Expiry Date</th>
+                                                                            <th>UOM</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>Total</th>
+                                                                            <th>Return Quantity</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -719,7 +719,7 @@ function EditPurchaseReturn({ PRAID }) {
                                                                         ) : (
                                                                             <tr>
                                                                                 <td colSpan="7" className="text-center">
-                                                                                    कोणतीही उत्पादने उपलब्ध नाहीत
+                                                                                    No Products Available
                                                                                 </td>
                                                                             </tr>
                                                                         )}
@@ -737,10 +737,10 @@ function EditPurchaseReturn({ PRAID }) {
                                                                 // data-bs-dismiss="modal"
                                                                 onClick={showExitAlert}
                                                             >
-                                                                रद्द करा
+                                                                Cancel
                                                             </button>
                                                             <button className="btn btn-submit">
-                                                                जतन करा
+                                                                Save Purchase
                                                             </button>
                                                         </div>
                                                     </div>

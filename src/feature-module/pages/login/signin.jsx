@@ -81,6 +81,8 @@ const Signin = () => {
   // } else if (elem.msRequestFullscreen) {
   //   elem.msRequestFullscreen();
   // }
+
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     setError("");
@@ -89,7 +91,7 @@ const Signin = () => {
       const payload = { email, password };
 
       const response = await axios.post(
-        `${baseUrl.Url}/backend/api/GET_UserLogin`,
+        `${baseUrl.Url}/api/SP_GET_UserLogin`,
         JSON.stringify(payload),
         {
           headers: {
@@ -117,6 +119,7 @@ const Signin = () => {
           companyname: user.companyname,
           APPDT: convertToCustomDate(user.registrationdate, 0),
           ROLEID: user.uroleid,
+          //LANGUAGE: user.language.replace(/\s+/g, '')
         };
 
         console.log()
@@ -124,7 +127,7 @@ const Signin = () => {
         localStorage.setItem('uaid', user.uaid);
 
         await axios.post(
-          `${baseUrl.Url}/backend/api/SP_UpadateUserLogin`,
+          `${baseUrl.Url}/api/SP_UpadateUserLogin`,
           {
             uaid: user.uaid,
             islogin: true,
@@ -152,6 +155,11 @@ const Signin = () => {
             "BILL",
             "VAPDASH",
             "PRECOOLING",
+            "MASTERS",
+            "DAYEND",
+            "VISITOR",
+            "SHEDULER",
+            "CBILL"
           ].includes(policy)
         );
 
@@ -165,9 +173,8 @@ const Signin = () => {
           case "AUCTION":
             navigate("/AuctionIndex");
             break;
-
           case "PURCHASES":
-            navigate("/purchaseindex");
+            navigate("/AppAdminIndex");
             break;
           case "LEDGER":
             navigate("/LedgerIndex");
@@ -190,6 +197,21 @@ const Signin = () => {
           case "PRECOOLING":
             navigate("/CoolingIndex");
             break;
+          case "MASTERS":
+            navigate("/MasterIndex");
+            break;
+          case "SHEDULER":
+            navigate("/ShedulerIndex");
+            break;
+          case "VISITOR":
+            navigate("/VisitorIndex");
+            break;
+          case "CBILL":
+            navigate("/CropBillIndex");
+            break;
+          case "DAYEND":
+            navigate("/DayEndIndex");
+            break;
           default:
             navigate("/no-access");
             break;
@@ -207,20 +229,22 @@ const Signin = () => {
       <div className="signin-box">
         <div className="signin-left">
           <div className="content-box">
-            <h2 style={{ color: "green" }} className="mb-3">Perfect Market</h2>
-            <h2 style={{ color: "green" }} className="mb-3">Committee</h2>
+            {/* <h2 style={{ color: "green" }} className="mb-3">Perfect Market</h2>
+            <h2 style={{ color: "green" }} className="mb-3">Committee</h2> */}
+            {/* <div className="image-box">
+              <img src="/assets/img/avatar/mrdbs1.png" alt="img" />
+            </div> */}
             <div className="image-box">
-              <img src="assets/img/avatar/SideImage.png" alt="" />
+              <img src="/assets/img/avatar/MyLogo.png" alt="Background" className="background-img" />
             </div>
           </div>
         </div>
-
         <div className="signin-right">
           <div className="login-box">
-            <div className="logo">
+            <div className="logo mb-2">
               <img src="assets/img/avatar/Logo1.png" alt="Logo" />
             </div>
-            <h3>Welcome Back</h3>
+            <h3>स्वागत आहे</h3>
             <li className="nav-item nav-item-box" style={{ display: "none" }}>
               <Link
                 to="#"
@@ -232,7 +256,7 @@ const Signin = () => {
               </Link>
             </li>
 
-            <p>Please login to your account</p>
+            <p>कृपया आपल्या खात्यात लॉगिन करा</p>
             {error && <div style={{ color: "red", marginBottom: "15px" }}>{error}</div>}
             <form onSubmit={handleSignIn}>
               <div className="form-group1 position-relative">
@@ -250,7 +274,7 @@ const Signin = () => {
               <div className="form-group1 password-group position-relative">
                 <input
                   // type="password"
-                  placeholder="Password"
+                  placeholder="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   type={isPasswordVisible ? "text" : "password"}
@@ -277,9 +301,9 @@ const Signin = () => {
               <button type="submit" className="btn btn-login">Sign In</button>
             </form>
 
-            <div className="or-divider">Or Login with</div>
+            {/* <div className="or-divider">Or Login with</div> */}
 
-            <div className="form-sociallink">
+            {/* <div className="form-sociallink">
               <ul className="social-icons d-flex">
                 <li>
                   <Link to="#" className="social-icon facebook-logo">
@@ -297,7 +321,7 @@ const Signin = () => {
               <span>Dont have an account? </span>
               <Link to="/signup" className="bold-link">Sign up</Link>
 
-            </div>
+            </div> */}
 
           </div>
         </div>

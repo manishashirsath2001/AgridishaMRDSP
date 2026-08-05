@@ -435,7 +435,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया वैध तारीख प्रविष्ट करा.",
+                text: "Please enter a valid date.",
             }).then(() => {
                 QDUEDATERef.current?.focus();
             });
@@ -448,7 +448,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "नियुक्त तारीख आजच्या तारखेपेक्षा पुढची असावी",
+                text: "Due Date must be later than today's date.",
             }).then(() => {
                 QDUEDATERef.current?.focus();
             });
@@ -459,7 +459,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया वाहतूक अटी प्रविष्ट करा.",
+                text: "Please enter transport terms.",
             }).then(() => {
                 QTRANSPORTTERMRef.current?.focus();
             });
@@ -470,7 +470,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error",
-                text: "कृपया भरणा अटी प्रविष्ट करा.",
+                text: "Please enter payment terms.",
             }).then(() => {
                 QPAYMENTTERMRef.current?.focus();
             });
@@ -581,13 +581,13 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
 
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्हाला बाहेर पडायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("onprocedquatationEdit");
@@ -789,15 +789,15 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
             // data-bs-dismiss="modal"
             >
                 <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
+                    <div className="modal-content mbgcolor">
 
-                        <div className="modal-body">
-                            <div className="modal-content">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
                                 <div className="page-wrapper-new p-0">
-                                    <div className="content">
+                                    <div className="content mbgcolor">
                                         <div className="modal-header border-0 custom-modal-header">
                                             <div className="page-title">
-                                                <h4>कोटेशन जोडा</h4>
+                                                <h4>Add Quatation</h4>
                                             </div>
                                             <div className="d-flex justify-content-between align-items-center">
                                                 <ul className="table-top-head">
@@ -811,7 +811,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                                 {...(QAMAID ? {} : { "data-bs-toggle": "modal", "data-bs-target": "#addquatation" })}
                                                             >
                                                                 <ArrowLeft className="me-2" />
-                                                                परत जा
+                                                                Back to Editpurchase
                                                             </button>
                                                         </div>
                                                     </li>
@@ -824,7 +824,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                 <div className="row mb-3">
                                                     <div className="col-lg-3 col-md-4 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label required">कोटेशन क्रमांक:</label>
+                                                            <label className="form-label required">Quotation No:</label>
                                                             <input
                                                                 name="QNO"
                                                                 type="text"
@@ -839,7 +839,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
 
                                                     <div className="col-lg-3 col-md-4 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label required">कोटेशन तारीख:</label>
+                                                            <label className="form-label required">Quotation Date:</label>
                                                             <input
                                                                 type="date"
                                                                 name="QDATE"
@@ -853,7 +853,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
 
                                                     <div className="col-lg-3 col-md-4 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label ">रेक्विझिशन क्रमांक:</label>
+                                                            <label className="form-label ">Requisition No:</label>
                                                             <input
                                                                 name="requisition_no"
                                                                 className="form-control"
@@ -866,7 +866,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
 
                                                     <div className="col-lg-3 col-md-4 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label required">कोटेशन वैधता तारीख:</label>
+                                                            <label className="form-label required">Quotation Validity Date:</label>
                                                             <input
                                                                 type="date"
                                                                 name="QDUEDATE"
@@ -888,12 +888,12 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                 <div className="row mb-3 mbgcolor">
                                                     <div className="">
                                                         <h5>
-                                                            <span>विक्रेता तपशील :</span>
+                                                            <span>Vendor Details :</span>
                                                         </h5>
                                                     </div>
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label ">विक्रेता नाव:</label>
+                                                            <label className="form-label ">Vendor Name:</label>
                                                             <input
                                                                 type="text"
                                                                 name="QVAID"
@@ -907,7 +907,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
 
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label ">विक्रेता संपर्क:</label>
+                                                            <label className="form-label ">Vendor Contact:</label>
                                                             <input
                                                                 type="number"
                                                                 name="QVCONTACT"
@@ -921,7 +921,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
 
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label ">विक्रेता ईमेल:</label>
+                                                            <label className="form-label ">Vendor Email:</label>
                                                             <input
                                                                 type="email"
                                                                 name="QVEMAIL"
@@ -935,7 +935,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
 
                                                     <div className="col-lg-3 col-md-3 col-12">
                                                         <div className="form-label">
-                                                            <label className="form-label ">विक्रेता राज्य:</label>
+                                                            <label className="form-label ">Vendor State:</label>
                                                             <Select
                                                                 classNamePrefix="react-select"
                                                                 options={states}
@@ -960,7 +960,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                             >
                                                                 <div className="addproduct-icon">
                                                                     <h5>
-                                                                        <span>बँक तपशील :</span>
+                                                                        <span>Bank Details :</span>
                                                                     </h5>
                                                                 </div>
                                                             </div>
@@ -974,7 +974,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                             <div className="accordion-body">
                                                                 <div className="row">
                                                                     <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                                        <label className="form-label">बँकेचे नाव:</label>
+                                                                        <label className="form-label">Bank Name:</label>
                                                                         <input
                                                                             type="text"
                                                                             className="form-control"
@@ -985,7 +985,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                                     </div>
 
                                                                     <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                                        <label className="form-label">खाते क्रमांक:</label>
+                                                                        <label className="form-label">Account Number:</label>
                                                                         <input
                                                                             type="text"
                                                                             className="form-control"
@@ -996,7 +996,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                                     </div>
 
                                                                     <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                                        <label className="form-label">आयएफएससी कोड:</label>
+                                                                        <label className="form-label">IFSC Code:</label>
                                                                         <input
                                                                             type="text"
                                                                             className="form-control"
@@ -1007,7 +1007,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                                     </div>
 
                                                                     <div className="col-lg-3 col-sm-6 col-12 mb-3">
-                                                                        <label className="form-label">शाखेचे नाव:</label>
+                                                                        <label className="form-label">Branch Name:</label>
                                                                         <input
                                                                             type="text"
                                                                             className="form-control"
@@ -1028,15 +1028,15 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                                 <table className="table table-bordered">
                                                                     <thead className="thead-dark">
                                                                         <tr>
-                                                                            <th className="col-4">उत्पादन</th>
-                                                                            <th className="col-1">HSN कोड</th>
-                                                                            <th className="col-1">प्रमाण</th>
-                                                                            <th className="col-1">माप एकक</th>
-                                                                            <th className="col-1">दर</th>
+                                                                            <th className="col-4">Product</th>
+                                                                            <th className="col-1">HSN Code</th>
+                                                                            <th className="col-1">Quantity</th>
+                                                                            <th className="col-1">UOM</th>
+                                                                            <th className="col-1">Rate</th>
                                                                             <th className="col-1">CGST</th>
                                                                             <th className="col-1">SGST</th>
                                                                             <th className="col-1">IGST</th>
-                                                                            <th className="col-1">एकूण</th>
+                                                                            <th className="col-1">Total</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -1106,7 +1106,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                                     </tbody>
                                                                     <tfoot>
                                                                         <tr>
-                                                                            <td colSpan="9" className="text-end">एकूण:</td>
+                                                                            <td colSpan="9" className="text-end">Total:</td>
                                                                             <td className="col-1">
                                                                                 <span>{totalAmount}</span>
                                                                             </td>
@@ -1119,8 +1119,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="mb-3 form-label">
-                                                        <label className="form-label required">वाहतुकीच्या अटी
-                                                            :</label>
+                                                        <label className="form-label required">Transport Terms:</label>
                                                         <textarea
                                                             rows="5"
                                                             className="form-control"
@@ -1139,13 +1138,13 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                         <div className="row mb-3">
                                                             <div className="addproduct-icon">
                                                                 <h5>
-                                                                    <span>देयक तपशील :</span>
+                                                                    <span>Payment Details :</span>
                                                                 </h5>
                                                             </div>
 
                                                             <div className="col-lg-3 col-md-3 col-12">
                                                                 <div className="form-label">
-                                                                    <label className="form-label ">भरणा देय तारीख:</label>
+                                                                    <label className="form-label ">Payment Due Date:</label>
                                                                     <Select
                                                                         classNamePrefix="react-select"
                                                                         options={paymentDues}
@@ -1161,7 +1160,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                                     {formData.QPDUEDATE === "2" && (
                                                                         <>
                                                                             <div>
-                                                                                <label className="form-label required">दिवसांची संख्या प्रविष्ट करा:</label>
+                                                                                <label className="form-label required">Enter Number of Days:</label>
                                                                             </div>
                                                                             <input
                                                                                 type="number"
@@ -1181,7 +1180,7 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                             </div>
                                                         </div>
                                                         <div className=" form-label">
-                                                            <label className="form-label required">देयक अटी:</label>
+                                                            <label className="form-label required">Payment Terms:</label>
                                                             <textarea
                                                                 rows="5"
                                                                 className="form-control"
@@ -1199,11 +1198,11 @@ function OnEditQuatation({ QAMAID, praid, caid, CSTATE }) {
                                                 <div className="btn-addproduct mb-4 mt-3">
                                                     <button type="button" className="btn btn-cancel me-2"
                                                         onClick={showExitAlert}>
-                                                        बाहेर जाणे
+                                                        Exit
                                                     </button>
 
                                                     <button type="submit" className="btn btn-submit">
-                                                        जतन करा
+                                                        Save
                                                     </button>
                                                 </div>
                                             </form>

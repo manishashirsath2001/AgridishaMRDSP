@@ -16,7 +16,7 @@ const AutoLogout = ({ children }) => {
 
         try {
             if (uaid) {
-                await axios.post(`${baseUrl.Url}/backend/api/SP_UpadateUserLogin`, {
+                await axios.post(`${baseUrl.Url}/api/SP_UpadateUserLogin`, {
                     uaid,
                     islogin: false,
                 });
@@ -35,61 +35,61 @@ const AutoLogout = ({ children }) => {
         timeoutRef.current = setTimeout(() => logout(false), 20 * 60 * 1000); // 20 minutes
     };
 
-    useEffect(() => {
-        const events = ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'];
-        const isSigninPage = location.pathname === '/signin';
+    // useEffect(() => {
+    //     const events = ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'];
+    //     const isSigninPage = location.pathname === '/signin';
 
-        const handleActivity = () => resetTimer();
+    //     const handleActivity = () => resetTimer();
 
-        const handleKeyDown = (e) => {
+    //     const handleKeyDown = (e) => {
 
-            if (e.key === 'Escape') {
-                console.log("Escape key pressed, logout will be blocked.");
-                return;
-            }
+    //         if (e.key === 'Escape') {
+    //             console.log("Escape key pressed, logout will be blocked.");
+    //             return;
+    //         }
 
-            resetTimer();
-        };
+    //         resetTimer();
+    //     };
 
-        events.forEach(event => window.addEventListener(event, handleActivity));
-        if (!isSigninPage) window.addEventListener('keydown', handleKeyDown);
+    //     events.forEach(event => window.addEventListener(event, handleActivity));
+    //     if (!isSigninPage) window.addEventListener('keydown', handleKeyDown);
 
-        // Start inactivity timer
-        resetTimer();
+    //     // Start inactivity timer
+    //     resetTimer();
 
-        // Heartbeat every 30s
-        const heartbeat = setInterval(() => {
-            const uaid = localStorage.getItem('uaid');
-            if (uaid) {
-                axios.post(`${baseUrl.Url}/backend/api/UpdateHeartbeat`, {
-                    uaid,
-                    lastActivity: new Date().toISOString()
-                }).catch(err => console.error("❌ Heartbeat error:", err));
-            }
-        }, 30000);
+    //     // Heartbeat every 30s
+    //     // const heartbeat = setInterval(() => {
+    //     //     const uaid = localStorage.getItem('uaid');
+    //     //     if (uaid) {
+    //     //         axios.post(`${baseUrl.Url}/backend/api/UpdateHeartbeat`, {
+    //     //             uaid,
+    //     //             lastActivity: new Date().toISOString()
+    //     //         }).catch(err => console.error("❌ Heartbeat error:", err));
+    //     //     }
+    //     // }, 30000);
 
-        // Session check every 15s
-        const sessionValidator = setInterval(() => {
-            const uaid = localStorage.getItem('uaid');
-            if (uaid) {
-                axios.post(`${baseUrl.Url}/backend/api/GET_CheckUserSession`, { uaid })
-                    .then(res => {
-                        if (res.data[0]?.islogin === false) {
-                            console.warn("⚠️ Session invalid — user logged in somewhere else.");
-                            logout(false);
-                        }
-                    }).catch(console.error);
-            }
-        }, 15000);
+    //     // Session check every 15s
+    //     const sessionValidator = setInterval(() => {
+    //         const uaid = localStorage.getItem('uaid');
+    //         if (uaid) {
+    //             axios.post(`${baseUrl.Url}api/GET_CheckUserSession`, { uaid })
+    //                 .then(res => {
+    //                     if (res.data[0]?.islogin === false) {
+    //                         console.warn("⚠️ Session invalid — user logged in somewhere else.");
+    //                         logout(false);
+    //                     }
+    //                 }).catch(console.error);
+    //         }
+    //     }, 15000);
 
-        return () => {
-            events.forEach(event => window.removeEventListener(event, handleActivity));
-            window.removeEventListener('keydown', handleKeyDown);
-            clearTimeout(timeoutRef.current);
-            clearInterval(heartbeat);
-            clearInterval(sessionValidator);
-        };
-    }, [location.pathname]);
+    //     return () => {
+    //         events.forEach(event => window.removeEventListener(event, handleActivity));
+    //         window.removeEventListener('keydown', handleKeyDown);
+    //         clearTimeout(timeoutRef.current);
+    //         // clearInterval(heartbeat);
+    //         clearInterval(sessionValidator);
+    //     };
+    // }, [location.pathname]);
 
     // useEffect(() => {
     //     let visibilityTimer = null;
@@ -219,7 +219,7 @@ const AutoLogout = ({ children }) => {
             if (uaid) {
                 console.log("🔓 Navigated to /signin — logging out user");
 
-                axios.post(`${baseUrl.Url}/backend/api/SP_UpadateUserLogin`, {
+                axios.post(`${baseUrl.Url}/api/SP_UpadateUserLogin`, {
                     uaid,
                     islogin: false,
                 })
@@ -261,7 +261,7 @@ const AutoLogout = ({ children }) => {
         if (isReload) {
             console.log("🔁 Page reloaded — marking user as logged in again on backend.");
 
-            axios.post(`${baseUrl.Url}/backend/api/SP_UpadateUserLogin`, {
+            axios.post(`${baseUrl.Url}/api/SP_UpadateUserLogin`, {
                 uaid,
                 islogin: true,
             })

@@ -147,8 +147,8 @@ function GoodReciptNote() {
     const columns = [
         {
             title: (
-                <OverlayTrigger placement="top" overlay={<Tooltip >विक्रेत्याचे नाव</Tooltip>}>
-                    <div className="text-center">विक्रेत्याचे नाव</div>
+                <OverlayTrigger placement="top" overlay={<Tooltip >VenderName</Tooltip>}>
+                    <div className="text-center">VenderName</div>
                 </OverlayTrigger>
             ),
             dataIndex: "vendorname",
@@ -158,7 +158,7 @@ function GoodReciptNote() {
         },
         {
             title: (
-                <div className="text-center">तपासणारे</div>
+                <div className="text-center">InspectedBy</div>
             ),
             dataIndex: "grninspectedby",
             render: (text) => <div style={{ textAlign: "left" }}>{text}</div>,
@@ -166,7 +166,7 @@ function GoodReciptNote() {
         },
         {
             title: (
-                <div className="text-center">चालान क्र.</div>
+                <div className="text-center">Challan No</div>
             ),
             dataIndex: "grnchallanno",
             render: (text) => <div style={{ textAlign: "left" }}>{text}</div>,
@@ -174,7 +174,7 @@ function GoodReciptNote() {
         },
         {
             title: (
-                <div className="text-center">चलनाची तारीख </div>
+                <div className="text-center">Challan Date</div>
             ),
             dataIndex: "grnchallandate",
             sorter: (a, b) => a.length.Status - b.length.Status,
@@ -183,7 +183,7 @@ function GoodReciptNote() {
         },
         {
             title: (
-                <div className="text-center">जीआरएनची तारीख</div>
+                <div className="text-center">GRN Date</div>
             ),
             dataIndex: "grndate",
             sorter: (a, b) => a.length.Date - b.length.Date,
@@ -192,7 +192,7 @@ function GoodReciptNote() {
         },
         {
             title: (
-                <div className="text-center">क्रिया </div>
+                <div className="text-center">Action</div>
             ),
             dataIndex: "action",
             render: (_, record) => (
@@ -271,19 +271,19 @@ function GoodReciptNote() {
 
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: 'तुला खात्री आहे का?',
-            text: 'तुम्ही हे परत करू शकणार नाही!',
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
             showCancelButton: true,
             confirmButtonColor: '#00ff00',
-            confirmButtonText: 'हो, ते हटवा!',
+            confirmButtonText: 'Yes, delete it!',
             cancelButtonColor: '#ff0000',
-            cancelButtonText: 'रद्द करा',
+            cancelButtonText: 'Cancel',
         }).then((result) => {
             if (result.isConfirmed) {
 
                 MySwal.fire({
-                    title: 'हटवले!',
-                    text: 'तुमची फाइल हटवली गेली आहे.',
+                    title: 'Deleted!',
+                    text: 'Your file has been deleted.',
                     className: "btn btn-success",
                     confirmButtonText: 'OK',
                     customClass: {
@@ -397,8 +397,7 @@ function GoodReciptNote() {
                         <div className="page-header transfer">
                             <div className="add-item d-flex">
                                 <div className="page-title">
-                                    <h4>खरेदी यादी</h4>
-                                    <h6>तुमच्या खरेदीचे व्यवस्थापन करा</h6>
+                                    <h4>Good Recepite Note</h4>
                                 </div>
                             </div>
                             <ul className="table-top-head">
@@ -461,13 +460,13 @@ function GoodReciptNote() {
                                         data-bs-target="#AddGRN"
                                     >
                                         <PlusCircle className="me-2" />
-                                        वस्तू प्राप्ती नोंद जोडा
+                                        Add Good Recipt Note
                                     </Link>
                                 </div>
                                 <div className="page-btn">
                                     <Link to={route.PurchaseIndex} className="btn btn-secondary">
                                         <ArrowLeft className="me-2" />
-                                        सूचीवर परत जा
+                                        Back to Index
                                     </Link>
                                 </div>
                             </div>

@@ -178,7 +178,7 @@ const ChallanReturn = () => {
 
     const columns = [
         {
-            title: "चलान क्रमांक",
+            title: "Challan Number",
             dataIndex: "pbno",
             render: (text) => (
                 <OverlayTrigger
@@ -194,7 +194,7 @@ const ChallanReturn = () => {
         {
             title: () => (
                 <OverlayTrigger placement="top" overlay={renderUOMTooltip}>
-                    <span>व्यवहार क्रमांक</span>
+                    <span>Transaction Number</span>
                 </OverlayTrigger>
             ),
             dataIndex: "potrnno",
@@ -211,7 +211,7 @@ const ChallanReturn = () => {
         {
             title: () => (
                 <OverlayTrigger placement="top" overlay={renderQuantityTooltip}>
-                    <span>व्यवहार तारीख</span>
+                    <span>Transaction Date</span>
                 </OverlayTrigger>
             ),
             dataIndex: "prdate",
@@ -226,7 +226,7 @@ const ChallanReturn = () => {
 
         },
         {
-            title: "विक्रेता",
+            title: "Vendor",
             dataIndex: "vendorname",
             render: (text) => (
                 <OverlayTrigger
@@ -243,7 +243,7 @@ const ChallanReturn = () => {
         {
             title: () => (
                 <OverlayTrigger placement="top" overlay={renderActionsTooltip}>
-                    <span>क्रिया</span>
+                    <span>Actions</span>
                 </OverlayTrigger>
             ),
             dataIndex: "actions",
@@ -282,18 +282,18 @@ const ChallanReturn = () => {
     const MySwal = withReactContent(Swal);
     const showConfirmationAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्ही हे परत करू शकणार नाही!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय, हे हटवा!",
+            confirmButtonText: "Yes, delete it!",
             cancelButtonColor: "#ff0000",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
                 MySwal.fire({
-                    title: "हटवले!",
-                    text: "तुमची फाइल हटवली गेली आहे.",
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
                     className: "btn btn-success",
                     confirmButtonText: "OK",
                     customClass: {
@@ -407,8 +407,8 @@ const ChallanReturn = () => {
                 <div className="content">
                     <div className="page-header">
                         <div className="page-title me-auto">
-                            <h4>चलान परतावा</h4>
-                            <h6>चलान परतावा व्यवस्थापित करा</h6>
+                            <h4>Challan Return</h4>
+                            <h6>Manage Challan Return</h6>
                         </div>
                         <ul className="table-top-head">
                             <li>
@@ -468,13 +468,13 @@ const ChallanReturn = () => {
                                 data-bs-toggle="modal"
                                 data-bs-target="#Challlanreturn">
                                 <PlusCircle className="me-2" />
-                                नवीन खरेदी परतावा जोडा
+                                Add New Purchase Return
                             </Link>
                         </div>
                         <div className="page-btn">
                             <Link to={route.ReturnIndex} className="btn btn-secondary">
                                 <ArrowLeft className="me-2" />
-                                सूचिके कडे परत जा
+                                Back to Index
                             </Link>
                         </div>
                     </div>

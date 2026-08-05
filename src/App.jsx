@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import AllRoutes from "./Router/router.jsx";
 import AutoLogoout from "./InitialPage/Sidebar/AutoLogoout.jsx";
-import NetworkStatus from "./InitialPage/Sidebar/NetworkStatus1.jsx";
+// import NetworkStatus from "./InitialPage/Sidebar/NetworkStatus1.jsx";
+import GoogleTranslate from "./InitialPage/Sidebar/GoogleTranslate.jsx";
 
 const rootElement = document.getElementById("root");
 
@@ -15,9 +16,10 @@ if (rootElement) {
     <React.StrictMode>
       <Provider store={store}>
         <BrowserRouter>
-          <NetworkStatus />
+          {/* <NetworkStatus /> */}
           <AutoLogoout>
             <AllRoutes />
+            <GoogleTranslate />
           </AutoLogoout>
         </BrowserRouter>
 

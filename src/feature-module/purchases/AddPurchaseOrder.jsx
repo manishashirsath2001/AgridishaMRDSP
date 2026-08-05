@@ -59,13 +59,13 @@ function AddPurchaseOrder() {
     const MySwal = withReactContent(Swal);
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला बाहेर पडायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 const modal = document.getElementById("AddPurchaseorder");
@@ -108,14 +108,14 @@ function AddPurchaseOrder() {
                 aria-hidden="true"
             >
                 <div className="modal-dialog modal-fullscreen">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div className="modal-content">
-                                <div className="page-wrapper-new p-0">
-                                    <div className="content">
+                    <div className="modal-content mbgcolor">
+                        <div className="modal-body mbgcolor">
+                            <div className="modal-content mbgcolor">
+                                <div className="page-wrapper-new p-0 mbgcolor">
+                                    <div className="content mbgcolor">
                                         <div className="modal-header border-0 custom-modal-header">
                                             <div className="page-title">
-                                                <h4>खरेदी संपादित करा</h4>
+                                                <h4>Edit Purchase</h4>
                                             </div>
                                             <div className="d-flex justify-content-between align-items-center">
                                                 <ul className="table-top-head">
@@ -126,7 +126,7 @@ function AddPurchaseOrder() {
                                                                 // data-bs-dismiss="modal"
                                                                 onClick={showExitAlert}>
                                                                 <ArrowLeft className="me-2" />
-                                                                परत खरेदी ऑर्डर
+                                                                Back to Purchase Order
                                                             </button>
                                                         </div>
                                                     </li>
@@ -171,7 +171,7 @@ function AddPurchaseOrder() {
                                                                 className="btn btn-primary ms-3 mt-1 mt-sm-0"
                                                                 onClick={() => OnSearchClick(searchQuery)}
                                                             >
-                                                                शोधणे
+                                                                Search
                                                             </button>
                                                         </div>
                                                     </div>
@@ -180,53 +180,55 @@ function AddPurchaseOrder() {
 
                                                 {/* Conditionally render the table based on searchQuery */}
                                                 {searchQuery && (
-                                                    <div className="col-lg-12">
-                                                        <div className="modal-body-table">
-                                                            <div className="table-responsive">
-                                                                <table className="table datanew">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>विक्रेत्याचे नाव</th>
-                                                                            <th>विक्रेता संपर्क क्रमांक</th>
-                                                                            <th>कोटेशन तारीख</th>
-                                                                            <th>कोटेशन अंतिम तारीख </th>
-                                                                            <th>क्रिया</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        {Quatetions?.length > 0 ? (
-                                                                            Quatetions?.map((vendor, index) => (
-                                                                                <tr key={index}>
-                                                                                    <td>{vendor.vendorname}</td>
-                                                                                    <td>{vendor.qvcontact}</td>
-                                                                                    <td>{vendor.qdate}</td>
-                                                                                    <td>{vendor.qduedate}</td>
-                                                                                    {/* <td>{vendor.status}</td> */}
-                                                                                    {/* <td>
+                                                    <div className="border p-3 rounded shadow-sm mt-2">
+                                                        <div className="col-lg-12">
+                                                            <div className="modal-body-table overflow-auto max-vh-100" >
+                                                                <div className="table-responsive" style={{ height: "calc(40vh - 120px)" }}>
+                                                                    <table className="table table-bordered table-sm">
+                                                                        <thead className="thead-dark" style={{ position: 'sticky', top: 0, zIndex: 1, backgroundColor: '#343a40' }}>
+                                                                            <tr>
+                                                                                <th>Vendor Name</th>
+                                                                                <th>Vendor Contact Number</th>
+                                                                                <th>Quotation Date</th>
+                                                                                <th>Quotation Due Date</th>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {Quatetions?.length > 0 ? (
+                                                                                Quatetions?.map((vendor, index) => (
+                                                                                    <tr key={index}>
+                                                                                        <td>{vendor.vendorname}</td>
+                                                                                        <td>{vendor.qvcontact}</td>
+                                                                                        <td>{vendor.qdate}</td>
+                                                                                        <td>{vendor.qduedate}</td>
+                                                                                        {/* <td>{vendor.status}</td> */}
+                                                                                        {/* <td>
                                                                                         <Link className="me-2 p-2" to="#" data-bs-toggle="modal" data-bs-target="#add-units">
                                                                                             <i data-feather="eye" className="feather-eye"></i>
                                                                                         </Link>
                                                                                     </td> */}
-                                                                                    <td>
-                                                                                        <Link
-                                                                                            to="#"
-                                                                                            className="btn btn-added"
-                                                                                            data-bs-toggle="modal"
-                                                                                            data-bs-target="#onproceedorder"
-                                                                                            onClick={() => onVendorEditClick(vendor.qvaid, vendor.qamaid)}
-                                                                                        >
-                                                                                            <Eye className="feather-view" />
-                                                                                        </Link>
-                                                                                    </td>
+                                                                                        <td>
+                                                                                            <Link
+                                                                                                to="#"
+                                                                                                className="btn btn-added"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#onproceedorder"
+                                                                                                onClick={() => onVendorEditClick(vendor.qvaid, vendor.qamaid)}
+                                                                                            >
+                                                                                                <Eye className="feather-view" />
+                                                                                            </Link>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                ))
+                                                                            ) : (
+                                                                                <tr>
+                                                                                    <td colSpan="6">No vendors found</td>
                                                                                 </tr>
-                                                                            ))
-                                                                        ) : (
-                                                                            <tr>
-                                                                                <td colSpan="6">कोणतेही विक्रेता आढळले नाहीत</td>
-                                                                            </tr>
-                                                                        )}
-                                                                    </tbody>
-                                                                </table>
+                                                                            )}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -240,10 +242,10 @@ function AddPurchaseOrder() {
                                                             // data-bs-dismiss="modal"
                                                             onClick={showExitAlert}
                                                         >
-                                                            बाहेर
+                                                            Exit
                                                         </button>
                                                         <Link to="#" className="btn btn-submit">
-                                                            जतन करा
+                                                            Save
                                                         </Link>
                                                     </div>
                                                 </div>

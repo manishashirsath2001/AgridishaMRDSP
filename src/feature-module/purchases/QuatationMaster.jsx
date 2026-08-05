@@ -141,7 +141,7 @@ function QuatationMaster() {
         {
             title: (
                 <OverlayTrigger placement="top" overlay={<Tooltip id="Member_Name-tooltip">Quotation No</Tooltip>}>
-                    <span>कोटेशन क्रमांक</span>
+                    <span>Quotation No</span>
                 </OverlayTrigger>
             ),
             dataIndex: "qno",
@@ -149,7 +149,7 @@ function QuatationMaster() {
         {
             title: (
                 <OverlayTrigger placement="top" overlay={<Tooltip id="Member_Cantact-tooltip">Quotation Date</Tooltip>}>
-                    <span>कोटेशन तारीख</span>
+                    <span>Quotation Date</span>
                 </OverlayTrigger>
             ),
             dataIndex: "qdate",
@@ -158,7 +158,7 @@ function QuatationMaster() {
         {
             title: (
                 <OverlayTrigger placement="top" overlay={<Tooltip id="Member_Cantact-tooltip">Vendor Name</Tooltip>}>
-                    <span>भरणा कालावधी</span>
+                    <span>Payment Duration</span>
                 </OverlayTrigger>
             ),
             dataIndex: "qpduedate",
@@ -167,7 +167,7 @@ function QuatationMaster() {
         {
             title: (
                 <OverlayTrigger placement="top" overlay={<Tooltip id="Member_Email-tooltip">Quotation Due Date</Tooltip>}>
-                    <span>कोटेशन देय तारीख</span>
+                    <span>Quotation Due Date</span>
                 </OverlayTrigger>
             ),
             dataIndex: "qduedate",
@@ -177,7 +177,7 @@ function QuatationMaster() {
             title: (
                 <div className="d-flex justify-content-center">
                     <OverlayTrigger placement="top" overlay={<Tooltip id="action-tooltip">Action</Tooltip>}>
-                        <span>कृती</span>
+                        <span>Action</span>
                     </OverlayTrigger>
                 </div>
             ),
@@ -525,14 +525,14 @@ function QuatationMaster() {
                                 data-bs-target="#addquatation"
                             >
                                 <PlusCircle className="me-2 iconsize" />
-                                कोटेशन जोडा
+                                Add Quotation
                             </button>
 
                         </div>
                         <div className="page-btn">
                             <Link to={route.PurchaseIndex} className="btn btn-secondary">
                                 <ArrowLeft className="me-2" />
-                                सूचीकडे परत जा
+                                Back to Index
                             </Link>
                         </div>
                     </div>

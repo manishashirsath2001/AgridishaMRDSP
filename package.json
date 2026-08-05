@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && powershell -ExecutionPolicy Bypass -File c:\\Users\\LENOVO\\Desktop\\Manisha Update\\AGRIDISHA(2 aug 2025)\\AGRIDISHA\\deploy.ps1",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -23,6 +23,7 @@
     "@hello-pangea/dnd": "^17.0.0",
     "@react-latest-ui/react-sticky-notes": "^0.2.6",
     "@reduxjs/toolkit": "^2.6.1",
+    "@vitalets/google-translate-api": "^9.2.1",
     "antd": "^5.22.7",
     "apexcharts": "^4.3.0",
     "axios": "^1.9.0",

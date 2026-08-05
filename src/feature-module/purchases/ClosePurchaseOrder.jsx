@@ -49,7 +49,7 @@ function ClosePurchaseOrder() {
                     <div className="page-header">
                         <div className="add-item d-flex">
                             <div className="page-title">
-                                <h3>खरेदी आदेश</h3>
+                                <h3>Purchase Order</h3>
 
                             </div>
                         </div>
@@ -108,14 +108,14 @@ function ClosePurchaseOrder() {
                                     data-bs-target="#AddPurchaseorder"
                                 >
 
-                                    खरेदी आदेश बदला
+                                    Edit Purchase Order
                                 </Link>
                             </div>
                         </div>
                         <div className="page-btn">
                             <Link to={route.PurchaseIndex} className="btn btn-secondary">
                                 <ArrowLeft className="me-2" />
-                                सूचिके कडे परत जा
+                                Back to Index
                             </Link>
                         </div>
                     </div>

@@ -245,9 +245,9 @@ const PickupChallan = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">चलान क्र.</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Challan No</Tooltip>}
                 >
-                    <div>चलान क्र.</div>
+                    <div>Challan No</div>
                 </OverlayTrigger>
             ),
             dataIndex: "pctrnno",
@@ -266,9 +266,9 @@ const PickupChallan = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">चलान तारीख</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Challan Date</Tooltip>}
                 >
-                    <div className="text-center">चलान तारीख</div>
+                    <div className="text-center">Challan Date</div>
                 </OverlayTrigger>
             ),
             dataIndex: "pcdate",
@@ -286,9 +286,9 @@ const PickupChallan = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">पुरवठ्याचे ठिकाण</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Place of Supply</Tooltip>}
                 >
-                    <div>पुरवठ्याचे ठिकाण</div>
+                    <div>Place of Supply</div>
                 </OverlayTrigger>
             ),
             dataIndex: "statename",
@@ -306,9 +306,9 @@ const PickupChallan = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">विक्रेता नाव</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Vendor Name</Tooltip>}
                 >
-                    <div>विक्रेता नाव</div>
+                    <div>Vendor Name</div>
                 </OverlayTrigger>
             ),
             dataIndex: "vendorname",
@@ -346,9 +346,9 @@ const PickupChallan = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">निर्धारित रक्कम</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Net Amount</Tooltip>}
                 >
-                    <div className="text-center">निर्धारित रक्कम</div>
+                    <div className="text-center">Net Amount</div>
                 </OverlayTrigger>
             ),
             dataIndex: "pcnamt",
@@ -366,9 +366,9 @@ const PickupChallan = () => {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">क्रिया</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Action</Tooltip>}
                 >
-                    <div className="text-center">क्रिया</div>
+                    <div className="text-center">Action</div>
                 </OverlayTrigger>
             ),
             dataIndex: "action",
@@ -417,13 +417,13 @@ const PickupChallan = () => {
     const MySwal = withReactContent(Swal);
     const showConfirmationAlert = (pcaid) => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्ही हे मागे करू शकणार नाही!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय, हे हटवा!",
+            confirmButtonText: "Yes, delete it!",
             cancelButtonColor: "#ff0000",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
                 OndeletePurchaseChallan(pcaid)
@@ -641,8 +641,8 @@ const PickupChallan = () => {
                 <div className="page-header">
                     <div className="add-item d-flex">
                         <div className="page-title">
-                            <h3>चलान उचलावे</h3>
-                            <h6>चलान व्यवस्थापित करा</h6>
+                            <h3>Pick Up Challan</h3>
+                            <h6>Manage Challan</h6>
                         </div>
                     </div>
                     <ul className="table-top-head">
@@ -702,7 +702,7 @@ const PickupChallan = () => {
                             data-bs-target="#EditPurchasechallan"
                         >
                             <PlusCircle className="me-2" />
-                            नवीन पिकअप चलान जोडा
+                            Add New Pickup Challan
                         </Link>
                     </div>
 
@@ -711,33 +711,33 @@ const PickupChallan = () => {
                     <div className="page-btn">
                         <Link to={route.ChallanIndex} className="btn btn-secondary">
                             <ArrowLeft className="me-2" />
-                            परत जा
+                            Back to Index
                         </Link>
                     </div>
                 </div>
 
-
+                <div className="search-container mb-3">
+                    <div className="row">
+                        <div className="col-lg-6 col-12 ms-auto">
+                            <div className="input-group">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Search"
+                                    value={searchQuery}
+                                    onChange={handleSearch}
+                                />
+                                <span className="input-group-text">
+                                    <i className="fa fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="card table-list-card">
                     <div className="card-body">
                         {/* /Filter */}
-                        <div className="search-container mb-3">
-                            <div className="row">
-                                <div className="col-lg-6 col-12 ms-auto">
-                                    <div className="input-group">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Search"
-                                            value={searchQuery}
-                                            onChange={handleSearch}
-                                        />
-                                        <span className="input-group-text">
-                                            <i className="fa fa-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <div className="table-responsive">
                             <Table columns={columns} dataSource={challandata} />
                         </div>

@@ -49,7 +49,7 @@ const Sidebar = () => {
       </div>
 
       {/* Masters Section */}
-      <div className="submenu-items">
+      {/* <div className="submenu-items">
         <div className="submenu-item">
           <Link to="/testindex" onClick={() => toggleSubmenu("masters")} className="menu-link">
             <div className="menu-text">
@@ -68,7 +68,7 @@ const Sidebar = () => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
 
       {/* Company Section */}
       <div className="submenu-items">
@@ -92,7 +92,7 @@ const Sidebar = () => {
       </div>
 
       {/* Purchases Section */}
-      <div className="submenu-items">
+      {/* <div className="submenu-items">
         <div className="submenu-item">
           <Link to="/purchaseindex" onClick={() => toggleSubmenu("purchases")} className="menu-link">
             <div className="menu-text">
@@ -110,7 +110,7 @@ const Sidebar = () => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
 
       {/* Sales Section */}
       <div className="submenu-items">
@@ -173,8 +173,8 @@ const Sidebar = () => {
         </div>
       </div>
 
-       {/* HRM Section */}
-       <div className="submenu-items">
+      {/* HRM Section */}
+      <div className="submenu-items">
         <div className="submenu-item">
           <Link to="/hrmindex" onClick={() => toggleSubmenu("hrm")} className="menu-link">
             <div className="menu-text">

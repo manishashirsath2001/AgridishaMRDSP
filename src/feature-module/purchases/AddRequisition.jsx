@@ -730,14 +730,14 @@ function AddRequisition() {
 
             } else {
                 Swal.fire({
-                    title: "तुला खात्री आहे का?",
-                    text: "तुम्ही हे परत करू शकणार नाही",
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#d33",
                     cancelButtonColor: "#3085d6",
-                    confirmButtonText: "होय, हे हटवा!",
-                    cancelButtonText: "रद्द करा",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "Cancel",
                 }).then((result) => {
                     if (result.isConfirmed) {
                         setTableData((prevData) =>
@@ -897,7 +897,7 @@ function AddRequisition() {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error of Enquiry Number",
-                text: "चौकशी क्रमांक फक्त १० अंकांचा असावा. रिकाम्या जागा, अक्षरे किंवा चिन्हे स्वीकारली जाणार नाहीत.",
+                text: "Enquiry Number must contain only 10 Digits. do not accept spaces and characters and symbols",
             })
             return;
         }
@@ -907,7 +907,7 @@ function AddRequisition() {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error of Vendor",
-                text: "कृपया एक विक्रेता निवडा.",
+                text: "Please select a Vendor",
             })
             return false;
         }
@@ -917,7 +917,7 @@ function AddRequisition() {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error of Narration",
-                text: "वर्णनाची सुरुवात रिकाम्या जागेने होऊ नये, आणि त्यात फक्त अक्षरे, अंक, रिकाम्या जागा व सामान्य विरामचिन्हे (.,'-) असावीत",
+                text: "Narration must not start with a space, can only include letters, numbers, spaces, and basic punctuation (.,'-).",
             })
             return;
         }
@@ -927,7 +927,7 @@ function AddRequisition() {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error of expecteddate",
-                text: "कृपया अपेक्षित तारीख निवडा.",
+                text: "please select Expected Date",
             })
             return;
         }
@@ -939,7 +939,7 @@ function AddRequisition() {
                 Swal.fire({
                     icon: "error",
                     title: "Validation Error of Meeting Date",
-                    text: "बैठकीची तारीख अपेक्षित तारखेपेक्षा मोठी असावी.",
+                    text: "Meeting Date must be Greater than the Expected Date.",
                 });
                 return;
             }
@@ -950,7 +950,7 @@ function AddRequisition() {
             Swal.fire({
                 icon: "error",
                 title: "Validation Error of Terms And Condition",
-                text: "अटी व शर्तींची सुरुवात रिकाम्या जागेने होऊ नये आणि त्यामध्ये फक्त अक्षरे, अंक, रिकाम्या जागा आणि सामान्य विरामचिन्हे (.,'-) असावीत.",
+                text: "Terms And Condition must not start with a space and only include letters, numbers, spaces, and basic punctuation (.,'-).",
             })
             return;
         }
@@ -1052,13 +1052,13 @@ function AddRequisition() {
                 return;
             }
             const result = await MySwal.fire({
-                title: "तुला खात्री आहे का?",
-                text: "तुम्हाला हे डेटा जतन करायचा आहे का?",
+                title: "Are you sure?",
+                text: "Do you want to save this data?",
                 showCancelButton: true,
                 confirmButtonColor: "#00ff00",
-                confirmButtonText: "जतन करा",
+                confirmButtonText: "SAVE",
                 cancelButtonColor: "#092C4C",
-                cancelButtonText: "रद्द करा",
+                cancelButtonText: "CANCEL",
             });
 
             if (!result.isConfirmed) return;
@@ -1078,13 +1078,13 @@ function AddRequisition() {
 
     const showExitAlert = () => {
         MySwal.fire({
-            title: "तुला खात्री आहे का?",
-            text: "तुम्हाला बाहेर जायचं आहे का?",
+            title: "Are you sure?",
+            text: "Do you want to Exit?",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय",
+            confirmButtonText: "YES",
             cancelButtonColor: "#092C4C",
-            cancelButtonText: "नाही",
+            cancelButtonText: "NO",
         }).then((result) => {
             if (result.isConfirmed) {
                 navigate(route.RequisitionMaster)
@@ -1098,8 +1098,8 @@ function AddRequisition() {
                 <div className="page-header">
                     <div className="add-item d-flex">
                         <div className="page-title">
-                            <h4>खरेदी विनंती/चौकशी</h4>
-                            <h6>खरेदी विनंती/चौकशी तयार करा</h6>
+                            <h4>Purchase Requisition/Enquiry</h4>
+                            <h6>Create Purchase Requisition/Enquiry</h6>
                         </div>
                     </div>
                     <ul className="table-top-head">
@@ -1123,7 +1123,7 @@ function AddRequisition() {
                     <div className="page-btn">
                         <Link className="btn btn-secondary" onClick={showExitAlert}>
                             <ArrowLeft className="me-2" />
-                            विनंती कडे परत
+                            Back to Requisition
                         </Link>
                     </div>
                 </div>
@@ -1131,7 +1131,7 @@ function AddRequisition() {
                 {/* /add */}
                 <form onSubmit={handleSubmit}>
                     <div className="card mbgcolor">
-                        <div className="card-body add-product pb-0 ">
+                        <div className="card-body add-product pb-0 mbgcolor">
 
                             <div
                                 className="accordion-card-one accordion"
@@ -1149,7 +1149,7 @@ function AddRequisition() {
                                                 <h5 >
                                                     <Info className="add-info" />
 
-                                                    <span>खरेदी विनंती/चौकशी (मास्टर)</span>
+                                                    <span>Purchase Requisition/Enquiry(Master)</span>
                                                 </h5>
                                                 <Link to="#">
                                                     <ChevronDown className="chevron-down-add" />
@@ -1168,7 +1168,7 @@ function AddRequisition() {
                                             <div className="row">
                                                 <div className="col-lg-3 col-sm-6 col-12">
                                                     <div className="mb-3">
-                                                        <label className="form-label required">रेक्विझिशन क्रमांक</label>
+                                                        <label className="form-label required">Requisition Number</label>
                                                         <input
                                                             type="text"
                                                             className="form-control"
@@ -1183,7 +1183,7 @@ function AddRequisition() {
                                                 </div>
                                                 <div className="col-lg-3 col-sm-6 col-12">
                                                     <div className="mb-3">
-                                                        <label className="form-label required">चौकशी क्रमांक</label>
+                                                        <label className="form-label required">Enquiry Number</label>
                                                         <input
                                                             type="text"
                                                             className="form-control"
@@ -1201,7 +1201,7 @@ function AddRequisition() {
                                                 </div>
                                                 <div className="col-lg-3 col-sm-6 col-12">
                                                     <div className="mb-3">
-                                                        <label className="form-label required">रेक्विझिशन तारीख</label>
+                                                        <label className="form-label required">Requisition Date</label>
                                                         <input
                                                             type="date"
                                                             className="form-control"
@@ -1217,7 +1217,7 @@ function AddRequisition() {
                                             <div className="row">
                                                 <div className="col-lg-12 col-sm-6 col-12">
                                                     <div className="mb-3">
-                                                        <label className="form-label">वर्ग</label>
+                                                        <label className="form-label">Category</label>
                                                         <Select
                                                             classNamePrefix="react-select"
                                                             options={category}
@@ -1233,7 +1233,7 @@ function AddRequisition() {
                                             <div className="row">
                                                 <div className="col-lg-12 col-sm-6 col-12">
                                                     <div className="mb-3">
-                                                        <label className="form-label required">विक्रेता</label>
+                                                        <label className="form-label required">Seller/Vendor</label>
                                                         <Select
                                                             classNamePrefix="react-select"
                                                             options={vendor}
@@ -1248,7 +1248,7 @@ function AddRequisition() {
 
                                                 <div className="col-lg-12 col-sm-6 col-12">
                                                     <div className="mb-3">
-                                                        <label className="form-label required">वर्णन</label>
+                                                        <label className="form-label required">Narration</label>
                                                         <textarea
                                                             type="text"
                                                             rows={4}
@@ -1289,11 +1289,11 @@ function AddRequisition() {
                                             <table className="table table-bordered">
                                                 <thead className="thead-dark">
                                                     <tr>
-                                                        <th className="col-3">उत्पादन</th>
-                                                        <th className="col-1">HSN कोड</th>
-                                                        <th className="col-1">प्रमाण</th>
-                                                        <th className="col-1">माप युनिट</th>
-                                                        <th className="col-1 text-center" >क्रिया</th>
+                                                        <th className="col-3">Product</th>
+                                                        <th className="col-1">HSN Code</th>
+                                                        <th className="col-1">Quantity</th>
+                                                        <th className="col-1">UOM</th>
+                                                        <th className="col-1 text-center" >Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -1362,7 +1362,7 @@ function AddRequisition() {
                                         <div className="row align-items-end">
                                             <div className="col-lg-8 col-sm-6 col-12">
                                                 <div className="mb-3">
-                                                    <label className="form-label required">उत्पादन</label>
+                                                    <label className="form-label required">Product</label>
                                                     <Select
                                                         classNamePrefix="react-select"
                                                         options={product}
@@ -1374,7 +1374,7 @@ function AddRequisition() {
                                             </div>
                                             <div className="col-lg-4 col-sm-6 col-12">
                                                 <div className="mb-3">
-                                                    <label className="form-label">HSN कोड</label>
+                                                    <label className="form-label">HSN Code</label>
                                                     <input
                                                         type="text"
                                                         className="form-control"
@@ -1388,7 +1388,7 @@ function AddRequisition() {
                                         <div className="row">
                                             <div className="col-lg-12 col-sm-6 col-12">
                                                 <div className="mb-3">
-                                                    <label className="form-label required">उत्पादन वर्णन</label>
+                                                    <label className="form-label required">Product Description</label>
                                                     <textarea
                                                         type="text"
                                                         className="form-control"
@@ -1405,7 +1405,7 @@ function AddRequisition() {
                                         <div className="row">
                                             <div className="col-lg-3 col-sm-6 col-12">
                                                 <div className="mb-3">
-                                                    <label className="form-label required">प्रमाण</label>
+                                                    <label className="form-label required">Quantity</label>
                                                     <input
                                                         type="text"
                                                         className="form-control"
@@ -1419,7 +1419,7 @@ function AddRequisition() {
 
                                             <div className="col-lg-3 col-sm-6 col-12">
                                                 <div className="mb-3">
-                                                    <label className="form-label required">माप युनिट</label>
+                                                    <label className="form-label required">UOM</label>
                                                     <Select
                                                         classNamePrefix="react-select"
                                                         options={uom}
@@ -1433,7 +1433,7 @@ function AddRequisition() {
                                             </div>
                                             <div className="col-lg-3 col-sm-6 col-12">
                                                 <div className="mb-3">
-                                                    <label className="form-label required">मुख्य मात्रा</label>
+                                                    <label className="form-label required">Base Quantity</label>
                                                     <input
                                                         type="number"
                                                         className="form-control"
@@ -1449,7 +1449,7 @@ function AddRequisition() {
                                             <div className="d-flex justify-content-end">
                                                 <div className="mb-3">
                                                     <button type="button" className="btn btn-primary" onClick={addRecord}  >
-                                                        जोडा
+                                                        Add
                                                     </button>
                                                 </div>
                                             </div>
@@ -1462,7 +1462,7 @@ function AddRequisition() {
                             <div className="row">
                                 <div className="col-lg-3 col-sm-6 col-12">
                                     <div className="mb-3">
-                                        <label className="form-label required">अपेक्षित तारीख</label>
+                                        <label className="form-label required">Expected Date</label>
                                         <input
                                             type="date"
                                             className="form-control"
@@ -1476,7 +1476,7 @@ function AddRequisition() {
                                 </div>
                                 <div className="col-lg-3 col-sm-6 col-12">
                                     <div className="mb-3">
-                                        <label className="form-label">संपर्क तारीख</label>
+                                        <label className="form-label">Meeting Date</label>
                                         <input
                                             type="date"
                                             className="form-control"
@@ -1498,7 +1498,7 @@ function AddRequisition() {
                             <div className="row">
                                 <div className="col-lg-12 col-sm-6 col-12">
                                     <div className="mb-3">
-                                        <label className="form-label required">अटी आणि शर्ती</label>
+                                        <label className="form-label required">Terms And Conditions</label>
                                         <textarea
                                             type="text"
                                             rows={4}
@@ -1528,10 +1528,10 @@ function AddRequisition() {
                             <div className="col-lg-12 d-flex justify-content-end mb-4">
 
                                 <button type="button" className="btn btn-cancel me-2" onClick={showExitAlert}>
-                                    बाहेर जा
+                                    Exit
                                 </button>
                                 <button type="submit" className="btn btn-submit">
-                                    जतन करा
+                                    Save Master
                                 </button>
 
                             </div>

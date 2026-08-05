@@ -145,9 +145,9 @@ function DirectChallan() {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">चलान क्रमांक</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Challan No</Tooltip>}
                 >
-                    <div>चलान क्रमांक</div>
+                    <div>Challan No</div>
                 </OverlayTrigger>
             ),
             dataIndex: "pctrnno",
@@ -166,9 +166,9 @@ function DirectChallan() {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">चलान तारीख</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Challan Date</Tooltip>}
                 >
-                    <div className="text-center">चलान तारीख</div>
+                    <div className="text-center">Challan Date</div>
                 </OverlayTrigger>
             ),
             dataIndex: "pcdate",
@@ -186,9 +186,9 @@ function DirectChallan() {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">पुरवठ्याचे ठिकाण</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Place of Supply</Tooltip>}
                 >
-                    <div>पुरवठ्याचे ठिकाण</div>
+                    <div>Place of Supply</div>
                 </OverlayTrigger>
             ),
             dataIndex: "statename",
@@ -206,9 +206,9 @@ function DirectChallan() {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">विक्रेत्याचे नाव</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Vendor Name</Tooltip>}
                 >
-                    <div>विक्रेत्याचे नाव</div>
+                    <div>Vendor Name</div>
                 </OverlayTrigger>
             ),
             dataIndex: "vendorname",
@@ -226,9 +226,9 @@ function DirectChallan() {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">करयोग्य रक्कम</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Taxable Amount</Tooltip>}
                 >
-                    <div className="text-center">करयोग्य रक्कम</div>
+                    <div className="text-center">Taxable Amount</div>
                 </OverlayTrigger>
             ),
             dataIndex: "pcgamt",
@@ -246,9 +246,9 @@ function DirectChallan() {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">निव्वळ रक्कम</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Net Amount</Tooltip>}
                 >
-                    <div className="text-center">निव्वळ रक्कम</div>
+                    <div className="text-center">Net Amount</div>
                 </OverlayTrigger>
             ),
             dataIndex: "pcnamt",
@@ -266,9 +266,9 @@ function DirectChallan() {
             title: (
                 <OverlayTrigger
                     placement="top"
-                    overlay={<Tooltip id="types-tooltip">क्रिया</Tooltip>}
+                    overlay={<Tooltip id="types-tooltip">Action</Tooltip>}
                 >
-                    <div className="text-center">क्रिया</div>
+                    <div className="text-center">Action</div>
                 </OverlayTrigger>
             ),
             dataIndex: "action",
@@ -317,13 +317,13 @@ function DirectChallan() {
     const MySwal = withReactContent(Swal);
     const showConfirmationAlert = (pcaid) => {
         MySwal.fire({
-            title: "तुम्हाला खात्री आहे का?",
-            text: "तुम्ही हे परत करू शकणार नाही!",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
             showCancelButton: true,
             confirmButtonColor: "#00ff00",
-            confirmButtonText: "होय, ते हटवा!",
+            confirmButtonText: "Yes, delete it!",
             cancelButtonColor: "#ff0000",
-            cancelButtonText: "रद्द करा",
+            cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
                 OndeletePurchaseChallan(pcaid)
@@ -535,7 +535,7 @@ function DirectChallan() {
                 <div className="page-header">
                     <div className="add-item d-flex">
                         <div className="page-title">
-                            <h3>खरेदी चलान जोडा</h3>
+                            <h3>Add Purchase Challan</h3>
                         </div>
                     </div>
                     <ul className="table-top-head">
@@ -593,13 +593,13 @@ function DirectChallan() {
                             data-bs-toggle="modal"
                             data-bs-target="#AddPurchasechallan"
                         >
-                            <PlusCircle className="me-2 iconsize" /> खरेदी चलान जोडा
+                            <PlusCircle className="me-2 iconsize" /> Add Purchase Challan
                         </button>
                     </div>
                     <div className="page-btn">
                         <Link to={route.ChallanIndex} className="btn btn-secondary">
                             <ArrowLeft className="me-2" />
-                            सूचिके कडे परत जा
+                            Back to Index
                         </Link>
                     </div>
                 </div>

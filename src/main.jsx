@@ -29,7 +29,7 @@ if (rootElement) {
     <React.StrictMode>
       <Provider store={store}>
         <BrowserRouter basename={base_path}>
-          <NetworkStatus />
+          {/* <NetworkStatus /> */}
           <AutoLogout>
             <AllRoutes />
           </AutoLogout>
