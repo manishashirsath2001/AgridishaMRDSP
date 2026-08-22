@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as FeatherIcons from "react-feather"; // Import all icons dynamically
-import CollapsedSidebar from "./collapsedSidebar";
 import { getUserData } from "../../Context/UserData";
 
 const Sidebar = () => {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const { userdetail } = getUserData();
   console.log(userdetail, "userdetailuserdetail")
-  const isRestricted = userdetail.LANGUAGE === "en";
+  const isRestricted = userdetail?.LANGUAGE === "en";
   useEffect(() => {
     const storedSubmenu = localStorage.getItem("activeSubmenu");
     if (storedSubmenu) {
@@ -103,8 +102,6 @@ const Sidebar = () => {
           </div>
         </div>
       )} */}
-
-      <CollapsedSidebar />
     </div>
   );
 };

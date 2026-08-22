@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
 import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { Settings, User } from "react-feather";
 import { all_routes } from "../../Router/all_routes";
 // import "../../style/scss/layout/_header"
-import { getUserData } from "../../Context/UserData";
+import { getUserData, clearUserData } from "../../Context/UserData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FiLogOut } from 'react-icons/fi';
@@ -23,7 +22,7 @@ const Header = () => {
   const isElementVisible = (element) => {
     return element.offsetWidth > 0 || element.offsetHeight > 0;
   };
-  const isRestricted = userdetail.LANGUAGE === "en";
+  const isRestricted = userdetail?.LANGUAGE === "en";
   const navigate = useNavigate();
   const [selectedLanguage, setSelectedLanguage] = useState(isRestricted ? 'en' : 'mr');
   const waitForGoogleTranslateCombo = () => {
@@ -141,7 +140,6 @@ const Header = () => {
   }, []);
   const handleLogout = async () => {
     try {
-
       if (userdetail?.uaid) {
         await axios.post(`${baseUrl.Url}/api/SP_UpadateUserLogin`, {
           uaid: userdetail.uaid,
@@ -153,10 +151,12 @@ const Header = () => {
           }
         });
       }
-      navigate("/signin");
     } catch (error) {
       console.error("❌ Logout failed:", error);
-
+    } finally {
+      clearUserData();
+      localStorage.removeItem("uaid");
+      navigate("/signin");
     }
   };
 
@@ -706,14 +706,6 @@ const Header = () => {
                   </div>
                 </div>
                 <hr className="m-0" />
-                <Link className="dropdown-item" to={route.profile}>
-                  <User className="me-2" /> My Profile
-                </Link>
-                <Link className="dropdown-item" to={route.generalsettings}>
-                  <Settings className="me-2" />
-                  Settings
-                </Link>
-                <hr className="m-0" />
                 <Link
                   className="dropdown-item logout pb-0"
                   to="#"
@@ -746,13 +738,7 @@ const Header = () => {
             <i className="fa fa-ellipsis-v" />
           </Link>
           <div className="dropdown-menu dropdown-menu-right">
-            <Link className="dropdown-item" to="profile">
-              My Profile
-            </Link>
-            <Link className="dropdown-item" to="generalsettings">
-              Settings
-            </Link>
-            <Link className="dropdown-item" to="signin">
+            <Link className="dropdown-item" to="#" onClick={handleLogout}>
               Logout
             </Link>
           </div>

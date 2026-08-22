@@ -123,9 +123,9 @@ export const baseUrl = {
     // Url: "https://arthadisha.in",
     // Url: "http://adsvr:140",
     // Url: "http://192.168.1.121:71",
-    Url: "http://adsvr:71",
-    // http://adsvr:71/api/SP_GET_UserLogin
     // Url: "https://perfectkrushimarketyard.com"
+    // Url: "http://localhost:5173/",
+        Url: "http://adsvr:71",
 
 };
 

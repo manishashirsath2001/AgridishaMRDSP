@@ -37,11 +37,11 @@ const GrapesVariety = () => {
     },
     {
       title: "द्राक्षाची जात",
-      dataIndex: "varityType",
+      dataIndex: "varitylabel",
     },
     {
       title: "द्राक्षाची उप-जात",
-      dataIndex: "subVarityType",
+      dataIndex: "subvaritylabel",
     },
     {
       title: "कृती",
@@ -76,6 +76,7 @@ const GrapesVariety = () => {
       try {
         const payload = {
           vid: "%",
+          keyword: "%",
           companyid: "COMP123",
         };
         const headers = {
@@ -84,7 +85,7 @@ const GrapesVariety = () => {
         };
         const response = await axios.post(`${baseUrl.Url}/api/GET_Variety`, payload, { headers });
         if (response.status !== 200) throw new Error("Failed to fetch data");
-        setVariety(response.data);
+        setVariety(response.data.map((item) => ({ ...item, id: item.vid })));
       } catch (error) {
         setError("Failed to fetch grape variety data. Please try again later.");
         console.error("Error fetching data:", error);
@@ -166,8 +167,8 @@ const GrapesVariety = () => {
     const tableColumn = ["नाव", "द्राक्षाची जात", "द्राक्षाची उप-जात"];
     const tableRows = varietyData.map((item) => [
       item.varietyName,
-      item.varityType,
-      item.subVarityType,
+      item.varitylabel,
+      item.subvaritylabel,
     ]);
 
     autoTable(doc, {
@@ -206,8 +207,8 @@ const GrapesVariety = () => {
         { key: "subVarityType", width: 40 },
       ];
 
-      varietyData.forEach(({ varietyName, varityType, subVarityType }) => {
-        const row = worksheet.addRow([varietyName, varityType, subVarityType]);
+      varietyData.forEach(({ varietyName, varitylabel, subvaritylabel }) => {
+        const row = worksheet.addRow([varietyName, varitylabel, subvaritylabel]);
         row.eachCell((cell) => {
           cell.alignment = { horizontal: "center", vertical: "middle" };
         });

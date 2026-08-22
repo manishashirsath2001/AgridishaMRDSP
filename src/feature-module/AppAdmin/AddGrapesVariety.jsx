@@ -443,6 +443,7 @@ const AddGrapesVariety = () => {
       try {
         const payload = {
           vid: Vid,
+          keyword: "%",
           companyid: "COMP123",
         };
         const headers = {
@@ -462,11 +463,11 @@ const AddGrapesVariety = () => {
         console.log("subVarietyOptions:", JSON.stringify(subVarietyOptions, null, 2));
 
         const matchedVariety = varietyOptions.find(
-          (opt) => normalizeString(opt.label) === normalizeString(apiData.varityType)
+          (opt) => normalizeString(opt.value) === normalizeString(apiData.varityType)
         ) || null;
 
         const matchedSubVariety = subVarietyOptions.find(
-          (opt) => normalizeString(opt.label) === normalizeString(apiData.subVarityType)
+          (opt) => normalizeString(opt.value) === normalizeString(apiData.subVarityType)
         ) || null;
 
         console.log("Matched Variety:", matchedVariety);
