@@ -46,7 +46,7 @@ if (Test-Path $tempConfigBackup) {
     Remove-Item $tempConfigBackup -Force
 }
 
-# Start-Process "http://adsvr:71/"
+# Start-Process "http://adsvr:188/"
 Start-Process "http://localhost:5173/"
 
 Write-Host "Incremental deployment complete and site opened!"
